@@ -1,0 +1,44 @@
+{
+  "name": "edgecms",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./postgres": {
+      "types": "./dist/postgres.d.ts",
+      "import": "./dist/postgres.js"
+    },
+    "./mysql": {
+      "types": "./dist/mysql.d.ts",
+      "import": "./dist/mysql.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts src/bin.ts src/postgres.ts src/mysql.ts --format esm --dts --sourcemap",
+    "test": "vitest run --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "bin": {
+    "edgecms": "./dist/bin.js"
+  },
+  "dependencies": {
+    "@edgecms/cli": "workspace:*",
+    "@edgecms/config": "workspace:*",
+    "@edgecms/runtime": "workspace:*",
+    "@edgecms/core": "workspace:*",
+    "@edgecms/adapter-postgres": "workspace:*",
+    "@edgecms/adapter-mysql": "workspace:*"
+  },
+  "devDependencies": {
+    "tsup": "^8.4.0",
+    "vitest": "^3.1.0"
+  }
+}

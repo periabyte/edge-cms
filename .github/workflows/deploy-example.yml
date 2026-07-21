@@ -1,0 +1,40 @@
+# Dogfoods edgecms/deploy-action against examples/blog. Runs only when the
+# deploy secrets are configured, so it's a no-op on forks/PRs without them.
+name: Deploy example blog
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "examples/blog/**"
+      - "actions/deploy/**"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Guard on secrets
+        id: guard
+        run: |
+          if [ -n "${{ secrets.CLOUDFLARE_API_TOKEN }}" ]; then
+            echo "ok=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "ok=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::CLOUDFLARE_API_TOKEN not set — skipping deploy."
+          fi
+
+      - name: Deploy examples/blog
+        if: steps.guard.outputs.ok == 'true'
+        id: cms
+        uses: ./actions/deploy
+        with:
+          cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          working-directory: examples/blog
+
+      - name: Report URL
+        if: steps.guard.outputs.ok == 'true'
+        run: echo "Deployed to ${{ steps.cms.outputs.url }}"

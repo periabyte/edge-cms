@@ -1,0 +1,36 @@
+{
+  "name": "@edgecms/storage-s3",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --sourcemap",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@edgecms/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "aws4fetch": "^1.0.18"
+  },
+  "peerDependenciesMeta": {
+    "aws4fetch": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "tsup": "^8.4.0",
+    "vitest": "^3.1.0"
+  }
+}

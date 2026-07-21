@@ -1,0 +1,11 @@
+{
+  "name": "runtime-test",
+  "main": "./workers/worker.ts",
+  "compatibility_date": "2025-01-01",
+  "d1_databases": [
+    { "binding": "DB", "database_name": "test", "database_id": "test-db-id" },
+  ],
+  "kv_namespaces": [{ "binding": "SESSIONS", "id": "test-sessions-id" }],
+  "r2_buckets": [{ "binding": "MEDIA", "bucket_name": "test-media" }],
+  "vars": { "SESSION_SECRET": "test-session-secret-not-for-production" },
+}

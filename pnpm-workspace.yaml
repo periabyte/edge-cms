@@ -1,0 +1,9 @@
+packages:
+  - packages/*
+  - packages/adapters/*
+  - packages/storage/*
+  - examples/*
+onlyBuiltDependencies:
+  - esbuild
+  - sharp
+  - workerd

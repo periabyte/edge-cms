@@ -1,0 +1,332 @@
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design-token layer. The whole admin themes off these CSS variables; Tailwind
+ * utilities map onto them (see tailwind.config.js) so `bg-card`, `text-muted`,
+ * etc. and raw var() usage agree. Light is the default; `.dark` on <html>
+ * (set by useTheme, matching Tailwind's darkMode:"class") swaps the palette.
+ */
+/*
+ * Token VALUES are HSL channel triplets ("H S% L%", no hsl() wrapper, no
+ * commas) so Tailwind can consume them as `hsl(var(--x) / <alpha-value>)`
+ * and support opacity modifiers (bg-brand/50, etc). Token NAMES are
+ * unchanged from the original hex-based system. `--primary` / `--secondary`
+ * / `--destructive` are shadcn-convention aliases onto the existing
+ * brand/muted/danger hues so stock shadcn/ui components render correctly
+ * without modification; prefer the semantic names (`brand`, `danger`, ...)
+ * in app code.
+ */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 6% 10%;
+  --card: 0 0% 100%;
+  --card-2: 0 0% 98%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 6% 10%;
+  --muted: 240 5% 96%;
+  --muted-foreground: 240 4% 46%;
+  --subtle-foreground: 240 5% 65%;
+  --accent: 240 5% 96%;
+  --accent-hover: 240 7% 92%;
+  --accent-foreground: 240 6% 10%;
+  --border: 240 6% 90%;
+  --border-strong: 240 5% 84%;
+  --input: 240 6% 90%;
+  --ring: var(--brand);
+  --radius: 0.5rem;
+
+  --brand: 21 90% 48%;
+  --brand-hover: 17 88% 40%;
+  --brand-foreground: 0 0% 100%;
+  --brand-subtle: 33 100% 96%;
+  --brand-subtle-fg: 15 79% 34%;
+  --draft: 38 92% 50%;
+  --draft-subtle: 48 100% 96%;
+  --draft-fg: 26 90% 37%;
+  --published: 142 76% 36%;
+  --published-subtle: 138 76% 97%;
+  --published-fg: 142 72% 29%;
+  --danger: 0 72% 51%;
+  --danger-subtle: 0 86% 97%;
+  --danger-fg: 0 74% 42%;
+  --mt: 258 90% 66%;
+  --mt-subtle: 250 100% 98%;
+  --mt-fg: 263 70% 50%;
+
+  /* shadcn/ui convention aliases (see comment above) */
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--foreground);
+  --destructive: var(--danger);
+  --destructive-foreground: 0 0% 100%;
+
+  --shadow: 0 1px 2px rgba(24, 24, 27, 0.06), 0 1px 3px rgba(24, 24, 27, 0.05);
+  --shadow-lg: 0 10px 30px -8px rgba(24, 24, 27, 0.18), 0 4px 12px -6px rgba(24, 24, 27, 0.12);
+}
+
+.dark {
+  --background: 240 10% 4%;
+  --foreground: 0 0% 98%;
+  --card: 240 8% 8%;
+  --card-2: 240 6% 10%;
+  --popover: 240 6% 10%;
+  --popover-foreground: 0 0% 98%;
+  --muted: 240 4% 16%;
+  --muted-foreground: 240 5% 65%;
+  --subtle-foreground: 240 4% 46%;
+  --accent: 240 4% 16%;
+  --accent-hover: 240 4% 20%;
+  --accent-foreground: 0 0% 98%;
+  --border: 240 5% 16%;
+  --border-strong: 240 5% 26%;
+  --input: 240 5% 17%;
+  --ring: var(--brand);
+
+  --brand: 25 95% 53%;
+  --brand-hover: 27 96% 61%;
+  --brand-foreground: 31 60% 7%;
+  --brand-subtle: 25 68% 10%;
+  --brand-subtle-fg: 31 97% 72%;
+  --draft: 38 92% 50%;
+  --draft-subtle: 39 71% 10%;
+  --draft-fg: 46 97% 65%;
+  --published: 142 71% 45%;
+  --published-subtle: 148 50% 9%;
+  --published-fg: 142 77% 73%;
+  --danger: 0 91% 71%;
+  --danger-subtle: 0 37% 12%;
+  --danger-fg: 0 94% 82%;
+  --mt: 255 92% 76%;
+  --mt-subtle: 257 40% 14%;
+  --mt-fg: 252 95% 85%;
+
+  /* shadcn/ui convention aliases (see comment above) */
+  --primary: var(--brand);
+  --primary-foreground: var(--brand-foreground);
+  --secondary: var(--muted);
+  --secondary-foreground: var(--foreground);
+  --destructive: var(--danger);
+  --destructive-foreground: 0 0% 100%;
+
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 16px 40px -12px rgba(0, 0, 0, 0.6), 0 4px 12px -6px rgba(0, 0, 0, 0.5);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+::selection {
+  background: color-mix(in oklab, hsl(var(--brand)) 30%, transparent);
+}
+
+@layer utilities {
+  .font-mono {
+    font-family: "Geist Mono", ui-monospace, monospace;
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border-strong));
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Animations */
+/*
+ * NOTE: most overlay entrance/exit animation now comes from the
+ * `tailwindcss-animate` plugin (see tailwind.config.js), consumed via
+ * Tailwind utilities like `data-[state=open]:animate-in fade-in-0
+ * zoom-in-95` on the Radix-backed components in `components/ui/*`. Do NOT
+ * name any custom class `animate-in`/`animate-out`/`fade-in-*`/`zoom-in-*`/
+ * `slide-in-from-*` here — those are the plugin's utility names and a
+ * same-named plain class can win the cascade over less-specific compound
+ * selectors, causing silent, hard-to-debug animation mismatches.
+ */
+@keyframes ecms-pop-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes ecms-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+@keyframes ecms-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.ecms-pop-in {
+  animation: ecms-pop-in 0.12s ease;
+}
+.skel {
+  background: linear-gradient(90deg, hsl(var(--muted)) 25%, hsl(var(--accent)) 37%, hsl(var(--muted)) 63%);
+  background-size: 400% 100%;
+  animation: ecms-pulse 1.4s ease-in-out infinite;
+  border-radius: 6px;
+}
+
+/* TipTap / rich text content */
+.rte-content:focus {
+  outline: none;
+}
+.rte-content p {
+  margin: 0 0 0.75em;
+}
+.rte-content h1 {
+  font-size: 1.7em;
+  font-weight: 700;
+  margin: 1em 0 0.4em;
+  line-height: 1.25;
+}
+.rte-content h2 {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin: 1em 0 0.4em;
+}
+.rte-content h3 {
+  font-size: 1.15em;
+  font-weight: 600;
+  margin: 0.9em 0 0.35em;
+}
+.rte-content ul,
+.rte-content ol {
+  padding-left: 1.4em;
+  margin: 0 0 0.75em;
+}
+.rte-content ul {
+  list-style: disc;
+}
+.rte-content ol {
+  list-style: decimal;
+}
+/* task lists */
+.rte-content ul[data-type="taskList"] {
+  list-style: none;
+  padding-left: 0.2em;
+}
+.rte-content ul[data-type="taskList"] li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5em;
+}
+.rte-content ul[data-type="taskList"] li > label {
+  margin-top: 0.2em;
+  user-select: none;
+}
+.rte-content ul[data-type="taskList"] li > div {
+  flex: 1;
+}
+.rte-content ul[data-type="taskList"] input[type="checkbox"] {
+  accent-color: hsl(var(--brand));
+  cursor: pointer;
+}
+.rte-content a {
+  color: hsl(var(--brand-subtle-fg));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+.rte-content mark {
+  background: hsl(var(--draft-subtle));
+  color: inherit;
+  padding: 0.05em 0.15em;
+  border-radius: 3px;
+}
+.rte-content u {
+  text-decoration: underline;
+}
+.rte-content s {
+  text-decoration: line-through;
+}
+.rte-content pre {
+  background: hsl(var(--muted));
+  border: 1px solid hsl(var(--border));
+  border-radius: 8px;
+  padding: 0.75em 0.9em;
+  margin: 0 0 0.75em;
+  overflow-x: auto;
+  font-family: "Geist Mono", ui-monospace, monospace;
+  font-size: 0.86em;
+  line-height: 1.5;
+}
+.rte-content pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+.rte-content hr {
+  border: none;
+  border-top: 1px solid hsl(var(--border-strong));
+  margin: 1.2em 0;
+}
+.rte-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 0.25em 0 0.75em;
+  display: block;
+}
+.rte-content img.ProseMirror-selectednode {
+  outline: 2px solid hsl(var(--brand));
+  outline-offset: 2px;
+}
+/* placeholder shown when empty */
+.rte-content p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: hsl(var(--subtle-foreground));
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
+.rte-content blockquote {
+  border-left: 3px solid hsl(var(--border-strong));
+  padding-left: 1em;
+  color: hsl(var(--muted-foreground));
+  margin: 0 0 0.75em;
+}
+.rte-content code {
+  font-family: "Geist Mono", ui-monospace, monospace;
+  background: hsl(var(--muted));
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.9em;
+}

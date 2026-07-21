@@ -1,0 +1,4 @@
+node_modules/
+.edgecms/
+.env
+.wrangler/

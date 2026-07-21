@@ -1,0 +1,39 @@
+{
+  "name": "@edgecms/adapter-mysql",
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts --sourcemap",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@edgecms/adapter-relational": "workspace:*",
+    "@edgecms/config": "workspace:*",
+    "@edgecms/core": "workspace:*"
+  },
+  "peerDependencies": {
+    "mysql2": "^3.9.0"
+  },
+  "peerDependenciesMeta": {
+    "mysql2": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@edgecms/adapter-conformance": "workspace:^",
+    "tsup": "^8.4.0",
+    "vitest": "^3.1.0"
+  }
+}

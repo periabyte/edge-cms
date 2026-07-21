@@ -1,0 +1,14 @@
+{
+  "name": "edgecms-example-blog",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "edgecms dev",
+    "migrate": "edgecms migrate",
+    "deploy": "edgecms deploy"
+  },
+  "dependencies": {
+    "edgecms": "workspace:*"
+  }
+}
