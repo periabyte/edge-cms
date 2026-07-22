@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -9,6 +9,11 @@
  * utilities map onto them (see tailwind.config.js) so `bg-card`, `text-muted`,
  * etc. and raw var() usage agree. Light is the default; `.dark` on <html>
  * (set by useTheme, matching Tailwind's darkMode:"class") swaps the palette.
+ *
+ * Values are the EdgeCMS brand system (see docs/design-system/): light =
+ * warm paper over indigo text, dark = indigo-charcoal with a signal-orange
+ * interactive accent and a mako-teal secondary. Converted from the DS's hex
+ * source (docs/design-system/tokens/colors.css) to HSL triplets here.
  */
 /*
  * Token VALUES are HSL channel triplets ("H S% L%", no hsl() wrapper, no
@@ -21,38 +26,43 @@
  * in app code.
  */
 :root {
-  --background: 0 0% 100%;
-  --foreground: 240 6% 10%;
+  --background: 60 18% 97%;
+  --foreground: 229 22% 10%;
   --card: 0 0% 100%;
-  --card-2: 0 0% 98%;
+  --card-2: 60 15% 94%;
   --popover: 0 0% 100%;
-  --popover-foreground: 240 6% 10%;
-  --muted: 240 5% 96%;
-  --muted-foreground: 240 4% 46%;
-  --subtle-foreground: 240 5% 65%;
-  --accent: 240 5% 96%;
-  --accent-hover: 240 7% 92%;
-  --accent-foreground: 240 6% 10%;
-  --border: 240 6% 90%;
-  --border-strong: 240 5% 84%;
-  --input: 240 6% 90%;
+  --popover-foreground: 229 22% 10%;
+  --muted: 60 15% 94%;
+  --muted-foreground: 226 9% 46%;
+  --subtle-foreground: 227 10% 62%;
+  --accent: 60 12% 89%;
+  --accent-hover: 60 11% 82%;
+  --accent-foreground: 229 22% 10%;
+  --border: 60 13% 86%;
+  --border-strong: 60 11% 79%;
+  --input: 60 13% 86%;
   --ring: var(--brand);
-  --radius: 0.5rem;
+  --radius: 0.625rem;
 
-  --brand: 21 90% 48%;
-  --brand-hover: 17 88% 40%;
+  --brand: 16 81% 54%;
+  --brand-hover: 14 100% 62%;
   --brand-foreground: 0 0% 100%;
-  --brand-subtle: 33 100% 96%;
-  --brand-subtle-fg: 15 79% 34%;
-  --draft: 38 92% 50%;
-  --draft-subtle: 48 100% 96%;
-  --draft-fg: 26 90% 37%;
-  --published: 142 76% 36%;
-  --published-subtle: 138 76% 97%;
-  --published-fg: 142 72% 29%;
-  --danger: 0 72% 51%;
-  --danger-subtle: 0 86% 97%;
-  --danger-fg: 0 74% 42%;
+  --brand-subtle: 16 100% 95%;
+  --brand-subtle-fg: 16 74% 38%;
+  --teal: 175 84% 34%;
+  --teal-hover: 175 82% 39%;
+  --teal-subtle: 175 60% 95%;
+  --teal-fg: 175 84% 27%;
+  --data: 199 89% 48%;
+  --draft: 40 92% 41%;
+  --draft-subtle: 40 100% 96%;
+  --draft-fg: 40 92% 32%;
+  --published: 156 68% 37%;
+  --published-subtle: 156 76% 97%;
+  --published-fg: 156 72% 29%;
+  --danger: 7 67% 49%;
+  --danger-subtle: 7 86% 97%;
+  --danger-fg: 7 74% 42%;
   --mt: 258 90% 66%;
   --mt-subtle: 250 100% 98%;
   --mt-fg: 263 70% 50%;
@@ -65,42 +75,47 @@
   --destructive: var(--danger);
   --destructive-foreground: 0 0% 100%;
 
-  --shadow: 0 1px 2px rgba(24, 24, 27, 0.06), 0 1px 3px rgba(24, 24, 27, 0.05);
-  --shadow-lg: 0 10px 30px -8px rgba(24, 24, 27, 0.18), 0 4px 12px -6px rgba(24, 24, 27, 0.12);
+  --shadow: 0 1px 2px rgba(10, 10, 22, 0.08), 0 1px 3px rgba(10, 10, 22, 0.06);
+  --shadow-lg: 0 10px 30px -8px rgba(10, 10, 22, 0.16), 0 4px 12px -6px rgba(10, 10, 22, 0.1);
 }
 
 .dark {
-  --background: 240 10% 4%;
-  --foreground: 0 0% 98%;
-  --card: 240 8% 8%;
-  --card-2: 240 6% 10%;
-  --popover: 240 6% 10%;
-  --popover-foreground: 0 0% 98%;
-  --muted: 240 4% 16%;
-  --muted-foreground: 240 5% 65%;
-  --subtle-foreground: 240 4% 46%;
-  --accent: 240 4% 16%;
-  --accent-hover: 240 4% 20%;
-  --accent-foreground: 0 0% 98%;
-  --border: 240 5% 16%;
-  --border-strong: 240 5% 26%;
-  --input: 240 5% 17%;
+  --background: 234 28% 7%;
+  --foreground: 231 23% 94%;
+  --card: 232 31% 10%;
+  --card-2: 230 25% 14%;
+  --popover: 232 31% 10%;
+  --popover-foreground: 231 23% 94%;
+  --muted: 230 25% 14%;
+  --muted-foreground: 228 12% 54%;
+  --subtle-foreground: 228 15% 40%;
+  --accent: 229 24% 18%;
+  --accent-hover: 228 22% 23%;
+  --accent-foreground: 231 23% 94%;
+  --border: 229 22% 19%;
+  --border-strong: 229 21% 27%;
+  --input: 229 22% 19%;
   --ring: var(--brand);
 
-  --brand: 25 95% 53%;
-  --brand-hover: 27 96% 61%;
-  --brand-foreground: 31 60% 7%;
-  --brand-subtle: 25 68% 10%;
-  --brand-subtle-fg: 31 97% 72%;
-  --draft: 38 92% 50%;
-  --draft-subtle: 39 71% 10%;
-  --draft-fg: 46 97% 65%;
-  --published: 142 71% 45%;
-  --published-subtle: 148 50% 9%;
-  --published-fg: 142 77% 73%;
-  --danger: 0 91% 71%;
-  --danger-subtle: 0 37% 12%;
-  --danger-fg: 0 94% 82%;
+  --brand: 14 100% 62%;
+  --brand-hover: 14 100% 67%;
+  --brand-foreground: 18 79% 6%;
+  --brand-subtle: 16 68% 10%;
+  --brand-subtle-fg: 16 100% 74%;
+  --teal: 175 82% 39%;
+  --teal-hover: 175 65% 49%;
+  --teal-subtle: 175 84% 10%;
+  --teal-fg: 175 68% 63%;
+  --data: 198 93% 60%;
+  --draft: 42 87% 55%;
+  --draft-subtle: 42 71% 10%;
+  --draft-fg: 42 97% 65%;
+  --published: 157 57% 48%;
+  --published-subtle: 157 50% 9%;
+  --published-fg: 157 77% 73%;
+  --danger: 7 86% 59%;
+  --danger-subtle: 7 37% 12%;
+  --danger-fg: 7 94% 82%;
   --mt: 255 92% 76%;
   --mt-subtle: 257 40% 14%;
   --mt-fg: 252 95% 85%;
@@ -113,8 +128,8 @@
   --destructive: var(--danger);
   --destructive-foreground: 0 0% 100%;
 
-  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 16px 40px -12px rgba(0, 0, 0, 0.6), 0 4px 12px -6px rgba(0, 0, 0, 0.5);
+  --shadow: 0 1px 2px rgba(6, 7, 14, 0.45), 0 1px 3px rgba(6, 7, 14, 0.35);
+  --shadow-lg: 0 16px 40px -12px rgba(6, 7, 14, 0.65), 0 4px 12px -6px rgba(6, 7, 14, 0.5);
 }
 
 html,
@@ -125,7 +140,7 @@ body,
 
 body {
   margin: 0;
-  font-family: "Geist", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
@@ -139,7 +154,7 @@ body {
 
 @layer utilities {
   .font-mono {
-    font-family: "Geist Mono", ui-monospace, monospace;
+    font-family: "JetBrains Mono", ui-monospace, monospace;
   }
 }
 
@@ -283,7 +298,7 @@ body {
   padding: 0.75em 0.9em;
   margin: 0 0 0.75em;
   overflow-x: auto;
-  font-family: "Geist Mono", ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 0.86em;
   line-height: 1.5;
 }
@@ -324,7 +339,7 @@ body {
   margin: 0 0 0.75em;
 }
 .rte-content code {
-  font-family: "Geist Mono", ui-monospace, monospace;
+  font-family: "JetBrains Mono", ui-monospace, monospace;
   background: hsl(var(--muted));
   padding: 0.1em 0.35em;
   border-radius: 4px;

@@ -1,0 +1,267 @@
+---
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import "../styles/landing.css";
+
+const configCode = `import { defineConfig, collection, field } from "edgecms";
+
+export default defineConfig({
+  name: "my-site",
+  domain: "blog.example.com",
+  ai: { enabled: true, features: ["alt-text", "translate", "editorial-assist"] },
+  collections: [
+    collection("posts", {
+      fields: {
+        title: field.text({ required: true }),
+        slug: field.slug({ from: "title", unique: true }),
+        body: field.richText(),
+        cover: field.media(),
+        author: field.relation("authors"),
+        status: field.select(["draft", "published"], { default: "draft" }),
+      },
+      versioning: true,
+    }),
+  ],
+});`;
+
+const features = [
+  { title: "Schema-driven admin", body: "Define content models in cms.config.ts; the admin SPA renders itself — typed fields, relations, and validation." },
+  { title: "Databases your way", body: "D1 is the zero-config default. Bring Postgres or MySQL over Hyperdrive when you outgrow it." },
+  { title: "AI that helps you ship", body: "Alt-text, translation, and editorial assist on Workers AI's free tier — plus optional semantic search." },
+  { title: "Every way to read", body: "A public REST API and config-generated GraphQL, plus an MCP endpoint so agents can query and edit content." },
+  { title: "Roles & real access control", body: "Config-defined roles and permissions, email invites, scoped API tokens with an audit log." },
+  { title: "Media, versions, locales", body: "Upload to R2 or S3, roll back any change, and localize content across languages from one place." },
+  { title: "Moderated submissions", body: "Accept public contributions behind Cloudflare Turnstile, then approve or reject from the admin queue." },
+  { title: "Your own domain", body: "Attach any custom domain with automatic DNS and TLS — the site is yours, not a subdomain." },
+];
+
+const costRows = [
+  { service: "Workers", does: "runs the CMS admin and serves your API", cost: "$0.00" },
+  { service: "D1", does: "your default SQL database", cost: "$0.00" },
+  { service: "R2", does: "media and file storage", cost: "$0.00" },
+  { service: "KV", does: "cache and edge config", cost: "$0.00" },
+  { service: "Workers Assets", does: "static hosting for the admin SPA", cost: "$0.00" },
+  { service: "Turnstile", does: "spam-free public submissions", cost: "$0.00" },
+];
+
+const terminalLines: Array<{ text: string; cls?: string }> = [
+  { text: "$ edgecms login", cls: "cmd" },
+  { text: "→ opening your Cloudflare token page…", cls: "dim" },
+  { text: "✓ signed in — account auto-detected", cls: "ok" },
+  { text: "", cls: "dim" },
+  { text: "$ edgecms init my-site", cls: "cmd" },
+  { text: "? content models: posts, authors", cls: "dim" },
+  { text: "? services: ai, custom domain", cls: "dim" },
+  { text: "? domain: blog.example.com", cls: "dim" },
+  { text: "✓ wrote cms.config.ts", cls: "ok" },
+  { text: "deploy now? → yes", cls: "accent" },
+  { text: "", cls: "dim" },
+  { text: "$ edgecms deploy", cls: "cmd" },
+  { text: "→ provisioning D1, R2, KV…", cls: "dim" },
+  { text: "→ attaching blog.example.com…", cls: "dim" },
+  { text: "✓ live at https://blog.example.com", cls: "ok" },
+  { text: "  $0.00/mo", cls: "accent" },
+];
+---
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>EdgeCMS — Make it real. Free.</title>
+    <meta
+      name="description"
+      content="A config-driven, self-deploying headless CMS for Cloudflare. One cms.config.ts and a guided login → init → deploy, and you have a live site — free, on your own domain."
+    />
+    <link rel="icon" href="/assets/logo.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <SiteHeader active="home" />
+
+    <section id="top" class="ec-section" style="position:relative;overflow:hidden">
+      <div class="ec-dotmap" aria-hidden="true">
+        <svg viewBox="0 0 600 400" preserveAspectRatio="xMidYMid slice">
+          <line class="link" x1="120" y1="300" x2="260" y2="140"></line>
+          <line class="link" x1="260" y1="140" x2="430" y2="70"></line>
+          <line class="link" x1="260" y1="140" x2="340" y2="230"></line>
+          <line class="link" x1="430" y1="70" x2="520" y2="110"></line>
+          <line class="link" x1="120" y1="300" x2="200" y2="340"></line>
+          <circle cx="120" cy="300" r="4"></circle>
+          <circle cx="260" cy="140" r="5"></circle>
+          <circle cx="430" cy="70" r="5"></circle>
+          <circle cx="340" cy="230" r="3.5"></circle>
+          <circle cx="520" cy="110" r="4"></circle>
+          <circle cx="200" cy="340" r="3"></circle>
+          <circle class="pulse" cx="260" cy="140" r="5"></circle>
+          <circle class="pulse" cx="430" cy="70" r="5" style="animation-delay:.6s"></circle>
+          <circle class="pulse" cx="340" cy="230" r="4" style="animation-delay:1.2s"></circle>
+        </svg>
+      </div>
+      <div class="ec-wrap ec-two" style="position:relative;padding:76px 40px 72px;display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center">
+        <div>
+          <div class="ec-eyebrow">// content with an edge</div>
+          <h1 class="ec-h1">Make it real. <span class="ec-accent">Free.</span></h1>
+          <p class="ec-mono" style="font-style:italic;font-size:16px;color:var(--text-3);margin:18px 0 0">
+            you don't need a big budget — just a big enough blade.
+          </p>
+          <p style="font-size:17px;line-height:1.6;color:var(--text-2);max-width:500px;margin:20px 0 28px">
+            A guided setup — sign in once, answer a few questions, deploy — to a live site on your own
+            Cloudflare account. D1, R2, and Workers on the permanent free tier. Your domain, your data,
+            no monthly bill to publish.
+          </p>
+          <div style="max-width:460px;margin-bottom:16px" class="ec-command">
+            <div class="ec-command-label">run this — a live site in a few minutes</div>
+            <div class="ec-command-row">
+              <span class="ec-command-code"><span class="ec-prompt">$</span>npx edgecms init</span>
+              <button type="button" class="ec-copy-btn" id="ec-copy-init">copy</button>
+            </div>
+          </div>
+          <a class="ec-link ec-mono" href="/guides/quickstart/" style="display:inline-flex;align-items:center;gap:9px">
+            <span style="display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border:1px solid var(--border-strong);border-radius:5px;color:var(--accent)">›</span>
+            read the quickstart guide
+          </a>
+        </div>
+        <div>
+          <div class="ec-terminal">
+            <div class="ec-terminal-bar">
+              <span class="ec-terminal-dot"></span>
+              <span class="ec-terminal-dot"></span>
+              <span class="ec-terminal-dot"></span>
+              <span class="ec-terminal-title">edgecms</span>
+            </div>
+            <div class="ec-terminal-body">
+              {terminalLines.map((l, i) => (
+                <div class={`line ${l.cls ?? ""}`} style={`animation-delay:${i * 220}ms`}>
+                  {l.text.startsWith("$") ? (
+                    <>
+                      <span class="ec-prompt">$</span>
+                      {l.text.slice(1)}
+                    </>
+                  ) : (
+                    l.text
+                  )}
+                </div>
+              ))}
+              <span class="ec-cursor" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="ec-section ec-section-alt">
+      <div class="ec-wrap ec-section-inner">
+        <div class="ec-section-head">
+          <div class="ec-eyebrow">// how it works</div>
+          <h2 class="ec-h2">Three commands. One is enough.</h2>
+          <p class="ec-section-lede">
+            Run them yourself, or let <code>edgecms init</code> chain login and deploy for you.
+          </p>
+        </div>
+        <div class="ec-steps">
+          <div class="ec-step">
+            <div class="ec-step-head"><span class="ec-step-num">01</span><span class="ec-step-cmd">$ edgecms login</span></div>
+            <div class="ec-step-title">Sign in, once</div>
+            <p class="ec-step-body">Opens a Cloudflare token page with the right permissions pre-filled. EdgeCMS auto-detects your account — no keys to copy by hand.</p>
+          </div>
+          <div class="ec-step">
+            <div class="ec-step-head"><span class="ec-step-num">02</span><span class="ec-step-cmd">$ edgecms init</span></div>
+            <div class="ec-step-title">Answer the wizard</div>
+            <p class="ec-step-body">Pick your content models, toggle services, enter a domain. It writes a real <code>cms.config.ts</code> — the file below — then asks: deploy now?</p>
+          </div>
+          <div class="ec-step">
+            <div class="ec-step-head"><span class="ec-step-num">03</span><span class="ec-step-cmd">$ edgecms deploy</span></div>
+            <div class="ec-step-title">Ship to the edge</div>
+            <p class="ec-step-body">Provisions D1, R2, and KV, uploads the admin SPA, and attaches your domain with automatic DNS and TLS. Resolves to a live URL.</p>
+          </div>
+        </div>
+        <div class="ec-mono" style="font-size:12px;color:var(--text-4);margin-bottom:14px">// the config the wizard writes — not lorem</div>
+        <div class="ec-code">
+          <div class="ec-code-head">cms.config.ts</div>
+          <pre>{configCode}</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="ec-section">
+      <div class="ec-wrap ec-section-inner">
+        <div class="ec-section-head">
+          <div class="ec-eyebrow">// the whole platform</div>
+          <h2 class="ec-h2">A real CMS, not a starter kit.</h2>
+          <p class="ec-section-lede">Everything below ships in the current release.</p>
+        </div>
+        <div class="ec-feat-grid">
+          {features.map((f) => (
+            <div class="ec-feat-card">
+              <div class="ec-feat-icon">▍</div>
+              <div class="ec-feat-title">{f.title}</div>
+              <div class="ec-feat-body">{f.body}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="cost" class="ec-section ec-section-alt">
+      <div class="ec-wrap ec-section-inner">
+        <div class="ec-section-head">
+          <div class="ec-eyebrow">// honest cost</div>
+          <h2 class="ec-h2">The bill is the whole point.</h2>
+          <p class="ec-section-lede">
+            EdgeCMS runs entirely on your own Cloudflare free tier — every service it uses, at no
+            monthly cost to publish.
+          </p>
+        </div>
+        <div class="ec-cost-table">
+          <div class="ec-cost-row ec-cost-head">
+            <div>cloudflare service</div>
+            <div>what it runs</div>
+            <div>cost / mo</div>
+          </div>
+          {costRows.map((r) => (
+            <div class="ec-cost-row">
+              <div class="ec-cost-service">{r.service}</div>
+              <div class="ec-cost-does">{r.does}</div>
+              <div class="ec-cost-price">{r.cost}</div>
+            </div>
+          ))}
+        </div>
+        <p class="ec-cost-foot">// free tier limits apply — see the docs for D1 / R2 / Workers quotas.</p>
+      </div>
+    </section>
+
+    <section class="ec-section ec-cta">
+      <div class="ec-cta-glow"></div>
+      <div class="ec-wrap ec-cta-inner">
+        <h2 class="ec-h2" style="font-size:48px">Make it real. <span class="ec-accent">Free.</span></h2>
+        <p class="ec-cta-sub">just a big enough blade.</p>
+        <div style="max-width:440px;margin:0 auto" class="ec-command">
+          <div class="ec-command-row">
+            <span class="ec-command-code"><span class="ec-prompt">$</span>npx edgecms init</span>
+            <button type="button" class="ec-copy-btn" id="ec-copy-cta">copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <SiteFooter />
+
+    <script>
+      function wireCopy(id: string) {
+        const btn = document.getElementById(id);
+        btn?.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText("npx edgecms init");
+            const original = btn.textContent;
+            btn.textContent = "copied";
+            setTimeout(() => (btn.textContent = original), 1400);
+          } catch {
+            /* clipboard unavailable — no-op */
+          }
+        });
+      }
+      wireCopy("ec-copy-init");
+      wireCopy("ec-copy-cta");
+    </script>
+  </body>
+</html>

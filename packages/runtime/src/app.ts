@@ -20,6 +20,7 @@ import { adminAiRoutes } from "./routes/admin-ai.js";
 import { mcpRoutes } from "./routes/mcp.js";
 import { authRoutes } from "./routes/auth.js";
 import { schemaRoute } from "./routes/schema.js";
+import { homeRoute } from "./routes/root.js";
 import { WorkersAIProvider, type AiBinding } from "./ai/workers-ai-provider.js";
 import { CloudflareEmailProvider, type SendEmailBinding } from "./email/cloudflare-email-provider.js";
 import { errorHandler, notFound } from "./errors.js";
@@ -105,6 +106,9 @@ export function createApp(config: ResolvedConfig, snapshot: SchemaSnapshot, opti
   app.route("/admin/api", adminCrudRoutes(config, plugins));
   // Agent-facing Model Context Protocol server (API-key authenticated).
   app.route("/mcp", mcpRoutes(config));
+  // Bare root — a small HTML page for browser navigations (falls through to
+  // the JSON 404 for non-HTML clients), since EdgeCMS is otherwise headless.
+  app.get("/", homeRoute(config));
 
   app.onError(errorHandler);
   app.notFound(notFound);

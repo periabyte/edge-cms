@@ -1,0 +1,176 @@
+/* ============================================================
+   COLOR SYSTEM
+   Base: deep indigo-charcoal. CLI-first identity is dark by default.
+   - Mako-teal  #12B5A8  → primary brand accent ("the blade")
+   - Signal orange       → INTERACTIVE elements only (buttons, links, focus)
+   - Cool cyan           → data / edge visuals (charts, graphs, telemetry)
+   Light + dark from day one. Sentence case everywhere.
+   ============================================================ */
+
+:root {
+  /* ---- Brand primitives (fixed hues, theme-independent) ---- */
+  --teal-300: #5FE0D5;
+  --teal-400: #2CCFC1;
+  --teal-500: #12B5A8;   /* THE blade — primary brand accent */
+  --teal-600: #0E9D91;
+  --teal-700: #0B7F76;
+
+  --orange-300: #FF9E7A;
+  --orange-400: #FF7E56;
+  --orange-500: #FF6A3D;  /* interactive / signal */
+  --orange-600: #E85D2A;
+  --orange-700: #C64A1E;
+
+  --cyan-300: #7DD3FC;
+  --cyan-400: #38BDF8;    /* data / edge visuals */
+  --cyan-500: #0EA5E9;
+
+  /* semantic status hues */
+  --green-500: #35C08A;
+  --amber-500: #F0B429;
+  --red-500:   #F0503C;
+
+  /* ---- Indigo-charcoal neutral ramp (cool, slightly blue) ---- */
+  --ink-950: #0A0B12;
+  --ink-900: #0D0E17;
+  --ink-850: #111320;
+  --ink-800: #151824;
+  --ink-750: #1B1E2D;
+  --ink-700: #232739;
+  --ink-600: #2E3348;
+  --ink-500: #3C4258;
+  --ink-400: #565C74;
+  --ink-300: #7C8299;
+  --ink-200: #A6ABBD;
+  --ink-100: #CFD2DE;
+  --ink-050: #E9EAF0;
+  --ink-000: #F7F7F9;
+
+  /* warm paper tints for light mode surfaces */
+  --paper-000: #FFFFFF;
+  --paper-050: #F8F8F5;
+  --paper-100: #F1F1EC;
+  --paper-200: #E6E6DF;
+  --paper-300: #D6D6CC;
+}
+
+/* ============================================================
+   DARK THEME (default) — CLI-first
+   ============================================================ */
+:root,
+[data-theme="dark"],
+.theme-dark {
+  color-scheme: dark;
+
+  --bg:            var(--ink-900);
+  --bg-elevated:   var(--ink-850);
+  --surface-1:     var(--ink-800);
+  --surface-2:     var(--ink-750);
+  --surface-3:     var(--ink-700);
+  --surface-code:  #0B0C14;
+
+  --border:        #262A3B;
+  --border-strong: #363B52;
+  --border-subtle: #1C2030;
+
+  --text-1: #ECEDF3;    /* primary */
+  --text-2: #B4B9CA;    /* secondary */
+  --text-3: #7C8299;    /* muted / captions */
+  --text-4: #565C74;    /* faint / placeholder */
+  --text-on-accent: #071311;
+  --text-on-signal: #1A0A03;
+
+  /* semantic accents resolved for dark */
+  /* PRIMARY ACCENT = signal orange (brand + interactive). Teal is secondary. */
+  --accent:          var(--orange-500);
+  --accent-hover:    var(--orange-400);
+  --accent-active:   var(--orange-600);
+  --accent-soft:     rgba(255, 106, 61, 0.14);
+  --accent-border:   rgba(255, 106, 61, 0.45);
+
+  /* teal — secondary brand ("the blade"): data story, callouts, diagrams */
+  --teal:            var(--teal-500);
+  --teal-hover:      var(--teal-400);
+  --teal-soft:       rgba(18, 181, 168, 0.14);
+  --teal-border:     rgba(18, 181, 168, 0.42);
+
+  --signal:          var(--orange-500);
+  --signal-hover:    var(--orange-400);
+  --signal-active:   var(--orange-600);
+  --signal-soft:     rgba(255, 106, 61, 0.14);
+  --signal-border:   rgba(255, 106, 61, 0.45);
+
+  --data:            var(--cyan-400);
+  --data-soft:       rgba(56, 189, 248, 0.14);
+
+  --success: var(--green-500);
+  --warning: var(--amber-500);
+  --danger:  var(--red-500);
+  --success-soft: rgba(53, 192, 138, 0.14);
+  --warning-soft: rgba(240, 180, 41, 0.14);
+  --danger-soft:  rgba(240, 80, 60, 0.14);
+
+  /* focus ring uses interactive signal */
+  --focus-ring: rgba(255, 106, 61, 0.55);
+
+  --scrim: rgba(6, 7, 12, 0.66);
+}
+
+/* ============================================================
+   LIGHT THEME — warm paper over indigo text
+   ============================================================ */
+:root[data-theme="light"],
+[data-theme="light"],
+.theme-light {
+  color-scheme: light;
+
+  --bg:            var(--paper-050);
+  --bg-elevated:   var(--paper-000);
+  --surface-1:     var(--paper-000);
+  --surface-2:     var(--paper-100);
+  --surface-3:     var(--paper-200);
+  --surface-code:  #14161F;
+
+  --border:        #E1E1D8;
+  --border-strong: #CFCFC3;
+  --border-subtle: #ECECE5;
+
+  --text-1: #14161F;
+  --text-2: #3F4353;
+  --text-3: #6A6F80;
+  --text-4: #9599A8;
+  --text-on-accent: #FFFFFF;
+  --text-on-signal: #FFFFFF;
+
+  /* PRIMARY ACCENT = signal orange (brand + interactive). Teal is secondary. */
+  --accent:        var(--orange-600);
+  --accent-hover:  var(--orange-500);
+  --accent-active: var(--orange-700);
+  --accent-soft:   rgba(232, 93, 42, 0.12);
+  --accent-border: rgba(232, 93, 42, 0.4);
+
+  /* teal — secondary brand ("the blade") */
+  --teal:          var(--teal-600);
+  --teal-hover:    var(--teal-500);
+  --teal-soft:     rgba(14, 157, 145, 0.12);
+  --teal-border:   rgba(14, 157, 145, 0.38);
+
+  --signal:        var(--orange-600);
+  --signal-hover:  var(--orange-500);
+  --signal-active: var(--orange-700);
+  --signal-soft:   rgba(232, 93, 42, 0.12);
+  --signal-border: rgba(232, 93, 42, 0.4);
+
+  --data:          var(--cyan-500);
+  --data-soft:     rgba(14, 165, 233, 0.1);
+
+  --success: #1E9E6A;
+  --warning: #C98A08;
+  --danger:  #D33C29;
+  --success-soft: rgba(30, 158, 106, 0.12);
+  --warning-soft: rgba(201, 138, 8, 0.12);
+  --danger-soft:  rgba(211, 60, 41, 0.12);
+
+  --focus-ring: rgba(232, 93, 42, 0.5);
+  --scrim: rgba(20, 22, 31, 0.4);
+}

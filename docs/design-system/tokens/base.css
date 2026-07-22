@@ -1,0 +1,58 @@
+/* ============================================================
+   BASE RESET & ELEMENT DEFAULTS
+   Applied by the global stylesheet. Sets brand defaults for
+   body text, links, selection, code, and focus.
+   ============================================================ */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text-1);
+  font-family: var(--font-body);
+  font-size: var(--text-md);
+  line-height: var(--leading-normal);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text-1);
+}
+
+/* Links — interactive, so they take the signal orange */
+a {
+  color: var(--signal);
+  text-decoration: none;
+  transition: color var(--dur-2) var(--ease-standard);
+}
+a:hover { color: var(--signal-hover); }
+
+code, kbd, samp, pre {
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-shadow);
+  border-radius: var(--radius-sm);
+}
+
+hr {
+  border: none;
+  border-top: var(--border-w) solid var(--border);
+  margin: var(--space-6) 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: var(--heading-weight);
+  letter-spacing: var(--heading-tracking);
+  line-height: var(--leading-snug);
+  color: var(--text-1);
+  margin: 0;
+}
