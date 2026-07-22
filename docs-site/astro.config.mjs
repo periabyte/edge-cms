@@ -7,10 +7,20 @@ export default defineConfig({
     starlight({
       title: "EdgeCMS",
       tagline: "Content with an edge.",
+      logo: {
+        src: "./src/assets/logo.svg",
+        alt: "EdgeCMS",
+      },
       social: {
         github: "https://github.com/periabyte/edge-cms",
       },
       customCss: ["./src/styles/custom.css"],
+      head: [
+        {
+          tag: "link",
+          attrs: { rel: "icon", href: "/assets/logo.svg", type: "image/svg+xml" },
+        },
+      ],
       sidebar: [
         {
           label: "Guides",
