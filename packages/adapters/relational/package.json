@@ -23,6 +23,7 @@
     "@edgecms/core": "workspace:*"
   },
   "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260702.1",
     "tsup": "^8.4.0",
     "vitest": "^3.1.0"
   }
