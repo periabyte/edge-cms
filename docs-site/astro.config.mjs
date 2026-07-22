@@ -2,8 +2,7 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 
 export default defineConfig({
-  site: "https://periabyte.github.io",
-  base: "/edge-cms",
+  site: "https://edge.periabyte.dev",
   integrations: [
     starlight({
       title: "EdgeCMS",
