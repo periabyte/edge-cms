@@ -6,9 +6,6 @@ import { ensureR2Bucket, ensureR2Cors } from "../cf/r2.js";
 import { ensureKvNamespace } from "../cf/kv.js";
 import { ensureVectorizeIndex } from "../cf/vectorize.js";
 import { applyExternalMigration } from "../external-migrate.js";
-
-/** Embedding dimensions for the Workers-AI model the runtime uses (bge-m3). */
-const EMBED_DIMENSIONS = 1024;
 import { uploadAssets } from "../cf/assets.js";
 import { uploadWorkerScript, setWorkerSecret, enableWorkersDevSubdomain, type WorkerBinding } from "../cf/workers.js";
 import { attachWorkerCustomDomain } from "../cf/domains.js";
@@ -95,7 +92,11 @@ export async function runDeploy(opts: DeployOptions): Promise<DeployResult> {
     prepared.loaded.resolved.ai.enabled &&
     prepared.loaded.resolved.ai.features.includes("semantic-search");
   if (semanticSearch) {
-    const vectorize = await ensureVectorizeIndex(client, `${workerName}-search`, EMBED_DIMENSIONS);
+    const vectorize = await ensureVectorizeIndex(
+      client,
+      `${workerName}-search`,
+      prepared.loaded.resolved.ai.embedDimensions,
+    );
     state = await saveResources(opts.projectDir, state, { vectorize });
   }
 

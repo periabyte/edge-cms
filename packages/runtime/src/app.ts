@@ -69,7 +69,7 @@ export function createApp(config: ResolvedConfig, snapshot: SchemaSnapshot, opti
     // The config's role→permission matrix, read by the auth middleware to build
     // each actor's ability. Set once here so every route group sees it.
     c.set("roles", config.roles);
-    if (c.env.AI) c.set("ai", new WorkersAIProvider(c.env.AI));
+    if (c.env.AI) c.set("ai", new WorkersAIProvider(c.env.AI, config.ai.models));
     // Email is optional: enabled only when a from-address is configured AND the
     // send_email binding is present. Invites degrade to a copyable link otherwise.
     if (c.env.EMAIL && config.email.from)

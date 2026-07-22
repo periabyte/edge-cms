@@ -17,5 +17,5 @@ export {
   type SnapshotCollection,
   type SnapshotField,
 } from "./snapshot.js";
-export { SYSTEM_SUBJECTS } from "./types.js";
+export { SYSTEM_SUBJECTS, DEFAULT_AI_MODELS, DEFAULT_EMBED_DIMENSIONS } from "./types.js";
 export type * from "./types.js";

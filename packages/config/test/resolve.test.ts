@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collection, ConfigError, defineConfig, field, resolveConfig } from "../src/index.js";
+import { collection, ConfigError, defineConfig, DEFAULT_AI_MODELS, field, resolveConfig } from "../src/index.js";
 import { blogConfig } from "./fixtures.js";
 
 describe("resolveConfig", () => {
@@ -30,6 +30,46 @@ describe("resolveConfig", () => {
     expect(resolved.database.adapter).toBe("d1");
     expect(resolved.auth.providers).toEqual(["email"]);
     expect(resolved.ai.enabled).toBe(false);
+    expect(resolved.ai.models).toEqual(DEFAULT_AI_MODELS);
+    expect(resolved.ai.embedDimensions).toBe(1024);
+  });
+
+  it("lets ai.models override individual defaults, filling the rest", () => {
+    const resolved = resolveConfig(
+      defineConfig({
+        name: "ai-custom",
+        ai: { enabled: true, models: { text: "@cf/meta/llama-3.3-70b-instruct-fp8-fast" } },
+        collections: [collection("things", { fields: {} })],
+      }),
+    );
+    expect(resolved.ai.models.text).toBe("@cf/meta/llama-3.3-70b-instruct-fp8-fast");
+    expect(resolved.ai.models.vision).toBe(DEFAULT_AI_MODELS.vision);
+    expect(resolved.ai.models.embed).toBe(DEFAULT_AI_MODELS.embed);
+    expect(resolved.ai.embedDimensions).toBe(1024);
+  });
+
+  it("resolves a custom embed model + embedDimensions together", () => {
+    const resolved = resolveConfig(
+      defineConfig({
+        name: "ai-embed",
+        ai: { enabled: true, models: { embed: "@cf/baai/bge-large-en-v1.5", embedDimensions: 1024 } },
+        collections: [collection("things", { fields: {} })],
+      }),
+    );
+    expect(resolved.ai.models.embed).toBe("@cf/baai/bge-large-en-v1.5");
+    expect(resolved.ai.embedDimensions).toBe(1024);
+  });
+
+  it("rejects ai.models.embed without embedDimensions", () => {
+    expect(() =>
+      resolveConfig(
+        defineConfig({
+          name: "ai-bad",
+          ai: { enabled: true, models: { embed: "@cf/baai/bge-large-en-v1.5" } },
+          collections: [collection("things", { fields: {} })],
+        }),
+      ),
+    ).toThrow(ConfigError);
   });
 
   it("defaults email to disabled (cloudflare provider, null from) when omitted", () => {

@@ -1,15 +1,11 @@
 import type { AIProvider } from "@edgecms/core";
+import { DEFAULT_AI_MODELS, DEFAULT_EMBED_DIMENSIONS, type AIModelOverrides } from "@edgecms/config";
 
-/** Workers AI model ids used by the provider. */
-export const AI_MODELS = {
-  vision: "@cf/llava-hf/llava-1.5-7b-hf",
-  text: "@cf/meta/llama-3.1-8b-instruct",
-  translate: "@cf/meta/m2m100-1.2b",
-  embed: "@cf/baai/bge-m3",
-} as const;
+/** Workers AI model ids used by the provider when a config doesn't override them. */
+export const AI_MODELS = DEFAULT_AI_MODELS;
 
-/** Embedding dimensionality of AI_MODELS.embed — the Vectorize index must match. */
-export const EMBED_DIMENSIONS = 1024;
+/** Embedding dimensionality of the default embed model (bge-m3) — the Vectorize index must match. */
+export const EMBED_DIMENSIONS = DEFAULT_EMBED_DIMENSIONS;
 
 /** Minimal shape of the Workers AI binding we depend on. */
 export interface AiBinding {
@@ -18,10 +14,17 @@ export interface AiBinding {
 
 /** AIProvider backed by the Cloudflare Workers AI binding (env.AI). */
 export class WorkersAIProvider implements AIProvider {
-  constructor(private readonly ai: AiBinding) {}
+  private readonly models: { text: string; vision: string; translate: string; embed: string };
+
+  constructor(
+    private readonly ai: AiBinding,
+    modelOverrides: Pick<AIModelOverrides, "text" | "vision" | "translate" | "embed"> = {},
+  ) {
+    this.models = { ...AI_MODELS, ...modelOverrides };
+  }
 
   async altText(image: ArrayBuffer): Promise<string> {
-    const res = await this.ai.run(AI_MODELS.vision, {
+    const res = await this.ai.run(this.models.vision, {
       image: [...new Uint8Array(image)],
       prompt: "Describe this image in a single concise sentence suitable for alt text.",
       max_tokens: 128,
@@ -30,7 +33,7 @@ export class WorkersAIProvider implements AIProvider {
   }
 
   async improve(text: string, instruction?: string): Promise<string> {
-    const res = await this.ai.run(AI_MODELS.text, {
+    const res = await this.ai.run(this.models.text, {
       messages: [
         {
           role: "system",
@@ -45,7 +48,7 @@ export class WorkersAIProvider implements AIProvider {
   }
 
   async summarize(text: string): Promise<string> {
-    const res = await this.ai.run(AI_MODELS.text, {
+    const res = await this.ai.run(this.models.text, {
       messages: [
         {
           role: "system",
@@ -59,7 +62,7 @@ export class WorkersAIProvider implements AIProvider {
   }
 
   async seo(text: string): Promise<{ title: string; description: string }> {
-    const res = await this.ai.run(AI_MODELS.text, {
+    const res = await this.ai.run(this.models.text, {
       messages: [
         {
           role: "system",
@@ -73,7 +76,7 @@ export class WorkersAIProvider implements AIProvider {
   }
 
   async translate(text: string, targetLocale: string, sourceLocale?: string): Promise<string> {
-    const res = await this.ai.run(AI_MODELS.translate, {
+    const res = await this.ai.run(this.models.translate, {
       text,
       source_lang: sourceLocale ?? "en",
       target_lang: targetLocale,
@@ -83,7 +86,7 @@ export class WorkersAIProvider implements AIProvider {
 
   async embed(texts: string[]): Promise<number[][]> {
     if (texts.length === 0) return [];
-    const res = await this.ai.run(AI_MODELS.embed, { text: texts });
+    const res = await this.ai.run(this.models.embed, { text: texts });
     const data = (res as { data?: unknown }).data;
     if (!Array.isArray(data))
       throw new Error("Workers AI embedding returned no data array");

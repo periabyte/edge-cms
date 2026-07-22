@@ -36,7 +36,7 @@ const app = createApp(testResolved(), testSnapshot(), { plugins: [testPlugin, co
  */
 const fakeAI: AiBinding = {
   run: async (model: string, inputs: Record<string, unknown>) => {
-    if (model.includes("llava")) return { description: "a mocked alt text description" };
+    if (model.includes("vision")) return { description: "a mocked alt text description" };
     if (model.includes("m2m100")) return { translated_text: `translated:${String(inputs.text)}` };
     return { response: `improved:${String((inputs.messages as { content: string }[] | undefined)?.at(-1)?.content ?? "")}` };
   },

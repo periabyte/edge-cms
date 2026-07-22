@@ -7,7 +7,7 @@ import type {
   ResolvedConfig,
   RolesConfig,
 } from "./types.js";
-import { SYSTEM_SUBJECTS } from "./types.js";
+import { SYSTEM_SUBJECTS, DEFAULT_AI_MODELS, DEFAULT_EMBED_DIMENSIONS } from "./types.js";
 import { defaultRoles, ADMIN_ROLE, PUBLIC_ROLE } from "./roles.js";
 
 const NAME_RE = /^[a-z][a-z0-9_]*$/;
@@ -131,6 +131,20 @@ export const configSchema = z.strictObject({
       features: z
         .array(z.enum(["alt-text", "semantic-search", "translate", "editorial-assist"]))
         .optional(),
+      models: z
+        .strictObject({
+          text: z.string().min(1).optional(),
+          vision: z.string().min(1).optional(),
+          translate: z.string().min(1).optional(),
+          embed: z.string().min(1).optional(),
+          embedDimensions: z.number().int().positive().optional(),
+        })
+        .refine((m) => !m.embed || m.embedDimensions !== undefined, {
+          message:
+            "ai.models.embedDimensions is required when ai.models.embed overrides the default embedding model — the Vectorize index dimension must match your model's actual output size.",
+          path: ["embedDimensions"],
+        })
+        .optional(),
     })
     .optional(),
   auth: z
@@ -237,7 +251,17 @@ export function resolveConfig(input: EdgeCMSConfig): ResolvedConfig {
     name: config.name,
     database: { adapter: config.database?.adapter ?? "d1" },
     storage: { adapter: config.storage?.adapter ?? "r2" },
-    ai: { enabled: config.ai?.enabled ?? false, features: [...(config.ai?.features ?? [])] },
+    ai: {
+      enabled: config.ai?.enabled ?? false,
+      features: [...(config.ai?.features ?? [])],
+      models: {
+        text: config.ai?.models?.text ?? DEFAULT_AI_MODELS.text,
+        vision: config.ai?.models?.vision ?? DEFAULT_AI_MODELS.vision,
+        translate: config.ai?.models?.translate ?? DEFAULT_AI_MODELS.translate,
+        embed: config.ai?.models?.embed ?? DEFAULT_AI_MODELS.embed,
+      },
+      embedDimensions: config.ai?.models?.embedDimensions ?? DEFAULT_EMBED_DIMENSIONS,
+    },
     auth: { providers: [...(config.auth?.providers ?? ["email"])] },
     email: {
       provider: config.email?.provider ?? "cloudflare",

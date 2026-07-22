@@ -122,6 +122,36 @@ export interface CollectionDef {
 export type DatabaseAdapterName = "d1" | "postgres" | "mysql" | "mongodb";
 export type StorageAdapterName = "r2" | "s3";
 export type AIFeature = "alt-text" | "semantic-search" | "translate" | "editorial-assist";
+
+/**
+ * Per-capability Workers AI model overrides. Any field left unset falls back
+ * to the runtime's current default (see `AI_MODELS` in `@edgecms/runtime`).
+ * `embedDimensions` is required alongside `embed` — the Vectorize index is
+ * provisioned with this dimension, and it must match the overriding model's
+ * actual output size (the default, bge-m3, is 1024).
+ */
+export interface AIModelOverrides {
+  text?: string;
+  vision?: string;
+  translate?: string;
+  embed?: string;
+  embedDimensions?: number;
+}
+
+/**
+ * Current (non-deprecated, as of this writing) Workers AI model defaults —
+ * the single source of truth for both the runtime provider and the CLI's
+ * Vectorize provisioning. Update here when Cloudflare deprecates a model.
+ */
+export const DEFAULT_AI_MODELS = {
+  text: "@cf/meta/llama-3.1-8b-instruct-fast",
+  vision: "@cf/meta/llama-3.2-11b-vision-instruct",
+  translate: "@cf/meta/m2m100-1.2b",
+  embed: "@cf/baai/bge-m3",
+} as const;
+
+/** Embedding dimensionality of DEFAULT_AI_MODELS.embed (bge-m3) — the Vectorize index must match. */
+export const DEFAULT_EMBED_DIMENSIONS = 1024;
 export type AuthProvider = "email" | "cloudflare-access";
 export type EmailProviderName = "cloudflare" | "resend";
 
@@ -157,7 +187,7 @@ export interface EdgeCMSConfig {
   name: string;
   database?: { adapter: DatabaseAdapterName };
   storage?: { adapter: StorageAdapterName };
-  ai?: { enabled: boolean; features?: readonly AIFeature[] };
+  ai?: { enabled: boolean; features?: readonly AIFeature[]; models?: AIModelOverrides };
   auth?: { providers: readonly AuthProvider[] };
   /**
    * Transactional email (invites). `from` must be an address on a domain
@@ -210,7 +240,14 @@ export interface ResolvedConfig {
   name: string;
   database: { adapter: DatabaseAdapterName };
   storage: { adapter: StorageAdapterName };
-  ai: { enabled: boolean; features: AIFeature[] };
+  ai: {
+    enabled: boolean;
+    features: AIFeature[];
+    /** Always fully populated — unset fields resolve to the runtime's current defaults. */
+    models: { text: string; vision: string; translate: string; embed: string };
+    /** Embedding dimension the Vectorize index is provisioned with (1024 unless `models.embed` overrides the default). */
+    embedDimensions: number;
+  };
   auth: { providers: AuthProvider[] };
   /** Resolved email config. `from`/`baseUrl` are null when unset (email disabled). */
   email: {

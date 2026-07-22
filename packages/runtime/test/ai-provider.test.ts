@@ -55,4 +55,15 @@ describe("WorkersAIProvider", () => {
     expect(out).toBe("hola");
     expect(run).toHaveBeenCalledWith(AI_MODELS.translate, { text: "hi", source_lang: "en", target_lang: "es" });
   });
+
+  it("uses a config-provided model override instead of the default, leaving others untouched", async () => {
+    const { ai, run } = fakeBinding({ response: "better" });
+    const provider = new WorkersAIProvider(ai, { text: "@cf/meta/llama-3.3-70b-instruct-fp8-fast" });
+    await provider.improve("meh");
+    expect(run.mock.calls[0]![0]).toBe("@cf/meta/llama-3.3-70b-instruct-fp8-fast");
+
+    const { ai: ai2, run: run2 } = fakeBinding({ translated_text: "hola" });
+    await new WorkersAIProvider(ai2, { text: "@cf/meta/llama-3.3-70b-instruct-fp8-fast" }).translate("hi", "es");
+    expect(run2.mock.calls[0]![0]).toBe(AI_MODELS.translate);
+  });
 });

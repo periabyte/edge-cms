@@ -58,6 +58,47 @@ default:
 - Without Vectorize, `/api/v1/search` still works — it falls back to a plain SQL text-match scan,
   just without semantic ranking.
 
+## Choosing models
+
+Each capability runs on a specific Workers AI model, with a sane default for each — you don't need
+to pick one to get started. To override any of them, add a `models` block:
+
+```ts
+ai: {
+  enabled: true,
+  features: ["editorial-assist"],
+  models: {
+    text: "@cf/meta/llama-3.3-70b-instruct-fp8-fast", // improve/summarize/seo — bigger, higher quality
+  },
+},
+```
+
+| Key | Used for | Default |
+|---|---|---|
+| `text` | improve, summarize, SEO title/description | `@cf/meta/llama-3.1-8b-instruct-fast` |
+| `vision` | alt-text generation | `@cf/meta/llama-3.2-11b-vision-instruct` |
+| `translate` | the translate action | `@cf/meta/m2m100-1.2b` |
+| `embed` | semantic search | `@cf/baai/bge-m3` |
+
+Any key you omit falls back to the default — so `models: { text: "..." }` only changes the text
+model and leaves the rest alone. Pick a bigger model (like `llama-3.3-70b-instruct-fp8-fast`) for
+higher-quality writing help, or a smaller one to spend fewer neurons.
+
+Cloudflare periodically deprecates older model versions — check the
+[Workers AI model catalog](https://developers.cloudflare.com/workers-ai/models/) if a request
+starts failing. EdgeCMS's own defaults are updated when that happens, so staying on the default
+(by omitting `models` entirely) is the lowest-maintenance choice.
+
+**`embed` is special:** if you override it, you must also set `embedDimensions` to that model's
+output size, since the Vectorize index is provisioned with that exact dimension:
+
+```ts
+models: {
+  embed: "@cf/baai/bge-large-en-v1.5",
+  embedDimensions: 1024,
+},
+```
+
 ## No AI features enabled?
 
 Everything above is opt-in — leave `ai` unset (or `enabled: false`) and none of it runs. The rest
