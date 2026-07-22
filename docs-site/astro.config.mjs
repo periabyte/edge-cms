@@ -1,5 +1,10 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
+import { ExpressiveCodeTheme } from "astro-expressive-code";
+// @ts-ignore -- Vite raw-import query, not a real .jsonc export
+import edgecmsDarkTheme from "./src/ec-themes/edgecms-dark.jsonc?raw";
+// @ts-ignore -- Vite raw-import query, not a real .jsonc export
+import edgecmsLightTheme from "./src/ec-themes/edgecms-light.jsonc?raw";
 
 export default defineConfig({
   site: "https://edge.periabyte.dev",
@@ -15,6 +20,16 @@ export default defineConfig({
         github: "https://github.com/periabyte/edge-cms",
       },
       customCss: ["./src/styles/custom.css"],
+      // Starlight's bundled code-block theme (Night Owl) has its own orange
+      // tokens (#F78C6C / #ECC48D) that clash with the brand's signal-orange
+      // — these are the same Night Owl themes with only the orange token
+      // colors swapped to match (see src/ec-themes/).
+      expressiveCode: {
+        themes: [
+          ExpressiveCodeTheme.fromJSONString(edgecmsDarkTheme),
+          ExpressiveCodeTheme.fromJSONString(edgecmsLightTheme),
+        ],
+      },
       head: [
         {
           tag: "link",
