@@ -3,6 +3,7 @@ packages:
   - packages/adapters/*
   - packages/storage/*
   - examples/*
+  - docs-site
 onlyBuiltDependencies:
   - esbuild
   - sharp

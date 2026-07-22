@@ -1,0 +1,13 @@
+/* Light brand touch — override Starlight's accent tokens only; everything else stays default. */
+:root {
+  --sl-color-accent-low: #3a2a1a;
+  --sl-color-accent: #ff7a1a;
+  --sl-color-accent-high: #ffcaa3;
+  --sl-color-white: #ffffff;
+}
+
+:root[data-theme="light"] {
+  --sl-color-accent-low: #ffe3cc;
+  --sl-color-accent: #d95f00;
+  --sl-color-accent-high: #6b3300;
+}
