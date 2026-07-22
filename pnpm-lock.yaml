@@ -369,6 +369,9 @@ importers:
         specifier: workspace:*
         version: link:../config
     devDependencies:
+      '@cloudflare/workers-types':
+        specifier: ^4.20260702.1
+        version: 4.20260702.1
       tsup:
         specifier: ^8.4.0
         version: 8.5.1(jiti@1.21.7)(postcss@8.5.19)(typescript@5.9.3)(yaml@2.9.0)
