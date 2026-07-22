@@ -19,6 +19,12 @@ export interface ResourceIds {
   worker?: { name: string; secretsInitialized?: boolean };
   /** Attached Workers custom domains (for detach on `down`). */
   domains?: { hostname: string; id: string }[];
+  /**
+   * The email from-address's domain, onboarded for Email Routing + Sending.
+   * Deliberately never torn down by `down` — disabling email at the zone
+   * level could affect real mail on that domain well beyond this deployment.
+   */
+  emailDomain?: { hostname: string; zoneId: string };
 }
 
 export interface EdgeCmsState {

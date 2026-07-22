@@ -45,7 +45,8 @@ re-authentication step later. `edgecms down` detaches the domain before deleting
 
 ## Bonus: email sending
 
-A custom domain is also what unlocks **Cloudflare Email Sending** for user invites — onboard it
-once with `wrangler email sending enable <domain>`, then set `email: { from:
-"hello@yourdomain.com" }` in your config. Without a configured email provider, invites still work —
-they degrade to a copyable invite link you can send however you like.
+A custom domain is also what unlocks **Cloudflare Email Sending** for user invites — set
+`email: { from: "hello@yourdomain.com" }` in your config, and `edgecms deploy` onboards that
+domain for Email Routing + Sending automatically (no separate `wrangler` step). It's best-effort,
+same as the domain attach above: without a configured email provider, or if onboarding fails,
+invites still work — they degrade to a copyable invite link you can send however you like.

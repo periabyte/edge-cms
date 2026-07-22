@@ -25,8 +25,9 @@ export interface EmailDefaults {
 
 /**
  * EmailProvider backed by the Cloudflare Email Sending binding. The `from`
- * domain must be onboarded (`wrangler email sending enable <domain>`) or sends
- * fail with `E_SENDER_NOT_VERIFIED` — surfaced here as an EdgeCMSError.
+ * domain must be onboarded for Email Sending — `edgecms deploy` does this
+ * automatically (see `packages/cli/src/cf/email.ts`) — or sends fail with
+ * `E_SENDER_NOT_VERIFIED`, surfaced here as an EdgeCMSError.
  */
 export class CloudflareEmailProvider implements EmailProvider {
   constructor(

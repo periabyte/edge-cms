@@ -20,6 +20,12 @@ const PERMISSION_GROUPS = [
   // Zone-level: attaching a custom domain creates a proxied DNS record + route.
   { key: "dns", type: "edit" },
   { key: "workers_routes", type: "edit" },
+  // Zone-level: onboarding the email from-domain for Email Routing + Sending
+  // (see cf/email.ts). Best-effort pre-fill — if Cloudflare's permission-group
+  // key naming differs, the token page just won't have it pre-checked; the
+  // human-readable checklist below is the reliable fallback either way.
+  { key: "email_routing_settings", type: "edit" },
+  { key: "email_routing_rules", type: "edit" },
 ];
 
 /** Human-readable checklist printed as the reliable fallback if the pre-fill doesn't apply. */
@@ -32,6 +38,7 @@ const PERMISSION_CHECKLIST = [
   "Account · Vectorize · Edit (only if you use semantic search)",
   "Zone · DNS · Edit (for custom domains)",
   "Zone · Workers Routes · Edit (for custom domains)",
+  "Zone · Email Routing Rules · Edit (only if you use email invites)",
 ];
 
 export function tokenTemplateUrl(): string {

@@ -125,12 +125,9 @@ program
       console.log(
         "\n⚠ semantic-search is enabled — it uses Vectorize, which requires the paid Workers plan. Remove it from ai.features to stay on the free tier.",
       );
-    if (result.emailFrom) {
-      const domain = result.emailFrom.split("@")[1];
-      console.log(
-        `\n✉ Email invites use ${result.emailFrom}. If sends fail, onboard the domain once:\n  wrangler email sending enable ${domain}`,
-      );
-    }
+    if (result.emailFrom && result.emailDomainOnboarded)
+      console.log(`\n✉ Email invites use ${result.emailFrom} (domain onboarded for sending).`);
+    if (result.emailWarning) console.log(`\n⚠ ${result.emailWarning}`);
 
     // Non-interactive bootstrap for CI/agents when both are supplied.
     const flagPassword = options.adminPassword ?? process.env.EDGECMS_ADMIN_PASSWORD;

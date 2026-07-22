@@ -76,8 +76,9 @@ export function generateWranglerConfig(
   }
   // Workers AI is account-level: no resource to provision, just a binding.
   if (config.ai.enabled) wrangler.ai = { binding: "AI" };
-  // Cloudflare Email Sending: a binding only (the from-domain is onboarded out
-  // of band via `wrangler email sending enable`). Added when email is configured.
+  // Cloudflare Email Sending: a binding only — the from-domain is onboarded
+  // separately at deploy time via the Email Routing/Sending REST API (see
+  // cf/email.ts), not `wrangler email sending enable`. Added when email is configured.
   if (config.email.from) wrangler.send_email = [{ name: "EMAIL" }];
   if (opts.assetsDir) {
     wrangler.assets = {

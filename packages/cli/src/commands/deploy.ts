@@ -9,6 +9,7 @@ import { applyExternalMigration } from "../external-migrate.js";
 import { uploadAssets } from "../cf/assets.js";
 import { uploadWorkerScript, setWorkerSecret, enableWorkersDevSubdomain, type WorkerBinding } from "../cf/workers.js";
 import { attachWorkerCustomDomain } from "../cf/domains.js";
+import { enableEmailRouting, enableEmailSending, findZoneForHostname } from "../cf/email.js";
 import { RUN_WORKER_FIRST } from "../wrangler-config.js";
 import { buildWorkerBundle } from "../worker-bundle.js";
 import { prepareProject } from "../project.js";
@@ -44,6 +45,10 @@ export interface DeployResult {
   customDomains?: string[];
   /** Non-fatal custom-domain attach failures (e.g. domain not on Cloudflare). */
   domainWarnings?: string[];
+  /** True when the email from-address's domain was successfully onboarded for Email Routing + Sending. */
+  emailDomainOnboarded?: boolean;
+  /** Non-fatal email-domain onboarding failure (e.g. domain not on Cloudflare, or the token lacks permission). */
+  emailWarning?: string;
 }
 
 const COMPATIBILITY_DATE = "2025-01-01";
@@ -187,8 +192,9 @@ export async function runDeploy(opts: DeployOptions): Promise<DeployResult> {
     state.resources.vectorize
   )
     bindings.push({ type: "vectorize", name: "VECTORIZE", index_name: state.resources.vectorize.name });
-  // Cloudflare Email Sending: a binding only (the from-domain is onboarded via
-  // `wrangler email sending enable`). Added when email is configured.
+  // Cloudflare Email Sending needs the binding; the from-domain's zone is
+  // onboarded separately, further down (step 7), via the Email Routing/Sending
+  // REST API rather than requiring `wrangler email sending enable` out of band.
   if (rebuilt.loaded.resolved.email.from) bindings.push({ type: "send_email", name: "EMAIL" });
   await uploadWorkerScript(client, {
     name: workerName,
@@ -247,6 +253,31 @@ export async function runDeploy(opts: DeployOptions): Promise<DeployResult> {
     if (attached.length > 0) state = await saveResources(opts.projectDir, state, { domains: attached });
   }
 
+  // 7. Onboard the email from-domain for Email Routing + Sending. Best-effort,
+  // same posture as custom domains: a domain that isn't a Cloudflare zone yet
+  // (or a token missing the email permission) must not fail the whole deploy —
+  // invites already degrade to a copyable link when sends fail.
+  let emailDomainOnboarded: boolean | undefined;
+  let emailWarning: string | undefined;
+  const emailFromDomain = rebuilt.loaded.resolved.email.from?.split("@")[1];
+  if (emailFromDomain) {
+    try {
+      const zone = await findZoneForHostname(client, emailFromDomain);
+      if (!zone) {
+        emailWarning = `Could not onboard ${emailFromDomain} for email: it isn't a zone in your Cloudflare account yet (add the site at dash.cloudflare.com first). Invites will use the copyable-link fallback until then.`;
+      } else {
+        await enableEmailRouting(client, zone.id);
+        await enableEmailSending(client, zone.id, emailFromDomain);
+        emailDomainOnboarded = true;
+        state = await saveResources(opts.projectDir, state, {
+          emailDomain: { hostname: emailFromDomain, zoneId: zone.id },
+        });
+      }
+    } catch (err) {
+      emailWarning = `Could not onboard ${emailFromDomain} for email: ${err instanceof Error ? err.message : String(err)}. Invites will use the copyable-link fallback until this is resolved.`;
+    }
+  }
+
   // Whether the root admin still needs creating (fresh deploy → zero users).
   // Only checkable for D1; external DBs aren't reachable over the D1 HTTP API.
   const needsAdminSetup = external ? undefined : (await remoteUserCount(client, d1.id)) === 0;
@@ -261,6 +292,8 @@ export async function runDeploy(opts: DeployOptions): Promise<DeployResult> {
       rebuilt.loaded.resolved.ai.features.includes("semantic-search") && { usesPaidFeatures: true }),
     ...(customDomains.length > 0 && { customDomains }),
     ...(domainWarnings.length > 0 && { domainWarnings }),
+    ...(emailDomainOnboarded !== undefined && { emailDomainOnboarded }),
+    ...(emailWarning && { emailWarning }),
   };
 }
 
@@ -287,6 +320,7 @@ interface ResourcesPatch {
   vectorize?: { name: string };
   worker?: { name: string; secretsInitialized?: boolean };
   domains?: { hostname: string; id: string }[];
+  emailDomain?: { hostname: string; zoneId: string };
 }
 
 async function saveResources(

@@ -78,6 +78,13 @@ describe("tokenTemplateUrl", () => {
     expect(keys).toContain("workers_routes");
     expect(url).toContain("zoneId=all");
   });
+
+  it("includes email routing permissions so email-domain onboarding works", () => {
+    const url = tokenTemplateUrl();
+    const keys = decodeURIComponent(url.split("permissionGroupKeys=")[1]!);
+    expect(keys).toContain("email_routing_settings");
+    expect(keys).toContain("email_routing_rules");
+  });
 });
 
 describe("runLogin (non-interactive)", () => {
