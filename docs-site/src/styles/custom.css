@@ -9,10 +9,21 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Spectral:ital,wght@0,500;0,600;1,600&display=swap");
 
+/* Cubao Free — the Dawn design system's actual brand display face (Aaron
+   Amar, free/open license); Spectral above is the fallback the design
+   system itself specifies for when this file isn't available. */
+@font-face {
+  font-family: "Cubao Free";
+  src: url("/fonts/Cubao_Free_Regular.otf") format("opentype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --sl-font: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --sl-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  --sl-font-heading: "Spectral", Georgia, serif;
+  --sl-font-heading: "Cubao Free", "Spectral", Georgia, serif;
 
   /* Colors (light mode, default) — warm paper ramp */
   --sl-color-white: hsl(34, 33%, 12%);

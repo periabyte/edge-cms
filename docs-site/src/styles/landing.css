@@ -6,6 +6,17 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Spectral:ital,wght@0,500;0,600;1,600&display=swap");
 
+/* Cubao Free — the Dawn design system's actual brand display face (Aaron
+   Amar, free/open license); Spectral above is the fallback the design
+   system itself specifies for when this file isn't available. */
+@font-face {
+  font-family: "Cubao Free";
+  src: url("/fonts/Cubao_Free_Regular.otf") format("opentype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* The command block / terminal / code panels always sit on the dark
    --surface-code, in both themes, so their text needs fixed colors rather
    than the theme-dependent --text, --accent, --teal tokens. */
@@ -92,7 +103,7 @@ body {
 }
 
 .ec-display {
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Cubao Free", "Spectral", Georgia, serif;
 }
 
 .ec-mono {
@@ -152,7 +163,7 @@ code {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Cubao Free", "Spectral", Georgia, serif;
   font-weight: 600;
   font-size: 20px;
   letter-spacing: -0.02em;
@@ -215,7 +226,7 @@ code {
 }
 
 .ec-h1 {
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Cubao Free", "Spectral", Georgia, serif;
   font-weight: 600;
   font-size: 62px;
   line-height: 1.06;
@@ -226,6 +237,14 @@ code {
 .ec-accent {
   color: var(--accent);
   font-style: italic;
+}
+
+.ec-rotate-line {
+  display: block;
+}
+#ec-rotate-word {
+  display: inline-block;
+  transition: opacity 300ms cubic-bezier(0.2, 0, 0, 1), transform 300ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .ec-command {
@@ -352,7 +371,7 @@ code {
   margin-bottom: 44px;
 }
 .ec-h2 {
-  font-family: "Spectral", Georgia, serif;
+  font-family: "Cubao Free", "Spectral", Georgia, serif;
   font-weight: 600;
   font-size: 38px;
   line-height: 1.1;
@@ -462,7 +481,11 @@ code {
   align-items: center;
   justify-content: center;
   color: var(--accent);
-  font-size: 16px;
+}
+.ec-feat-icon svg {
+  width: 19px;
+  height: 19px;
+  display: block;
 }
 .ec-feat-title {
   font-family: "Figtree", ui-sans-serif, sans-serif;

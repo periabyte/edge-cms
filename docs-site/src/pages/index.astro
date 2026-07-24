@@ -25,15 +25,26 @@ export default defineConfig({
 });`;
 
 const features = [
-  { title: "Schema-driven admin", body: "Define content models in cms.config.ts; the admin SPA renders itself — typed fields, relations, and validation." },
-  { title: "Databases your way", body: "D1 is the zero-config default. Bring Postgres or MySQL over Hyperdrive when you outgrow it." },
-  { title: "AI that helps you ship", body: "Alt-text, translation, and editorial assist on Workers AI's free tier — plus optional semantic search." },
-  { title: "Every way to read", body: "A public REST API and config-generated GraphQL, plus an MCP endpoint so agents can query and edit content." },
-  { title: "Roles & real access control", body: "Config-defined roles and permissions, email invites, scoped API tokens with an audit log." },
-  { title: "Media, versions, locales", body: "Upload to R2 or S3, roll back any change, and localize content across languages from one place." },
-  { title: "Moderated submissions", body: "Accept public contributions behind Cloudflare Turnstile, then approve or reject from the admin queue." },
-  { title: "Your own domain", body: "Attach any custom domain with automatic DNS and TLS — the site is yours, not a subdomain." },
+  { icon: "layout-dashboard", title: "Schema-driven admin", body: "Define content models in cms.config.ts; the admin SPA renders itself — typed fields, relations, and validation." },
+  { icon: "database", title: "Databases your way", body: "D1 is the zero-config default. Bring Postgres or MySQL over Hyperdrive when you outgrow it." },
+  { icon: "sparkles", title: "AI that helps you ship", body: "Alt-text, translation, and editorial assist on Workers AI's free tier — plus optional semantic search." },
+  { icon: "link", title: "Every way to read", body: "A public REST API and config-generated GraphQL, plus an MCP endpoint so agents can query and edit content." },
+  { icon: "users", title: "Roles & real access control", body: "Config-defined roles and permissions, email invites, scoped API tokens with an audit log." },
+  { icon: "layers", title: "Media, versions, locales", body: "Upload to R2 or S3, roll back any change, and localize content across languages from one place." },
+  { icon: "shield-check", title: "Moderated submissions", body: "Accept public contributions behind Cloudflare Turnstile, then approve or reject from the admin queue." },
+  { icon: "globe", title: "Your own domain", body: "Attach any custom domain with automatic DNS and TLS — the site is yours, not a subdomain." },
 ];
+
+const ICONS: Record<string, string> = {
+  "layout-dashboard": `<rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/>`,
+  database: `<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v6c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 11v6c0 1.66 3.58 3 8 3s8-1.34 8-3v-6"/>`,
+  sparkles: `<path d="M11 3c.4 3 2 4.6 5 5-3 .4-4.6 2-5 5-.4-3-2-4.6-5-5 3-.4 4.6-2 5-5Z"/><path d="M18 14c.2 1.4.9 2.1 2.3 2.3-1.4.2-2.1.9-2.3 2.3-.2-1.4-.9-2.1-2.3-2.3 1.4-.2 2.1-.9 2.3-2.3Z"/>`,
+  link: `<path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><path d="M8 12h8"/>`,
+  users: `<path d="M17 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 5 18.5V20"/><circle cx="9.5" cy="8.5" r="3.5"/><path d="M20 20v-1.5a3.5 3.5 0 0 0-2.5-3.36"/><path d="M15 5.13a3.5 3.5 0 0 1 0 6.74"/>`,
+  layers: `<path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/>`,
+  "shield-check": `<path d="M12 3 4 6v6c0 4.5 3 7.5 8 9 5-1.5 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>`,
+  globe: `<circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.5 2.5 4 5.7 4 9s-1.5 6.5-4 9c-2.5-2.5-4-5.7-4-9s1.5-6.5 4-9Z"/>`,
+};
 
 const costRows = [
   { service: "Workers", does: "runs the CMS admin and serves your API", cost: "$0.00" },
@@ -100,7 +111,7 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
       <div class="ec-wrap ec-two" style="position:relative;padding:80px 40px 76px;display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center">
         <div>
           <div class="ec-eyebrow">// login → init → deploy</div>
-          <h1 class="ec-h1">Freedom to deploy. <em class="ec-accent">Freedom to own.</em> Freedom from recurring CMS costs.</h1>
+          <h1 class="ec-h1" id="ec-hero-h1">Freedom to deploy. <em class="ec-accent">Freedom to own.</em> Freedom from recurring CMS costs.</h1>
           <p style="font-size:17px;line-height:1.6;color:var(--text-2);max-width:520px;margin:22px 0 28px">
             A guided setup — sign in once, answer a few questions, deploy — to a live site on your own
             Cloudflare account. D1, R2, and Workers on the permanent free tier. Your domain, your data,
@@ -190,7 +201,17 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
         <div class="ec-feat-grid">
           {features.map((f) => (
             <div class="ec-feat-card">
-              <div class="ec-feat-icon">▍</div>
+              <div class="ec-feat-icon">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.75"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  set:html={ICONS[f.icon]}
+                />
+              </div>
               <div class="ec-feat-title">{f.title}</div>
               <div class="ec-feat-body">{f.body}</div>
             </div>
@@ -259,6 +280,35 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
       }
       wireCopy("ec-copy-init");
       wireCopy("ec-copy-cta");
+
+      // Rotating hero tagline: "Freedom" + the mission-line triad, cycled one
+      // clause at a time. Starts from the full static sentence already in the
+      // markup (good for no-JS/SEO) and only switches to the rotating form
+      // when motion is allowed.
+      const ROTATIONS = ["to deploy.", "to own.", "from recurring CMS costs."];
+      const heroH1 = document.getElementById("ec-hero-h1");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (heroH1 && !reduceMotion) {
+        heroH1.innerHTML =
+          'Freedom <span class="ec-rotate-line"><em class="ec-accent" id="ec-rotate-word">to deploy.</em></span>';
+        const word = document.getElementById("ec-rotate-word");
+        let i = 0;
+        if (word) {
+          setInterval(() => {
+            word.style.opacity = "0";
+            word.style.transform = "translateY(8px)";
+            setTimeout(() => {
+              i = (i + 1) % ROTATIONS.length;
+              word.textContent = ROTATIONS[i];
+              word.style.transform = "translateY(-8px)";
+              requestAnimationFrame(() => {
+                word.style.opacity = "1";
+                word.style.transform = "translateY(0)";
+              });
+            }, 320);
+          }, 3200);
+        }
+      }
     </script>
   </body>
 </html>

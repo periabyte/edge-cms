@@ -23,8 +23,8 @@ export function SetupScreen() {
     <div className="flex min-h-screen items-center justify-center bg-background p-4">
       <Card className="w-full max-w-sm p-6">
         <div className="flex items-center gap-2.5 mb-1">
-          <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-brand-foreground font-bold shadow-token">
-            {(schema?.name ?? "E").slice(0, 1).toUpperCase()}
+          <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center text-brand-foreground font-display font-bold shadow-token">
+            {(schema?.name ?? "K").slice(0, 1).toUpperCase()}
           </div>
           <div>
             <div className="font-semibold text-sm">Welcome to {schema?.name ?? "Kalayaan"}</div>

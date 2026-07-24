@@ -1,5 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Spectral:ital,wght@0,500;0,600;1,600&display=swap");
 
+/* Cubao Free — the Dawn design system's actual brand display face (Aaron
+   Amar, free/open license); Spectral above is the fallback the design
+   system itself specifies for when this file isn't available. */
+@font-face {
+  font-family: "Cubao Free";
+  src: url("/fonts/Cubao_Free_Regular.otf") format("opentype");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -161,7 +172,7 @@ body {
      chrome (cards, dialogs, form labels) stays on the sans per the Dawn
      design system's type guidance. */
   .font-display {
-    font-family: "Spectral", Georgia, serif;
+    font-family: "Cubao Free", "Spectral", Georgia, serif;
   }
 }
 
