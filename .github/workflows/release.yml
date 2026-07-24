@@ -3,8 +3,12 @@
 # `pnpm changeset version`, see docs/releasing.md) before the release/tag is
 # cut — this workflow just builds, verifies, and runs `changeset publish`,
 # which is idempotent: it only publishes packages whose local version isn't
-# already on npm. A no-op (with a notice, not a failure) until NPM_TOKEN is
-# configured as a repo secret.
+# already on npm.
+#
+# Auth is npm Trusted Publishing (OIDC) — no NPM_TOKEN secret involved. Each
+# package has a trusted-publisher record (see docs/releasing.md) tying it to
+# this exact workflow file; `id-token: write` lets npm's CLI mint a
+# short-lived OIDC token for the publish automatically.
 name: Release
 
 on:
@@ -16,43 +20,28 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write # for npm provenance
+      id-token: write # required for npm OIDC trusted publishing + provenance
     steps:
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.release.tag_name }}
 
-      - name: Guard on NPM_TOKEN
-        id: guard
-        run: |
-          if [ -n "${{ secrets.NPM_TOKEN }}" ]; then
-            echo "ok=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "ok=false" >> "$GITHUB_OUTPUT"
-            echo "::warning::NPM_TOKEN not set — skipping publish. See docs/releasing.md."
-          fi
-
       - uses: pnpm/action-setup@v4
-        if: steps.guard.outputs.ok == 'true'
       - uses: actions/setup-node@v4
-        if: steps.guard.outputs.ok == 'true'
         with:
           node-version: 22
           cache: pnpm
           registry-url: https://registry.npmjs.org
 
+      - name: Ensure npm supports OIDC trusted publishing (>=11.5.1)
+        run: npm install -g npm@latest
+
       - run: pnpm install --frozen-lockfile
-        if: steps.guard.outputs.ok == 'true'
       - run: pnpm build
-        if: steps.guard.outputs.ok == 'true'
       - run: pnpm typecheck
-        if: steps.guard.outputs.ok == 'true'
       - run: pnpm test
-        if: steps.guard.outputs.ok == 'true'
 
       - name: Publish to npm
-        if: steps.guard.outputs.ok == 'true'
         run: pnpm changeset publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           NPM_CONFIG_PROVENANCE: "true"

@@ -6,12 +6,21 @@ you review the changelog before anything ships.
 
 ## One-time setup (do before the first release)
 
-1. **npm**: create/confirm the `@kalayaan` npm org (or scope) and the `kalayaan` package name are
-   yours, then generate an **automation** access token (npmjs.com → Access Tokens → Generate New
-   Token → Automation — bypasses 2FA prompts so CI can use it non-interactively).
-2. **GitHub repo secret**: add that token as `NPM_TOKEN` (Settings → Secrets and variables →
-   Actions → New repository secret). Until this exists, `.github/workflows/release.yml` no-ops
-   with a warning instead of failing.
+Publishing uses npm **Trusted Publishing** (OIDC) — `.github/workflows/release.yml` authenticates
+via a short-lived token minted for that exact workflow run, no long-lived `NPM_TOKEN` secret
+involved. Trusted publisher records only attach to packages that already exist, so the very first
+release has a bootstrapping step:
+
+1. **Claim the names**: publish once manually from your own machine (needs your npm login + an
+   OTP from your authenticator): `npm login` then `pnpm changeset publish`. This is the only manual
+   publish ever — every release after this goes through CI.
+2. **Configure trusted publishers**: for every package (`kalayaan` + each `@kalayaan/*`), run:
+   ```sh
+   npm trust github <package> --repo periabyte/kalayaan-cms --file release.yml --allow-publish
+   ```
+   Each call opens a browser to approve via OIDC/2FA; check status any time with
+   `npm trust list <package>`. `@kalayaan/admin` is skipped — it's `private: true` and never
+   published.
 3. Make sure `main` is the default branch and has a git remote (`git remote -v`).
 
 ## Every release
