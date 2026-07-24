@@ -54,7 +54,7 @@ control hint).
   variant with its own independent publish state.
 - **`aiEnrich`** on a field (e.g. `{ action: "improve", dependency: "body" }`) attaches an inline
   AI action button to that specific field in the editor — see the
-  [AI features guide](/edge-cms/guides/ai-features/).
+  [AI features guide](/guides/ai-features/).
 
 ## Applying changes
 

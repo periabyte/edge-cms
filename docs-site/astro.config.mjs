@@ -17,7 +17,7 @@ export default defineConfig({
         alt: "Kalayaan",
       },
       social: {
-        github: "https://github.com/periabyte/edge-cms",
+        github: "https://github.com/periabyte/kalayaan-cms",
       },
       customCss: ["./src/styles/custom.css"],
       // Starlight's bundled code-block theme (Night Owl) has its own orange

@@ -91,7 +91,7 @@ function renderHome(siteName: string, links: Array<{ label: string; href: string
   <h1>This is a Kalayaan API.</h1>
   <p class="sub">Serving <code>${escapeHtml(siteName)}</code> — headless, so there's no page here. The content lives behind the routes below.</p>
   <ul>${linkRows}</ul>
-  <footer>powered by <a href="https://github.com/periabyte/edge-cms" target="_blank" rel="noopener">Kalayaan</a>, a free open-source CMS</footer>
+  <footer>powered by <a href="https://github.com/periabyte/kalayaan-cms" target="_blank" rel="noopener">Kalayaan</a>, a free open-source CMS</footer>
 </main>
 </body>
 </html>`;

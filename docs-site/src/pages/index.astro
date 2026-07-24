@@ -284,28 +284,27 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
       // Rotating hero tagline: "Freedom" + the mission-line triad, cycled one
       // clause at a time. Starts from the full static sentence already in the
       // markup (good for no-JS/SEO) and only switches to the rotating form
-      // when motion is allowed.
+      // when motion is allowed. All three clauses are stacked in the same
+      // CSS grid cell (see .ec-rotate-stack) so the wrapper's height is
+      // always the tallest of the three, however many lines it wraps to at
+      // the current viewport width — swapping which one is visible never
+      // changes the h1's box size, so nothing below it shifts.
       const ROTATIONS = ["to deploy.", "to own.", "from recurring CMS costs."];
       const heroH1 = document.getElementById("ec-hero-h1");
       const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       if (heroH1 && !reduceMotion) {
         heroH1.innerHTML =
-          'Freedom <span class="ec-rotate-line"><em class="ec-accent" id="ec-rotate-word">to deploy.</em></span>';
-        const word = document.getElementById("ec-rotate-word");
+          "Freedom " +
+          '<span class="ec-rotate-stack">' +
+          ROTATIONS.map((text, idx) => `<em class="ec-accent ec-rotate-item${idx === 0 ? " is-active" : ""}">${text}</em>`).join("") +
+          "</span>";
+        const items = heroH1.querySelectorAll<HTMLElement>(".ec-rotate-item");
         let i = 0;
-        if (word) {
+        if (items.length) {
           setInterval(() => {
-            word.style.opacity = "0";
-            word.style.transform = "translateY(8px)";
-            setTimeout(() => {
-              i = (i + 1) % ROTATIONS.length;
-              word.textContent = ROTATIONS[i];
-              word.style.transform = "translateY(-8px)";
-              requestAnimationFrame(() => {
-                word.style.opacity = "1";
-                word.style.transform = "translateY(0)";
-              });
-            }, 320);
+            items[i].classList.remove("is-active");
+            i = (i + 1) % items.length;
+            items[i].classList.add("is-active");
           }, 3200);
         }
       }

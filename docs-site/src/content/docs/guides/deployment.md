@@ -12,7 +12,7 @@ description: How kalayaan deploy provisions Cloudflare, and how to automate it i
 2. Applies any pending, **non-destructive** schema migration to the remote database.
 3. Uploads the Worker and the admin SPA (served as Workers Assets).
 4. Attaches a custom domain, if configured — see the
-   [custom domains guide](/edge-cms/guides/custom-domains/).
+   [custom domains guide](/guides/custom-domains/).
 5. Sets up first-run secrets, and prints the live URL.
 
 Destructive migrations (e.g. dropping a column) are never applied automatically — they need

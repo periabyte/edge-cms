@@ -60,7 +60,7 @@ To use your own domain instead:
 npx kalayaan deploy --domain blog.example.com
 ```
 
-See the [custom domains guide](/edge-cms/guides/custom-domains/) for the one prerequisite (the
+See the [custom domains guide](/guides/custom-domains/) for the one prerequisite (the
 domain needs to already be a Cloudflare zone).
 
 On first deploy, create your admin account at `<your-url>/admin` — or bootstrap it
@@ -78,7 +78,7 @@ Detaches any custom domain and deletes the deployed Worker and every resource it
 
 ## What's next
 
-- [Define your content model](/edge-cms/guides/schema-and-config/) in `cms.config.ts`.
-- [Set up roles and API tokens](/edge-cms/guides/roles-and-access/) for your team or integrations.
-- [Turn on AI features](/edge-cms/guides/ai-features/) — alt-text, translation, editorial assist,
+- [Define your content model](/guides/schema-and-config/) in `cms.config.ts`.
+- [Set up roles and API tokens](/guides/roles-and-access/) for your team or integrations.
+- [Turn on AI features](/guides/ai-features/) — alt-text, translation, editorial assist,
   and semantic search.
