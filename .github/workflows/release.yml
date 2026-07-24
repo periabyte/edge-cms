@@ -9,11 +9,21 @@
 # package has a trusted-publisher record (see docs/releasing.md) tying it to
 # this exact workflow file; `id-token: write` lets npm's CLI mint a
 # short-lived OIDC token for the publish automatically.
+#
+# Also runnable via workflow_dispatch (Actions tab → Run workflow) for
+# retries without cutting a new tag/release — `changeset publish` is
+# idempotent, so re-running is always safe.
 name: Release
 
 on:
   release:
     types: [published]
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Git ref (tag) to build and publish from — defaults to the current branch tip"
+        required: false
+        default: ""
 
 jobs:
   publish:
@@ -24,7 +34,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: ${{ inputs.ref || github.event.release.tag_name || github.ref }}
 
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
