@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { ComponentType } from "react";
 import type { FieldDef } from "@kalayaan/config";
 import type { SchemaField } from "../lib/types.js";
-import { Input, Select, Textarea } from "../components/ui.js";
+import { Input, Textarea } from "../components/ui.js";
 import {
   Select as RadixSelect,
   SelectContent,
@@ -130,16 +130,18 @@ function CustomFieldEditor({ field, value, onChange }: FieldEditorProps) {
       );
     case "select":
       return (
-        <Select value={(value as string) ?? ""} onChange={(e) => onChange(e.target.value)}>
-          <option value="" disabled>
-            Choose…
-          </option>
-          {options.map((opt) => (
-            <option key={opt} value={opt}>
-              {opt}
-            </option>
-          ))}
-        </Select>
+        <RadixSelect value={(value as string) ?? undefined} onValueChange={(v) => onChange(v)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Choose…" />
+          </SelectTrigger>
+          <SelectContent>
+            {options.map((opt) => (
+              <SelectItem key={opt} value={opt}>
+                {opt}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </RadixSelect>
       );
     case "json":
       return <JsonField value={value} onChange={onChange} />;
