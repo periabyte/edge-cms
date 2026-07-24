@@ -85,7 +85,7 @@ function renderHome(siteName: string, links: Array<{ label: string; href: string
 <body>
 <main>
   <div class="brand">
-    <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kalayaan"><rect width="64" height="64" rx="16" fill="var(--accent)"/><text x="32.5" y="34" text-anchor="middle" dominant-baseline="central" font-family="Georgia, serif" font-weight="700" font-size="42" fill="var(--text-on-accent)">K</text></svg>
+    <svg viewBox="0 0 64 64" width="36" height="36" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Kalayaan"><rect width="64" height="64" rx="16" fill="var(--accent)"/><path transform="translate(15.85 14.00) scale(0.05725) scale(1 -1) translate(-26.00 -628.90)" d="M550.8 194.3C535.5 257.0 508.2 311.8 509.9 322.9C511.6 334.5 531.4 398.9 550.8 466.0C569.7 531.3 588.2 599.1 589.3 623.0V623.1C589.4 626.2 587.8 628.8 585.7 628.8H344.7C343.3 628.8 342.1 627.7 341.4 626.0C331.2 597.3 302.5 501.8 298.9 489.3C295.1 475.9 288.2 462.1 277.1 458.6C265.6 455.0 266.6 487.8 266.3 510.7C266.0 540.3 271.1 615.1 271.8 623.1C272.1 626.2 270.3 628.9 268.2 628.9H31.0C29.0 628.9 27.3 626.6 27.3 623.7C27.3 551.8 30.0 479.9 29.4 408.0V140.7C29.6 127.7 26.0 5.3 26.0 5.3C26.0 2.4 27.6 0.1 29.7 0.1H254.7C256.7 0.1 258.3 2.4 258.4 5.3C258.5 30.7 259.1 56.2 261.5 81.4C263.8 105.5 263.2 184.1 267.7 189.8C275.0 199.0 285.6 184.7 291.0 169.2C296.5 153.2 326.6 26.6 332.6 3.5C333.1 1.4 334.5 0.1 336.0 0.1H586.6C589.1 0.1 590.9 3.7 590.1 7.1C587.3 17.5 567.8 124.4 550.8 194.3Z" fill="var(--text-on-accent)"/></svg>
     <span>kalayaan</span>
   </div>
   <h1>This is a Kalayaan API.</h1>
