@@ -1,6 +1,7 @@
 {
   "name": "kalayaan-skill",
   "version": "0.0.0",
+  "license": "MIT",
   "description": "Agent skill for deploying and managing a Kalayaan project safely",
   "type": "module",
   "files": [
