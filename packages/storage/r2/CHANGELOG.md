@@ -1,5 +1,11 @@
 # @kalayaan/storage-r2
 
+## 0.1.1
+
+### Patch Changes
+
+- @kalayaan/core@0.1.1
+
 ## 0.1.0
 
 ### Patch Changes

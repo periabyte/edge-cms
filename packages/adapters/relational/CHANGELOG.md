@@ -1,5 +1,12 @@
 # @kalayaan/adapter-relational
 
+## 0.1.1
+
+### Patch Changes
+
+- @kalayaan/config@0.1.1
+- @kalayaan/core@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

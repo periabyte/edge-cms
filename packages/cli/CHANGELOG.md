@@ -1,5 +1,19 @@
 # @kalayaan/cli
 
+## 0.1.1
+
+### Patch Changes
+
+- Updated dependencies [3ed4a1f]
+  - @kalayaan/admin@0.1.1
+  - @kalayaan/adapter-d1@0.1.1
+  - @kalayaan/adapter-mysql@0.1.1
+  - @kalayaan/adapter-postgres@0.1.1
+  - @kalayaan/adapter-relational@0.1.1
+  - @kalayaan/config@0.1.1
+  - @kalayaan/core@0.1.1
+  - @kalayaan/runtime@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes
