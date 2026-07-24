@@ -7,7 +7,7 @@ import kalayaanDarkTheme from "./src/ec-themes/kalayaan-dark.jsonc?raw";
 import kalayaanLightTheme from "./src/ec-themes/kalayaan-light.jsonc?raw";
 
 export default defineConfig({
-  site: "https://edge.periabyte.dev",
+  site: "https://kalayaan.periabyte.dev",
   integrations: [
     starlight({
       title: "Kalayaan",

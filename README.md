@@ -173,7 +173,7 @@ items:
 
 ## Docs
 
-- **[edge.periabyte.dev](https://edge.periabyte.dev/)** — the public docs site
+- **[kalayaan.periabyte.dev](https://kalayaan.periabyte.dev/)** — the public docs site
   (quickstart, schema/config, roles & access, AI features, custom domains, deployment)
 - [`docs/development-plan.md`](docs/development-plan.md) — the full plan + current status
 - [`docs/custom-domains.md`](docs/custom-domains.md) — using your own domain
