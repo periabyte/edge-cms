@@ -1,6 +1,6 @@
 {
-  "name": "@edgecms/core",
-  "version": "0.0.0",
+  "name": "@kalayaan/core",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,7 +19,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@edgecms/config": "workspace:*"
+    "@kalayaan/config": "workspace:*"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260702.1",

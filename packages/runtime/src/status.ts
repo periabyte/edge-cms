@@ -1,4 +1,4 @@
-import type { Doc, Page } from "@edgecms/core";
+import type { Doc, Page } from "@kalayaan/core";
 
 /**
  * Publish status is *derived*, never stored — the single source of truth is

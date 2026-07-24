@@ -1,4 +1,4 @@
-import type { SchemaChange, SchemaSnapshot, SnapshotCollection } from "@edgecms/config";
+import type { SchemaChange, SchemaSnapshot, SnapshotCollection } from "@kalayaan/config";
 import {
   EdgeCMSError,
   slugify,
@@ -9,7 +9,7 @@ import {
   type MigrationPlan,
   type Page,
   type Query,
-} from "@edgecms/core";
+} from "@kalayaan/core";
 import { emitDDL, type SqlDialect } from "./dialect.js";
 import { columnName, fieldDef, findField, isLocalized, joinTableName } from "./naming.js";
 import { buildFind, encodeCursor } from "./query-builder.js";

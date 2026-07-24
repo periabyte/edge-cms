@@ -1,6 +1,6 @@
 /**
  * Postgres flavour of the fixed system tables. Same shape as the SQLite set
- * (see @edgecms/adapter-d1's SYSTEM_TABLE_DDL) with native BIGINT timestamps
+ * (see @kalayaan/adapter-d1's SYSTEM_TABLE_DDL) with native BIGINT timestamps
  * and BOOLEAN flags. Every statement is idempotent so the migration runner can
  * reconcile them on every deploy.
  */

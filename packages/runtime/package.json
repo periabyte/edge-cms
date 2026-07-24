@@ -1,6 +1,6 @@
 {
-  "name": "@edgecms/runtime",
-  "version": "0.0.0",
+  "name": "@kalayaan/runtime",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,14 +19,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@edgecms/adapter-d1": "workspace:*",
-    "@edgecms/config": "workspace:*",
-    "@edgecms/core": "workspace:*",
-    "@edgecms/storage-r2": "workspace:*",
+    "@kalayaan/adapter-d1": "workspace:*",
+    "@kalayaan/config": "workspace:*",
+    "@kalayaan/core": "workspace:*",
+    "@kalayaan/storage-r2": "workspace:*",
     "hono": "^4.12.31",
     "zod": "^4.4.3",
-    "@edgecms/adapter-postgres": "workspace:*",
-    "@edgecms/adapter-mysql": "workspace:*",
+    "@kalayaan/adapter-postgres": "workspace:*",
+    "@kalayaan/adapter-mysql": "workspace:*",
     "graphql": "^16.9.0"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { z } from "zod";
-import { EdgeCMSError, abilityForRole } from "@edgecms/core";
-import type { PermissionGrant } from "@edgecms/config";
+import { EdgeCMSError, abilityForRole } from "@kalayaan/core";
+import type { PermissionGrant } from "@kalayaan/config";
 import { ApiKeysStore, grantsFromScopes } from "../auth/api-keys.js";
 import { AuditLog } from "../auth/audit-log.js";
 import { issueCsrfCookie } from "../auth/csrf.js";

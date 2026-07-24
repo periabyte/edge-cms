@@ -1,4 +1,4 @@
-import { EdgeCMSError } from "@edgecms/core";
+import { EdgeCMSError } from "@kalayaan/core";
 
 /**
  * Cloudflare Access identity, extracted from a verified JWT. Access has already

@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { Ability, abilityForRole, createAbility, isAdminRole } from "../src/index.js";
-import { defaultRoles } from "@edgecms/config";
+import { defaultRoles } from "@kalayaan/config";
 
 describe("Ability", () => {
   it("matches granted action + subject", () => {

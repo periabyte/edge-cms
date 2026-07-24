@@ -1,4 +1,4 @@
-import { ulid, type Doc } from "@edgecms/core";
+import { ulid, type Doc } from "@kalayaan/core";
 
 /**
  * The recorded status of a version snapshot. `draft`/`published`/`scheduled`
@@ -26,7 +26,7 @@ export type VersionSummary = Omit<VersionRecord, "snapshot">;
 
 /**
  * Append-only history of document snapshots, backed by the fixed `_versions`
- * system table (see @edgecms/adapter-d1's SYSTEM_TABLE_DDL). One row is written
+ * system table (see @kalayaan/adapter-d1's SYSTEM_TABLE_DDL). One row is written
  * per admin create/update/publish. History is never rewound or deleted —
  * restoring an old version writes a *new* version.
  */

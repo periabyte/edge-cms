@@ -58,7 +58,7 @@ working tree has further uncommitted changes from this session). Repo root stays
 Landed as four clean commits on the branch (`59cf733`, `9605cad`, `3c1ea08`, `dc6f1a2`):
 
 - **RBAC + scoped API tokens.** Config-defined roles/permissions with an `Ability` model
-  (`Action × Subject`) in `@edgecms/core`; vocabulary + `defaultRoles()` in `@edgecms/config`.
+  (`Action × Subject`) in `@kalayaan/core`; vocabulary + `defaultRoles()` in `@kalayaan/config`.
   `requirePermission()` replaces the old scope checks across every route (incl. the MCP tool map),
   and enforces per-collection/per-action for users, not just keys. API keys gained granular grants,
   expiry, and revocation; `users` gained `disabled_at`; an `audit_log` system table was added.
@@ -98,8 +98,8 @@ the free path free, and reduces setup friction for one person shipping a site.
 - **Phase 3 (Adapters): done (on branch), external-DB is content-plane only.** Extracted a
   `SqlDialect` abstraction from D1's SQLite specifics (identifier/literal quoting, `?`→engine
   placeholder rendering, boolean/param encoding, LIKE op, `timestampType`, `idType`, ALTER-vs-
-  copy-rename). New `@edgecms/adapter-postgres`, `@edgecms/adapter-mysql` (both over minimal
-  `PgClient`/`MysqlClient` interfaces with lazy driver imports), `@edgecms/storage-s3` (aws4fetch,
+  copy-rename). New `@kalayaan/adapter-postgres`, `@kalayaan/adapter-mysql` (both over minimal
+  `PgClient`/`MysqlClient` interfaces with lazy driver imports), `@kalayaan/storage-s3` (aws4fetch,
   injected signed-fetch). CLI provisions Hyperdrive + Vectorize; `migration.ts` is dialect-aware;
   runtime selects the adapter per config via an injected factory (see gotchas). Golden DDL tests
   run offline; full conformance is **gated behind `EDGECMS_PG_URL`/`EDGECMS_MYSQL_URL`** (needs
@@ -185,7 +185,7 @@ scaffolded:** `.github/workflows/release.yml` (publish on GitHub Release, gated 
 `docs/releasing.md` are in place; `ci.yml` already existed but has never run. Still needed before
 either fires: **(1)** create the GitHub repo + add the remote + push (`main` currently only has
 Phase 1 — decide whether to merge `feat/admin-dashboard-redesign` in first); **(2)** create the
-`@edgecms`/`kalayaan` npm org access + an automation token as the `NPM_TOKEN` repo secret (both
+`@kalayaan`/`kalayaan` npm org access + an automation token as the `NPM_TOKEN` repo secret (both
 names confirmed unclaimed on npm as of this check). After that: **(3)** docs site +
 Deploy-to-Cloudflare button (P5 gap) + the marketing/About pages; **(4)** the external-DB
 control-plane gap (auth/media/versions stores are D1-bound) or MongoDB, per priority.
@@ -199,22 +199,22 @@ Kalayaan is a greenfield, config-driven headless CMS that deploys entirely onto 
 ```
 edge-cms/
 ├── packages/
-│   ├── config/            @edgecms/config          — source of truth (zod only, runs everywhere)
-│   ├── core/              @edgecms/core            — engine: DSL types, adapter contracts, lifecycle, errors
+│   ├── config/            @kalayaan/config          — source of truth (zod only, runs everywhere)
+│   ├── core/              @kalayaan/core            — engine: DSL types, adapter contracts, lifecycle, errors
 │   ├── adapters/
-│   │   ├── relational/    @edgecms/adapter-relational  (shared base + SQL query builder)
-│   │   ├── d1/            @edgecms/adapter-d1
-│   │   ├── postgres/      @edgecms/adapter-postgres    (Phase 3)
-│   │   ├── mysql/         @edgecms/adapter-mysql       (Phase 3)
-│   │   └── mongodb/       @edgecms/adapter-mongodb     (Phase 3)
+│   │   ├── relational/    @kalayaan/adapter-relational  (shared base + SQL query builder)
+│   │   ├── d1/            @kalayaan/adapter-d1
+│   │   ├── postgres/      @kalayaan/adapter-postgres    (Phase 3)
+│   │   ├── mysql/         @kalayaan/adapter-mysql       (Phase 3)
+│   │   └── mongodb/       @kalayaan/adapter-mongodb     (Phase 3)
 │   ├── storage/
-│   │   ├── r2/            @edgecms/storage-r2
-│   │   └── s3/            @edgecms/storage-s3          (Phase 3)
-│   ├── runtime/           @edgecms/runtime         — createApp() Hono factory
-│   ├── admin/             @edgecms/admin           — Vite React SPA, ships dist/ as static assets
-│   ├── cli/               @edgecms/cli             — bin: kalayaan (init/dev/deploy/migrate/doctor/seed)
+│   │   ├── r2/            @kalayaan/storage-r2
+│   │   └── s3/            @kalayaan/storage-s3          (Phase 3)
+│   ├── runtime/           @kalayaan/runtime         — createApp() Hono factory
+│   ├── admin/             @kalayaan/admin           — Vite React SPA, ships dist/ as static assets
+│   ├── cli/               @kalayaan/cli             — bin: kalayaan (init/dev/deploy/migrate/doctor/seed)
 │   ├── kalayaan/           kalayaan                  — umbrella package users install
-│   ├── conformance/       @edgecms/adapter-conformance — published adapter test kit
+│   ├── conformance/       @kalayaan/adapter-conformance — published adapter test kit
 │   └── skill/             kalayaan-skill            (Phase 5)
 ├── templates/             blog/ portfolio/ docs/ blank/   (copied by init, not workspace deps)
 ├── examples/blog/         dogfooding app
@@ -222,12 +222,12 @@ edge-cms/
 ```
 
 **Key responsibilities:**
-- **`@edgecms/config`** — `defineConfig`/`collection`/`field.*` builders, Zod validation, normalized `ResolvedConfig`/`CollectionSchema`/`FieldDef` types, JSON Schema export, canonical **schema snapshot** serialization + `diffSnapshots(prev, next): ChangeSet`. Depends on zod only — consumable from Node (CLI), workerd (runtime), and browser (admin).
-- **`@edgecms/core`** — query DSL types, `DatabaseAdapter`/`StorageAdapter` contracts, document lifecycle (validation, ulid IDs, slugs, timestamps, locale/status semantics, version snapshots), `EdgeCMSError` taxonomy, hook dispatch.
-- **`@edgecms/adapter-relational`** — `RelationalAdapter` abstract class, DSL→parameterized-SQL query builder, dialect interface (`quoteIdent`, type mapping, `emitDDL(ChangeSet)`), keyset cursor encoding. `adapter-d1` adds the SQLite dialect, D1 executor, copy-rename ALTER strategy, and system-table DDL (`_migrations`, `_versions`, `media`, `users`, `api_keys`).
-- **`@edgecms/runtime`** — `createApp(config, env)`: content API `/api/v1`, admin API `/admin/api`, auth middleware, media routes, KV cache, queue consumer export, MCP endpoint (Phase 5), asset fallthrough.
-- **`@edgecms/admin`** — schema-driven SPA; imports only *types* from config (schema arrives at runtime via `/admin/api/schema`); `dist/` shipped inside the npm package and copied into the deploy bundle as Workers Assets.
-- **`@edgecms/cli`** — Cloudflare REST provisioning client, config loader (esbuild-bundles user `cms.config.ts`), generated worker entry + `wrangler.json`, `.kalayaan/state.json` manager.
+- **`@kalayaan/config`** — `defineConfig`/`collection`/`field.*` builders, Zod validation, normalized `ResolvedConfig`/`CollectionSchema`/`FieldDef` types, JSON Schema export, canonical **schema snapshot** serialization + `diffSnapshots(prev, next): ChangeSet`. Depends on zod only — consumable from Node (CLI), workerd (runtime), and browser (admin).
+- **`@kalayaan/core`** — query DSL types, `DatabaseAdapter`/`StorageAdapter` contracts, document lifecycle (validation, ulid IDs, slugs, timestamps, locale/status semantics, version snapshots), `EdgeCMSError` taxonomy, hook dispatch.
+- **`@kalayaan/adapter-relational`** — `RelationalAdapter` abstract class, DSL→parameterized-SQL query builder, dialect interface (`quoteIdent`, type mapping, `emitDDL(ChangeSet)`), keyset cursor encoding. `adapter-d1` adds the SQLite dialect, D1 executor, copy-rename ALTER strategy, and system-table DDL (`_migrations`, `_versions`, `media`, `users`, `api_keys`).
+- **`@kalayaan/runtime`** — `createApp(config, env)`: content API `/api/v1`, admin API `/admin/api`, auth middleware, media routes, KV cache, queue consumer export, MCP endpoint (Phase 5), asset fallthrough.
+- **`@kalayaan/admin`** — schema-driven SPA; imports only *types* from config (schema arrives at runtime via `/admin/api/schema`); `dist/` shipped inside the npm package and copied into the deploy bundle as Workers Assets.
+- **`@kalayaan/cli`** — Cloudflare REST provisioning client, config loader (esbuild-bundles user `cms.config.ts`), generated worker entry + `wrangler.json`, `.kalayaan/state.json` manager.
 
 Dependency graph (no cycles): `config → core → adapter-relational → d1/postgres/mysql`; `core → mongodb, storage-*, runtime`; `config → admin (types), cli, conformance`; `kalayaan → config + runtime + cli`.
 
@@ -303,7 +303,7 @@ walkthrough; Playwright smoke (login→create→edit→list) by end of phase.
 3. **`.kalayaan/state.json`:** `{ version, resources: {d1, r2, kv:{cache,sessions}, queue, vectorize, hyperdrive, worker}, schema: {snapshotVersion, collections}, migrations: [{id, checksum, appliedAt}] }`. Committed to git; secrets never in it; snapshot format versioned independently.
 4. **Auth model (M5):** PBKDF2-SHA256 600k iters; 256-bit session id in KV (7d sliding TTL) + HMAC-signed cookie; CSRF double-submit; API keys stored as SHA-256 hash with `{scopes, collections?}`.
 5. **Error format (M4):** `{ error: { code, message, details?: [{path, message}] } }` with matching HTTP status; `EdgeCMSError` in core carries code+status; same shape everywhere.
-6. **Releases:** changesets in fixed/lockstep mode for all `@edgecms/*` + `kalayaan`; `0.x` until the Phase-3 contract freeze → `1.0`. Skill and templates version independently. Runtime↔CLI compatibility guaranteed by the CLI generating the worker entry from its own bundled runtime.
+6. **Releases:** changesets in fixed/lockstep mode for all `@kalayaan/*` + `kalayaan`; `0.x` until the Phase-3 contract freeze → `1.0`. Skill and templates version independently. Runtime↔CLI compatibility guaranteed by the CLI generating the worker entry from its own bundled runtime.
 
 ## 5. Testing & CI
 

@@ -63,7 +63,7 @@ const COMPATIBILITY_DATE = "2025-01-01";
  */
 export async function runDeploy(opts: DeployOptions): Promise<DeployResult> {
   const client = opts.client ?? new CfClient(await requireCredentials());
-  // Ship the built admin SPA as Workers Assets. Defaults to @edgecms/admin's
+  // Ship the built admin SPA as Workers Assets. Defaults to @kalayaan/admin's
   // dist; skipped if neither an override nor a build is present.
   const assetsDir = opts.assetsDir ?? resolveAdminDist();
 

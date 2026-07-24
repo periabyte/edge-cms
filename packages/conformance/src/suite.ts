@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from "vitest";
-import { EdgeCMSError, type DatabaseAdapter } from "@edgecms/core";
+import { EdgeCMSError, type DatabaseAdapter } from "@kalayaan/core";
 import { seedSchema } from "./fixture.js";
 
 export interface ConformanceContext {

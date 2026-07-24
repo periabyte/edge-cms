@@ -8,7 +8,7 @@ export interface DevOptions {
   port?: number;
   /** Interface to bind, passed to `wrangler dev --ip`. Use 0.0.0.0 for LAN access. */
   host?: string;
-  /** Overrides the auto-resolved admin SPA dist (defaults to @edgecms/admin's build). */
+  /** Overrides the auto-resolved admin SPA dist (defaults to @kalayaan/admin's build). */
   assetsDir?: string;
 }
 

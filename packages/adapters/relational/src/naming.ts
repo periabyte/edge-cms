@@ -1,4 +1,4 @@
-import type { FieldDef, SnapshotCollection, SnapshotField } from "@edgecms/config";
+import type { FieldDef, SnapshotCollection, SnapshotField } from "@kalayaan/config";
 
 export function fieldDef(f: SnapshotField): FieldDef {
   return f.def as unknown as FieldDef;

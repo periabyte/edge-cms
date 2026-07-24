@@ -1,6 +1,6 @@
 import type { Context, MiddlewareHandler } from "hono";
-import { EdgeCMSError, Ability, abilityForRole, createAbility, type Action } from "@edgecms/core";
-import { defaultRoles, PUBLIC_ROLE, type RolesConfig } from "@edgecms/config";
+import { EdgeCMSError, Ability, abilityForRole, createAbility, type Action } from "@kalayaan/core";
+import { defaultRoles, PUBLIC_ROLE, type RolesConfig } from "@kalayaan/config";
 import { ApiKeysStore } from "./api-keys.js";
 import { readSession } from "./session.js";
 import { UsersStore } from "./users-store.js";

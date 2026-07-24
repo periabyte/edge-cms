@@ -40,12 +40,12 @@ service/provider.** Two steps unlock a Resend (or any) provider:
    `createApp` (`entry-template.ts` → `{ plugins }`), so no new loading path is
    needed. Gate selection on `config.email.provider`.
 
-2. **Ship `@edgecms/plugin-resend`** — an `EmailProvider` backed by Resend's REST
+2. **Ship `@kalayaan/plugin-resend`** — an `EmailProvider` backed by Resend's REST
    API (`POST https://api.resend.com/emails`) using a `RESEND_API_KEY` Worker
    secret. Usage:
    ```ts
    // cms.plugins.ts
-   import { resend } from "@edgecms/plugin-resend";
+   import { resend } from "@kalayaan/plugin-resend";
    export default [resend()];
    // cms.config.ts
    email: { provider: "resend", from: "hello@yourdomain.com" }

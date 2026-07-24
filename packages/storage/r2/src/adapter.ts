@@ -1,4 +1,4 @@
-import type { StorageAdapter, StorageObject } from "@edgecms/core";
+import type { StorageAdapter, StorageObject } from "@kalayaan/core";
 
 export class R2Adapter implements StorageAdapter {
   constructor(private readonly bucket: R2Bucket) {}

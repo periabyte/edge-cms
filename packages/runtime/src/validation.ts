@@ -1,5 +1,5 @@
 import { z } from "zod";
-import type { FieldDef, ResolvedCollection } from "@edgecms/config";
+import type { FieldDef, ResolvedCollection } from "@kalayaan/config";
 
 /** Builds a Zod schema for a collection's writable body from its field defs. */
 export function collectionWriteSchema(c: ResolvedCollection, opts: { partial: boolean }) {

@@ -5,7 +5,7 @@ import {
   resolveConfig,
   snapshotOf,
   type SnapshotCollection,
-} from "@edgecms/config";
+} from "@kalayaan/config";
 
 export function postsCollection(): SnapshotCollection {
   const snap = snapshotOf(
@@ -36,7 +36,7 @@ import type { SqlDialect } from "../src/dialect.js";
 
 /**
  * A minimal SQLite-flavoured dialect for query-builder unit tests: double-quote
- * identifiers, `?` placeholders, LIKE, boolean → 0/1. Mirrors @edgecms/adapter-d1's
+ * identifiers, `?` placeholders, LIKE, boolean → 0/1. Mirrors @kalayaan/adapter-d1's
  * sqliteDialect without importing it (relational must not depend on d1).
  */
 export const testDialect: SqlDialect = {

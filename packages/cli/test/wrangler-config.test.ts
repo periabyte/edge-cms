@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { defineConfig, resolveConfig } from "@edgecms/config";
+import { defineConfig, resolveConfig } from "@kalayaan/config";
 import { generateWranglerConfig } from "../src/wrangler-config.js";
 
 const config = resolveConfig(defineConfig({ name: "my-site", collections: [] }));

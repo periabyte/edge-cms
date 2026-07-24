@@ -1,5 +1,5 @@
-import type { SchemaSnapshot } from "@edgecms/config";
-import { RelationalAdapter, type SqlRows } from "@edgecms/adapter-relational";
+import type { SchemaSnapshot } from "@kalayaan/config";
+import { RelationalAdapter, type SqlRows } from "@kalayaan/adapter-relational";
 import { sqliteDialect } from "./dialect.js";
 
 export class D1Adapter extends RelationalAdapter {

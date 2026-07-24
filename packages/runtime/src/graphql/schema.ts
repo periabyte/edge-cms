@@ -12,9 +12,9 @@ import {
   type GraphQLFieldConfig,
   type GraphQLOutputType,
 } from "graphql";
-import type { ResolvedCollection, ResolvedConfig } from "@edgecms/config";
-import type { DatabaseAdapter } from "@edgecms/core";
-import { MAX_LIMIT } from "@edgecms/core";
+import type { ResolvedCollection, ResolvedConfig } from "@kalayaan/config";
+import type { DatabaseAdapter } from "@kalayaan/core";
+import { MAX_LIMIT } from "@kalayaan/core";
 
 export interface GraphQLContext {
   adapter: DatabaseAdapter;

@@ -7,7 +7,7 @@ import {
   snapshotOf,
   type EdgeCMSConfig,
   type SchemaSnapshot,
-} from "@edgecms/config";
+} from "@kalayaan/config";
 import { emitDDL, type SqlStatement } from "../src/ddl.js";
 
 export function blogConfig(): EdgeCMSConfig {

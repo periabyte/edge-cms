@@ -51,13 +51,13 @@ importers:
 
   packages/adapters/d1:
     dependencies:
-      '@edgecms/adapter-relational':
+      '@kalayaan/adapter-relational':
         specifier: workspace:*
         version: link:../relational
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../../core
     devDependencies:
@@ -67,7 +67,7 @@ importers:
       '@cloudflare/workers-types':
         specifier: ^4.20260702.1
         version: 4.20260702.1
-      '@edgecms/adapter-conformance':
+      '@kalayaan/adapter-conformance':
         specifier: workspace:^
         version: link:../../conformance
       tsup:
@@ -79,20 +79,20 @@ importers:
 
   packages/adapters/mysql:
     dependencies:
-      '@edgecms/adapter-relational':
+      '@kalayaan/adapter-relational':
         specifier: workspace:*
         version: link:../relational
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../../core
       mysql2:
         specifier: ^3.9.0
         version: 3.23.1(@types/node@24.13.3)
     devDependencies:
-      '@edgecms/adapter-conformance':
+      '@kalayaan/adapter-conformance':
         specifier: workspace:^
         version: link:../../conformance
       tsup:
@@ -104,20 +104,20 @@ importers:
 
   packages/adapters/postgres:
     dependencies:
-      '@edgecms/adapter-relational':
+      '@kalayaan/adapter-relational':
         specifier: workspace:*
         version: link:../relational
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../../core
       postgres:
         specifier: ^3.4.0
         version: 3.4.9
     devDependencies:
-      '@edgecms/adapter-conformance':
+      '@kalayaan/adapter-conformance':
         specifier: workspace:^
         version: link:../../conformance
       tsup:
@@ -129,10 +129,10 @@ importers:
 
   packages/adapters/relational:
     dependencies:
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../../core
     devDependencies:
@@ -248,7 +248,7 @@ importers:
         specifier: ^4.4.3
         version: 4.4.3
     devDependencies:
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../config
       '@testing-library/jest-dom':
@@ -296,28 +296,28 @@ importers:
       '@clack/prompts':
         specifier: ^0.9.0
         version: 0.9.1
-      '@edgecms/adapter-d1':
+      '@kalayaan/adapter-d1':
         specifier: workspace:*
         version: link:../adapters/d1
-      '@edgecms/adapter-mysql':
+      '@kalayaan/adapter-mysql':
         specifier: workspace:*
         version: link:../adapters/mysql
-      '@edgecms/adapter-postgres':
+      '@kalayaan/adapter-postgres':
         specifier: workspace:*
         version: link:../adapters/postgres
-      '@edgecms/adapter-relational':
+      '@kalayaan/adapter-relational':
         specifier: workspace:*
         version: link:../adapters/relational
-      '@edgecms/admin':
+      '@kalayaan/admin':
         specifier: workspace:*
         version: link:../admin
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../core
-      '@edgecms/runtime':
+      '@kalayaan/runtime':
         specifier: workspace:*
         version: link:../runtime
       commander:
@@ -355,10 +355,10 @@ importers:
 
   packages/conformance:
     dependencies:
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -371,7 +371,7 @@ importers:
 
   packages/core:
     dependencies:
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../config
     devDependencies:
@@ -387,22 +387,22 @@ importers:
 
   packages/kalayaan:
     dependencies:
-      '@edgecms/adapter-mysql':
+      '@kalayaan/adapter-mysql':
         specifier: workspace:*
         version: link:../adapters/mysql
-      '@edgecms/adapter-postgres':
+      '@kalayaan/adapter-postgres':
         specifier: workspace:*
         version: link:../adapters/postgres
-      '@edgecms/cli':
+      '@kalayaan/cli':
         specifier: workspace:*
         version: link:../cli
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../core
-      '@edgecms/runtime':
+      '@kalayaan/runtime':
         specifier: workspace:*
         version: link:../runtime
     devDependencies:
@@ -415,22 +415,22 @@ importers:
 
   packages/runtime:
     dependencies:
-      '@edgecms/adapter-d1':
+      '@kalayaan/adapter-d1':
         specifier: workspace:*
         version: link:../adapters/d1
-      '@edgecms/adapter-mysql':
+      '@kalayaan/adapter-mysql':
         specifier: workspace:*
         version: link:../adapters/mysql
-      '@edgecms/adapter-postgres':
+      '@kalayaan/adapter-postgres':
         specifier: workspace:*
         version: link:../adapters/postgres
-      '@edgecms/config':
+      '@kalayaan/config':
         specifier: workspace:*
         version: link:../config
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../core
-      '@edgecms/storage-r2':
+      '@kalayaan/storage-r2':
         specifier: workspace:*
         version: link:../storage/r2
       graphql:
@@ -460,7 +460,7 @@ importers:
 
   packages/storage/r2:
     dependencies:
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../../core
     devDependencies:
@@ -479,7 +479,7 @@ importers:
 
   packages/storage/s3:
     dependencies:
-      '@edgecms/core':
+      '@kalayaan/core':
         specifier: workspace:*
         version: link:../../core
       aws4fetch:

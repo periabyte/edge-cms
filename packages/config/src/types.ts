@@ -125,7 +125,7 @@ export type AIFeature = "alt-text" | "semantic-search" | "translate" | "editoria
 
 /**
  * Per-capability Workers AI model overrides. Any field left unset falls back
- * to the runtime's current default (see `AI_MODELS` in `@edgecms/runtime`).
+ * to the runtime's current default (see `AI_MODELS` in `@kalayaan/runtime`).
  * `embedDimensions` is required alongside `embed` — the Vectorize index is
  * provisioned with this dimension, and it must match the overriding model's
  * actual output size (the default, bge-m3, is 1024).
@@ -157,7 +157,7 @@ export type EmailProviderName = "cloudflare" | "resend";
 
 /* ------------------------------------------------------------------ *
  * RBAC vocabulary — the canonical permission model. The runtime's
- * `Ability` (in @edgecms/core) enforces these grants; the admin SPA reads
+ * `Ability` (in @kalayaan/core) enforces these grants; the admin SPA reads
  * the same shapes to hide actions a user can't perform.
  * ------------------------------------------------------------------ */
 

@@ -4,8 +4,8 @@ import type {
   SchemaSnapshot,
   SnapshotCollection,
   SnapshotField,
-} from "@edgecms/config";
-import { isDestructive } from "@edgecms/config";
+} from "@kalayaan/config";
+import { isDestructive } from "@kalayaan/config";
 
 export interface SqlStatement {
   sql: string;

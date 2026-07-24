@@ -1,6 +1,6 @@
 {
   "name": "kalayaan",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -30,12 +30,12 @@
     "kalayaan": "./dist/bin.js"
   },
   "dependencies": {
-    "@edgecms/cli": "workspace:*",
-    "@edgecms/config": "workspace:*",
-    "@edgecms/runtime": "workspace:*",
-    "@edgecms/core": "workspace:*",
-    "@edgecms/adapter-postgres": "workspace:*",
-    "@edgecms/adapter-mysql": "workspace:*"
+    "@kalayaan/cli": "workspace:*",
+    "@kalayaan/config": "workspace:*",
+    "@kalayaan/runtime": "workspace:*",
+    "@kalayaan/core": "workspace:*",
+    "@kalayaan/adapter-postgres": "workspace:*",
+    "@kalayaan/adapter-mysql": "workspace:*"
   },
   "devDependencies": {
     "tsup": "^8.4.0",

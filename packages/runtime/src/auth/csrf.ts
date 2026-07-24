@@ -1,6 +1,6 @@
 import { getCookie, setCookie } from "hono/cookie";
 import type { Context, MiddlewareHandler } from "hono";
-import { EdgeCMSError } from "@edgecms/core";
+import { EdgeCMSError } from "@kalayaan/core";
 import { randomToken } from "./tokens.js";
 import { secureCookies } from "./secure-cookie.js";
 

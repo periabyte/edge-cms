@@ -1,5 +1,5 @@
-import type { AIProvider } from "@edgecms/core";
-import { DEFAULT_AI_MODELS, DEFAULT_EMBED_DIMENSIONS, type AIModelOverrides } from "@edgecms/config";
+import type { AIProvider } from "@kalayaan/core";
+import { DEFAULT_AI_MODELS, DEFAULT_EMBED_DIMENSIONS, type AIModelOverrides } from "@kalayaan/config";
 
 /** Workers AI model ids used by the provider when a config doesn't override them. */
 export const AI_MODELS = DEFAULT_AI_MODELS;

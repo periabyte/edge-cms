@@ -7,8 +7,8 @@ import {
   snapshotOf,
   type EdgeCMSConfig,
   type SchemaSnapshot,
-} from "@edgecms/config";
-import type { DatabaseAdapter } from "@edgecms/core";
+} from "@kalayaan/config";
+import type { DatabaseAdapter } from "@kalayaan/core";
 
 export function conformanceConfig(): EdgeCMSConfig {
   return defineConfig({

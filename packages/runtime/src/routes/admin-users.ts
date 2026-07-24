@@ -1,7 +1,7 @@
 import { Hono } from "hono";
 import { z } from "zod";
-import { EdgeCMSError, type EmailProvider } from "@edgecms/core";
-import type { ResolvedConfig } from "@edgecms/config";
+import { EdgeCMSError, type EmailProvider } from "@kalayaan/core";
+import type { ResolvedConfig } from "@kalayaan/config";
 import { requireAuth, requirePermission, type AuthEnv } from "../auth/middleware.js";
 import { csrfProtection } from "../auth/csrf.js";
 import { UsersStore, toPublicUser } from "../auth/users-store.js";

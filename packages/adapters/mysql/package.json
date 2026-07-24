@@ -1,6 +1,6 @@
 {
-  "name": "@edgecms/adapter-mysql",
-  "version": "0.0.0",
+  "name": "@kalayaan/adapter-mysql",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,9 +19,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@edgecms/adapter-relational": "workspace:*",
-    "@edgecms/config": "workspace:*",
-    "@edgecms/core": "workspace:*"
+    "@kalayaan/adapter-relational": "workspace:*",
+    "@kalayaan/config": "workspace:*",
+    "@kalayaan/core": "workspace:*"
   },
   "peerDependencies": {
     "mysql2": "^3.9.0"
@@ -32,7 +32,7 @@
     }
   },
   "devDependencies": {
-    "@edgecms/adapter-conformance": "workspace:^",
+    "@kalayaan/adapter-conformance": "workspace:^",
     "tsup": "^8.4.0",
     "vitest": "^3.1.0"
   }

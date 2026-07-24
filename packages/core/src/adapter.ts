@@ -1,4 +1,4 @@
-import type { SchemaChange, SchemaSnapshot } from "@edgecms/config";
+import type { SchemaChange, SchemaSnapshot } from "@kalayaan/config";
 import type { Doc, DocRef, Page, Query } from "./query.js";
 
 export interface MigrationPlan {

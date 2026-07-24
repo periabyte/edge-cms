@@ -1,5 +1,5 @@
 import type { Context, ErrorHandler } from "hono";
-import { EdgeCMSError } from "@edgecms/core";
+import { EdgeCMSError } from "@kalayaan/core";
 import { ZodError } from "zod";
 
 export const errorHandler: ErrorHandler = (err, c: Context) => {

@@ -1,4 +1,4 @@
-import { ulid } from "@edgecms/core";
+import { ulid } from "@kalayaan/core";
 import type { Actor } from "./middleware.js";
 
 export interface AuditEntry {

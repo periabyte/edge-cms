@@ -1,4 +1,4 @@
-import { ulid } from "@edgecms/core";
+import { ulid } from "@kalayaan/core";
 import { randomToken } from "../auth/tokens.js";
 
 export const WEBHOOK_EVENTS = ["document.published", "document.updated", "document.deleted"] as const;

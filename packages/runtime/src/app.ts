@@ -1,8 +1,8 @@
 import { Hono } from "hono";
-import type { ResolvedConfig, SchemaSnapshot, RolesConfig } from "@edgecms/config";
-import type { AIProvider, EmailProvider, Plugin } from "@edgecms/core";
-import { PluginHost } from "@edgecms/core";
-import { R2Adapter } from "@edgecms/storage-r2";
+import type { ResolvedConfig, SchemaSnapshot, RolesConfig } from "@kalayaan/config";
+import type { AIProvider, EmailProvider, Plugin } from "@kalayaan/core";
+import { PluginHost } from "@kalayaan/core";
+import { R2Adapter } from "@kalayaan/storage-r2";
 import { d1AdapterFactory, type DatabaseAdapterFactory, type HyperdriveBinding } from "./adapter.js";
 import type { AuthEnv } from "./auth/middleware.js";
 import type { MediaEnv } from "./routes/media.js";
@@ -45,7 +45,7 @@ export type Bindings = AuthEnv["Bindings"] & {
  * /media).
  */
 export interface CreateAppOptions {
-  /** Runtime plugins — lifecycle hooks and custom field types (see @edgecms/core). */
+  /** Runtime plugins — lifecycle hooks and custom field types (see @kalayaan/core). */
   plugins?: Plugin[];
   /**
    * Selects the database adapter per request. Defaults to D1. The CLI-generated

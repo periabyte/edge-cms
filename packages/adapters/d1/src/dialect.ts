@@ -1,5 +1,5 @@
-import type { SnapshotField } from "@edgecms/config";
-import { columnNameFor, fieldDef, type SqlDialect } from "@edgecms/adapter-relational";
+import type { SnapshotField } from "@kalayaan/config";
+import { columnNameFor, fieldDef, type SqlDialect } from "@kalayaan/adapter-relational";
 import { SYSTEM_TABLE_DDL } from "./system-tables.js";
 
 function q(ident: string): string {

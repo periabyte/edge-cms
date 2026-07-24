@@ -1,6 +1,6 @@
-import type { SchemaSnapshot } from "@edgecms/config";
-import type { DatabaseAdapter } from "@edgecms/core";
-import { D1Adapter } from "@edgecms/adapter-d1";
+import type { SchemaSnapshot } from "@kalayaan/config";
+import type { DatabaseAdapter } from "@kalayaan/core";
+import { D1Adapter } from "@kalayaan/adapter-d1";
 
 /** A Hyperdrive binding exposes a pooled connection string to the origin DB. */
 export interface HyperdriveBinding {

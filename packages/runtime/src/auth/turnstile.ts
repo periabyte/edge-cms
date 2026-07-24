@@ -1,5 +1,5 @@
 import type { MiddlewareHandler } from "hono";
-import { EdgeCMSError } from "@edgecms/core";
+import { EdgeCMSError } from "@kalayaan/core";
 
 const SITEVERIFY_URL = "https://challenges.cloudflare.com/turnstile/v0/siteverify";
 

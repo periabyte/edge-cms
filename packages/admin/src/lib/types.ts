@@ -1,6 +1,6 @@
-import type { FieldDef, PermissionGrant } from "@edgecms/config";
+import type { FieldDef, PermissionGrant } from "@kalayaan/config";
 
-export type { PermissionAction, PermissionGrant } from "@edgecms/config";
+export type { PermissionAction, PermissionGrant } from "@kalayaan/config";
 
 /** Serialized permission rules the SPA uses to hide actions a user can't perform. */
 export interface AbilityRules {

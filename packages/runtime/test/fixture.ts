@@ -6,7 +6,7 @@ import {
   resolveConfig,
   snapshotOf,
   type EdgeCMSConfig,
-} from "@edgecms/config";
+} from "@kalayaan/config";
 
 export function testConfig(): EdgeCMSConfig {
   return defineConfig({

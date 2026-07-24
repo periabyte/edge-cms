@@ -1,7 +1,7 @@
 /**
- * URL-safe slug from a title. Mirrors @edgecms/core's slugify so the admin's
+ * URL-safe slug from a title. Mirrors @kalayaan/core's slugify so the admin's
  * live preview matches what the server generates on save (the admin only deps
- * @edgecms/config, so this is a small local copy rather than a new dep).
+ * @kalayaan/config, so this is a small local copy rather than a new dep).
  */
 export function slugify(input: string): string {
   return input

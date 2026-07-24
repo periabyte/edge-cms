@@ -1,5 +1,5 @@
 import type { Context, Handler } from "hono";
-import type { ResolvedConfig } from "@edgecms/config";
+import type { ResolvedConfig } from "@kalayaan/config";
 import { notFound } from "../errors.js";
 
 /**

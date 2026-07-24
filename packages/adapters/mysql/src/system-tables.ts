@@ -81,7 +81,7 @@ export const MYSQL_SYSTEM_TABLE_DDL: string[] = [
  * Additive columns for projects deployed before the column existed, executed
  * separately from `MYSQL_SYSTEM_TABLE_DDL` and tolerated as best-effort (not
  * every MySQL-compatible target reliably supports `ADD COLUMN IF NOT
- * EXISTS`) — see `SYSTEM_TABLE_RECONCILE_DDL` in `@edgecms/adapter-d1` for
+ * EXISTS`) — see `SYSTEM_TABLE_RECONCILE_DDL` in `@kalayaan/adapter-d1` for
  * the execution convention. A no-op in effect on fresh installs.
  */
 export const MYSQL_SYSTEM_TABLE_RECONCILE_DDL: string[] = [

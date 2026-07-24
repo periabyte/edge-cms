@@ -1,4 +1,4 @@
-import type { SnapshotCollection } from "@edgecms/config";
+import type { SnapshotCollection } from "@kalayaan/config";
 import {
   DEFAULT_LIMIT,
   EdgeCMSError,
@@ -7,7 +7,7 @@ import {
   type Sort,
   type Where,
   type WhereOps,
-} from "@edgecms/core";
+} from "@kalayaan/core";
 import type { SqlDialect } from "./dialect.js";
 import { columnName, findField, isLocalized } from "./naming.js";
 

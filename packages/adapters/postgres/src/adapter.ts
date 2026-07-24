@@ -1,6 +1,6 @@
-import type { SchemaSnapshot } from "@edgecms/config";
-import type { DatabaseAdapter } from "@edgecms/core";
-import { RelationalAdapter, type SqlRows } from "@edgecms/adapter-relational";
+import type { SchemaSnapshot } from "@kalayaan/config";
+import type { DatabaseAdapter } from "@kalayaan/core";
+import { RelationalAdapter, type SqlRows } from "@kalayaan/adapter-relational";
 import { postgresDialect } from "./dialect.js";
 
 /**

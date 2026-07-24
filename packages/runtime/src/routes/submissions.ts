@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { EdgeCMSError, PluginHost, type AIProvider } from "@edgecms/core";
-import type { ResolvedConfig } from "@edgecms/config";
+import { EdgeCMSError, PluginHost, type AIProvider } from "@kalayaan/core";
+import type { ResolvedConfig } from "@kalayaan/config";
 import { publicAuth, assertPermission, type AuthEnv } from "../auth/middleware.js";
 import { turnstileProtection } from "../auth/turnstile.js";
 import { rateLimit } from "../auth/rate-limit.js";

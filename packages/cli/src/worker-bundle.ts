@@ -4,7 +4,7 @@ import * as esbuild from "esbuild";
  * Bundles the generated Worker entry into one self-contained ESM module for
  * direct upload via the Workers API (unlike `kalayaan dev`, which hands the
  * unbundled entry to `wrangler dev` and lets wrangler's own bundler do
- * this). Everything — @edgecms/config, @edgecms/runtime, adapter-d1,
+ * this). Everything — @kalayaan/config, @kalayaan/runtime, adapter-d1,
  * storage-r2, hono, zod — gets inlined; nothing is external except the
  * `cloudflare:*` built-ins the runtime provides and the optional external-DB
  * drivers.

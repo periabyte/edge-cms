@@ -31,7 +31,7 @@ The rest of this doc is for the case where you specifically want both on one dom
 2. Rebuild the admin SPA with a non-root base so its own asset references resolve under
    `/admin/` instead of `/`:
    ```sh
-   cd packages/admin   # or wherever @edgecms/admin is built from
+   cd packages/admin   # or wherever @kalayaan/admin is built from
    vite build --base=/admin/
    ```
 3. Create a merged assets directory: your site's files at the top level (`index.html`,

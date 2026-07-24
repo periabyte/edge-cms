@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { field } from "@edgecms/config";
+import { field } from "@kalayaan/config";
 import { postgresDialect } from "../src/dialect.js";
 import { blogConfig, ddlBetween } from "./helpers.js";
 

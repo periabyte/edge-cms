@@ -1,8 +1,8 @@
-import { diffSnapshots, snapshotOf, type ResolvedConfig, type SchemaSnapshot } from "@edgecms/config";
-import { emitDDL, type SqlDialect, type SqlStatement } from "@edgecms/adapter-relational";
-import { sqliteDialect, SYSTEM_TABLE_DDL, SYSTEM_TABLE_RECONCILE_DDL } from "@edgecms/adapter-d1";
-import { postgresDialect, PG_SYSTEM_TABLE_DDL } from "@edgecms/adapter-postgres";
-import { mysqlDialect, MYSQL_SYSTEM_TABLE_DDL, MYSQL_SYSTEM_TABLE_RECONCILE_DDL } from "@edgecms/adapter-mysql";
+import { diffSnapshots, snapshotOf, type ResolvedConfig, type SchemaSnapshot } from "@kalayaan/config";
+import { emitDDL, type SqlDialect, type SqlStatement } from "@kalayaan/adapter-relational";
+import { sqliteDialect, SYSTEM_TABLE_DDL, SYSTEM_TABLE_RECONCILE_DDL } from "@kalayaan/adapter-d1";
+import { postgresDialect, PG_SYSTEM_TABLE_DDL } from "@kalayaan/adapter-postgres";
+import { mysqlDialect, MYSQL_SYSTEM_TABLE_DDL, MYSQL_SYSTEM_TABLE_RECONCILE_DDL } from "@kalayaan/adapter-mysql";
 
 export interface MigrationPlan {
   nextSnapshot: SchemaSnapshot;

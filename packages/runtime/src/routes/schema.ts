@@ -1,5 +1,5 @@
 import { Hono } from "hono";
-import type { ResolvedConfig } from "@edgecms/config";
+import type { ResolvedConfig } from "@kalayaan/config";
 
 /** The admin UI's single source of truth: fetched once, drives every screen. */
 export function schemaRoute(config: ResolvedConfig, customFieldTypes: string[] = []) {

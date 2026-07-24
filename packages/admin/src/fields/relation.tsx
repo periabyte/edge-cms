@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Check, Plus, X } from "lucide-react";
-import type { FieldDef } from "@edgecms/config";
+import type { FieldDef } from "@kalayaan/config";
 import { useCreateDoc, useRelationOptions, useSchema } from "../lib/hooks.js";
 import { ApiError } from "../lib/api.js";
 import { cn } from "../components/ui.js";

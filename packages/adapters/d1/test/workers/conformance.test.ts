@@ -1,5 +1,5 @@
 import { env } from "cloudflare:test";
-import { runConformanceSuite, conformanceSnapshot } from "@edgecms/adapter-conformance";
+import { runConformanceSuite, conformanceSnapshot } from "@kalayaan/adapter-conformance";
 import { D1Adapter } from "../../src/adapter.js";
 
 interface TestEnv {

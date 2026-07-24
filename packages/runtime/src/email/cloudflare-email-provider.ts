@@ -1,4 +1,4 @@
-import { EdgeCMSError, type EmailMessage, type EmailProvider } from "@edgecms/core";
+import { EdgeCMSError, type EmailMessage, type EmailProvider } from "@kalayaan/core";
 
 /**
  * Minimal shape of the Cloudflare Email Sending binding (`send_email`, env.EMAIL).

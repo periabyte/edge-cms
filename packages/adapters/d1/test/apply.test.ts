@@ -1,6 +1,6 @@
 import { DatabaseSync } from "node:sqlite";
 import { describe, expect, it } from "vitest";
-import { field } from "@edgecms/config";
+import { field } from "@kalayaan/config";
 import { SYSTEM_TABLE_DDL } from "../src/system-tables.js";
 import { blogConfig, ddlBetween } from "./helpers.js";
 

@@ -2,7 +2,7 @@
  * The generated Worker entry. It's a plain ESM file, not magic: it imports
  * the CLI-generated pure-data config module (relative path) plus
  * resolveConfig/snapshotOf/createApp from the "kalayaan" umbrella package —
- * never from @edgecms/config or @edgecms/runtime directly, since a project
+ * never from @kalayaan/config or @kalayaan/runtime directly, since a project
  * only ever declares "kalayaan" as a dependency, and package managers with
  * strict, non-hoisted resolution (pnpm workspaces in particular) won't
  * resolve a bare import of a transitive dependency that isn't re-exported

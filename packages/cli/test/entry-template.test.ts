@@ -6,9 +6,9 @@ describe("generateEntrySource", () => {
     const src = generateEntrySource("./config.generated.mjs");
     expect(src).toContain('import userConfig from "./config.generated.mjs"');
     // Imports only from "kalayaan" (the umbrella package), never the
-    // scoped @edgecms/* packages directly — see entry-template.ts for why.
+    // scoped @kalayaan/* packages directly — see entry-template.ts for why.
     expect(src).toContain('from "kalayaan"');
-    expect(src).not.toContain("@edgecms/");
+    expect(src).not.toContain("@kalayaan/");
     expect(src).toContain("resolveConfig(userConfig)");
     expect(src).toContain("export default {");
     expect(src).toContain("fetch:");

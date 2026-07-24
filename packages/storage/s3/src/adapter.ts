@@ -1,4 +1,4 @@
-import { type StorageAdapter, type StorageObject } from "@edgecms/core";
+import { type StorageAdapter, type StorageObject } from "@kalayaan/core";
 
 /** A fetch that signs requests (AWS SigV4). Injectable so tests need no signer. */
 export type SignedFetch = (input: Request) => Promise<Response>;

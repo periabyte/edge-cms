@@ -1,6 +1,6 @@
 {
-  "name": "@edgecms/adapter-relational",
-  "version": "0.0.0",
+  "name": "@kalayaan/adapter-relational",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,8 +19,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@edgecms/config": "workspace:*",
-    "@edgecms/core": "workspace:*"
+    "@kalayaan/config": "workspace:*",
+    "@kalayaan/core": "workspace:*"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260702.1",

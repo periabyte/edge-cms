@@ -1,5 +1,5 @@
-import { EdgeCMSError, type Query, type Sort, type Where, type WhereOps } from "@edgecms/core";
-import type { FieldDef, ResolvedCollection } from "@edgecms/config";
+import { EdgeCMSError, type Query, type Sort, type Where, type WhereOps } from "@kalayaan/core";
+import type { FieldDef, ResolvedCollection } from "@kalayaan/config";
 
 const OPS = new Set(["eq", "ne", "in", "lt", "lte", "gt", "gte", "contains"]);
 

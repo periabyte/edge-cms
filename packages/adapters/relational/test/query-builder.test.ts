@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { EdgeCMSError } from "@edgecms/core";
+import { EdgeCMSError } from "@kalayaan/core";
 import { buildFind as _buildFind, decodeCursor, encodeCursor } from "../src/query-builder.js";
 import { postsCollection, testDialect } from "./fixture.js";
 

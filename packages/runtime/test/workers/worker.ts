@@ -1,6 +1,6 @@
 import { createApp, type Bindings } from "../../src/app.js";
 import type { AiBinding } from "../../src/ai/workers-ai-provider.js";
-import type { Plugin } from "@edgecms/core";
+import type { Plugin } from "@kalayaan/core";
 import { testResolved, testSnapshot } from "../fixture.js";
 
 /**

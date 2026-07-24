@@ -1,4 +1,4 @@
-import type { ResolvedConfig } from "@edgecms/config";
+import type { ResolvedConfig } from "@kalayaan/config";
 import type { ResourceIds } from "./state.js";
 
 export interface WranglerConfig {
@@ -28,7 +28,7 @@ const COMPATIBILITY_DATE = "2025-01-01";
  * The single URL namespace the runtime and the Assets binding split
  * between them: everything under these prefixes always reaches the
  * Worker first; everything else (the admin SPA) is served as a static
- * asset. See @edgecms/runtime's app.ts for the matching route mounts.
+ * asset. See @kalayaan/runtime's app.ts for the matching route mounts.
  */
 // `/mcp` is a bare endpoint (the JSON-RPC POST target), so it needs an exact
 // match in addition to `/mcp/*` — a `/*` pattern alone does NOT cover the path

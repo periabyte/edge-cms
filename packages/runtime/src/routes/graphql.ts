@@ -1,6 +1,6 @@
 import { Hono, type Context } from "hono";
 import { graphql, type GraphQLSchema } from "graphql";
-import type { ResolvedConfig } from "@edgecms/config";
+import type { ResolvedConfig } from "@kalayaan/config";
 import { buildGraphQLSchema } from "../graphql/schema.js";
 import type { ContentEnv } from "./content.js";
 

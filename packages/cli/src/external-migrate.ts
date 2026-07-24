@@ -1,4 +1,4 @@
-import type { ResolvedConfig } from "@edgecms/config";
+import type { ResolvedConfig } from "@kalayaan/config";
 import type { MigrationPlan } from "./migration.js";
 
 /**
@@ -27,7 +27,7 @@ export async function applyExternalMigration(
   if (statements.length === 0 && reconcile.length === 0) return;
 
   if (config.database.adapter === "postgres") {
-    const { connectPostgres } = await import("@edgecms/adapter-postgres");
+    const { connectPostgres } = await import("@kalayaan/adapter-postgres");
     const { client, close } = await connectPostgres(connectionString);
     try {
       if (statements.length > 0) {
@@ -49,7 +49,7 @@ export async function applyExternalMigration(
   }
 
   if (config.database.adapter === "mysql") {
-    const { connectMysql } = await import("@edgecms/adapter-mysql");
+    const { connectMysql } = await import("@kalayaan/adapter-mysql");
     const { client, close } = await connectMysql(connectionString);
     try {
       for (const sql of statements) await client.query(sql, []);

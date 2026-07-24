@@ -1,9 +1,9 @@
-import { SYSTEM_SUBJECTS, type PermissionAction, type PermissionGrant } from "@edgecms/config";
+import { SYSTEM_SUBJECTS, type PermissionAction, type PermissionGrant } from "@kalayaan/config";
 import type { AbilityRules } from "./types.js";
 import { useAbilityRules } from "./hooks.js";
 
 /**
- * Client-side permission check. Mirrors @edgecms/core's `Ability` so the admin
+ * Client-side permission check. Mirrors @kalayaan/core's `Ability` so the admin
  * can hide actions a user can't perform — the server still enforces the same
  * rules, this is purely for UX. The `"*"` subject matches collections only,
  * never a system subject (users, api_keys, webhooks, settings, media, ai).

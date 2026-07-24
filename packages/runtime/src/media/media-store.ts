@@ -1,4 +1,4 @@
-import { ulid } from "@edgecms/core";
+import { ulid } from "@kalayaan/core";
 
 export interface MediaRecord {
   id: string;
@@ -14,7 +14,7 @@ export interface MediaRecord {
 
 /**
  * Raw queries against the fixed `media` system table (see
- * @edgecms/adapter-d1's SYSTEM_TABLE_DDL). Object bytes live in R2 under
+ * @kalayaan/adapter-d1's SYSTEM_TABLE_DDL). Object bytes live in R2 under
  * `key`; this table is the queryable, joinable metadata index the `media`
  * field type references via `{field}_id`.
  */

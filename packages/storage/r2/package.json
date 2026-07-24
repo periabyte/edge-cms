@@ -1,6 +1,6 @@
 {
-  "name": "@edgecms/storage-r2",
-  "version": "0.0.0",
+  "name": "@kalayaan/storage-r2",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -19,7 +19,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@edgecms/core": "workspace:*"
+    "@kalayaan/core": "workspace:*"
   },
   "devDependencies": {
     "@cloudflare/vitest-pool-workers": "0.12.0",

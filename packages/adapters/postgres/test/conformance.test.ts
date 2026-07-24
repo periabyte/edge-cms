@@ -1,5 +1,5 @@
 import { describe } from "vitest";
-import { conformanceSnapshot, runConformanceSuite } from "@edgecms/adapter-conformance";
+import { conformanceSnapshot, runConformanceSuite } from "@kalayaan/adapter-conformance";
 import { PostgresAdapter } from "../src/adapter.js";
 import { connectPostgres } from "../src/driver.js";
 

@@ -23,7 +23,7 @@ export async function deleteR2Bucket(client: CfClient, name: string): Promise<vo
 /**
  * CORS so the admin UI (served from the Worker's own origin) can PUT
  * uploads directly. Wide open by design for Phase 1's Worker-proxied
- * upload path — see @edgecms/runtime's media routes, which authenticate
+ * upload path — see @kalayaan/runtime's media routes, which authenticate
  * every upload — and gets scoped to presigned-URL origins in Phase 2.
  */
 export async function ensureR2Cors(client: CfClient, bucketName: string): Promise<void> {

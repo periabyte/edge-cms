@@ -1,4 +1,4 @@
-# Publishes @edgecms/* + kalayaan to npm when a GitHub Release is published.
+# Publishes @kalayaan/* + kalayaan to npm when a GitHub Release is published.
 # Versions/changelogs are expected to already be bumped on `main` (via
 # `pnpm changeset version`, see docs/releasing.md) before the release/tag is
 # cut — this workflow just builds, verifies, and runs `changeset publish`,

@@ -1,6 +1,6 @@
 import { env, SELF } from "cloudflare:test";
 import { beforeAll, describe, expect, it } from "vitest";
-import { D1Adapter, SYSTEM_TABLE_DDL } from "@edgecms/adapter-d1";
+import { D1Adapter, SYSTEM_TABLE_DDL } from "@kalayaan/adapter-d1";
 import { UsersStore } from "../../src/auth/users-store.js";
 import { testDiff, testSnapshot } from "../fixture.js";
 import { authenticate, authHeaders, loginAs, type AuthedRequest } from "./auth-helper.js";

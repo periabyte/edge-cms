@@ -1,6 +1,6 @@
 import { useState } from "react";
 import type { ComponentType } from "react";
-import type { FieldDef } from "@edgecms/config";
+import type { FieldDef } from "@kalayaan/config";
 import type { SchemaField } from "../lib/types.js";
 import { Input, Select, Textarea } from "../components/ui.js";
 import {

@@ -5,7 +5,7 @@ import { prepareProject } from "../project.js";
 import { checksumOf, planMigration } from "../migration.js";
 import { lastSnapshot, readState, writeState } from "../state.js";
 import { resolveWranglerBin } from "../wrangler-bin.js";
-import { ulid } from "@edgecms/core";
+import { ulid } from "@kalayaan/core";
 
 export interface MigrateOptions {
   projectDir: string;

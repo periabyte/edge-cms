@@ -24,7 +24,7 @@ export default defineConfig({
 beforeEach(async () => {
   dir = await mkdtemp(join(tmpdir(), "kalayaan-deploy-"));
   await writeFile(join(dir, "cms.config.ts"), CONFIG_TS);
-  await mkdir(join(dir, "node_modules", "@edgecms"), { recursive: true });
+  await mkdir(join(dir, "node_modules", "@kalayaan"), { recursive: true });
   // Unlike `kalayaan dev` (which hands off to wrangler's own bundler, whose
   // symlink-realpath resolution reaches into the monorepo's nested
   // node_modules), `deploy` bundles with our own esbuild call — so this
@@ -32,7 +32,7 @@ beforeEach(async () => {
   // project root, rather than relying on that extra resolution behavior.
   const packagesDir = join(import.meta.dirname, "../..");
   const link = (name: string, target: string) =>
-    symlink(join(packagesDir, target), join(dir, "node_modules", "@edgecms", name), "dir").catch(() => undefined);
+    symlink(join(packagesDir, target), join(dir, "node_modules", "@kalayaan", name), "dir").catch(() => undefined);
   await symlink(join(packagesDir, "kalayaan"), join(dir, "node_modules", "kalayaan"), "dir").catch(() => undefined);
   await link("config", "config");
   await link("core", "core");
@@ -80,7 +80,7 @@ function freshAccountRoutes(): MockRoute[] {
         return { result: [{ results, success: true, meta: { duration: 0 } }] };
       },
     },
-    // Admin SPA assets are uploaded by default now (resolved from @edgecms/admin's
+    // Admin SPA assets are uploaded by default now (resolved from @kalayaan/admin's
     // dist). The upload-session fast path returns a completion JWT directly.
     {
       method: "POST",
@@ -126,7 +126,7 @@ describe("runDeploy", () => {
     // Worker script upload happened with D1/R2/KV bindings.
     const scriptCall = calls.find((c) => c.method === "PUT" && /\/workers\/scripts\/[^/]+$/.test(c.path));
     expect(scriptCall).toBeDefined();
-    // The admin SPA assets are uploaded by default (dist resolved from @edgecms/admin).
+    // The admin SPA assets are uploaded by default (dist resolved from @kalayaan/admin).
     expect(calls.some((c) => c.path.includes("/assets-upload-session"))).toBe(true);
 
     // The script must be uploaded BEFORE the secret is set — on a first-ever

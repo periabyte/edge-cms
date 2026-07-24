@@ -3,7 +3,7 @@ import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
 import { join } from "node:path";
 import { pathToFileURL } from "node:url";
 import * as esbuild from "esbuild";
-import { resolveConfig, type EdgeCMSConfig, type ResolvedConfig } from "@edgecms/config";
+import { resolveConfig, type EdgeCMSConfig, type ResolvedConfig } from "@kalayaan/config";
 
 export const CONFIG_CANDIDATES = ["cms.config.ts", "cms.config.js", "cms.config.mjs", "cms.config.json"];
 export const PLUGINS_CANDIDATES = ["cms.plugins.ts", "cms.plugins.js", "cms.plugins.mjs"];

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collection, defineConfig, field, resolveConfig, snapshotOf } from "@edgecms/config";
+import { collection, defineConfig, field, resolveConfig, snapshotOf } from "@kalayaan/config";
 import { checksumOf, planMigration } from "../src/migration.js";
 
 const blog = () =>

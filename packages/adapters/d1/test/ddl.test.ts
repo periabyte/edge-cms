@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { collection, field } from "@edgecms/config";
+import { collection, field } from "@kalayaan/config";
 import { blogConfig, ddlBetween } from "./helpers.js";
 
 describe("emitDDL golden output", () => {

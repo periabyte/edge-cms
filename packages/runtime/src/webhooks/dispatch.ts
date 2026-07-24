@@ -1,4 +1,4 @@
-import type { Doc } from "@edgecms/core";
+import type { Doc } from "@kalayaan/core";
 import { hmacSign } from "../auth/tokens.js";
 import type { DocStatus } from "../status.js";
 import { WebhookStore, type WebhookEvent } from "./webhook-store.js";

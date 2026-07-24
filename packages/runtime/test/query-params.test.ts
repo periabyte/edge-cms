@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { collection, defineConfig, field, resolveConfig } from "@edgecms/config";
-import { EdgeCMSError } from "@edgecms/core";
+import { collection, defineConfig, field, resolveConfig } from "@kalayaan/config";
+import { EdgeCMSError } from "@kalayaan/core";
 import { parseContentQuery } from "../src/query-params.js";
 import { testResolved } from "./fixture.js";
 

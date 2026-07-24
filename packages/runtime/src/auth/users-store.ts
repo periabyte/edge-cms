@@ -1,7 +1,7 @@
-import { ulid } from "@edgecms/core";
+import { ulid } from "@kalayaan/core";
 import { hashPassword } from "./password.js";
 
-/** Role is a config-defined name (see @edgecms/config `roles`), not a fixed enum. */
+/** Role is a config-defined name (see @kalayaan/config `roles`), not a fixed enum. */
 export type UserRole = string;
 
 export interface UserRecord {
@@ -32,7 +32,7 @@ export function toPublicUser(u: UserRecord): PublicUser {
 
 /**
  * Raw queries against the fixed `users` system table (see
- * @edgecms/adapter-d1's SYSTEM_TABLE_DDL). Not config-driven, so it bypasses
+ * @kalayaan/adapter-d1's SYSTEM_TABLE_DDL). Not config-driven, so it bypasses
  * the generic DatabaseAdapter collection CRUD.
  */
 export class UsersStore {

@@ -1,5 +1,5 @@
-import { ulid } from "@edgecms/core";
-import { SYSTEM_SUBJECTS, type PermissionAction, type PermissionGrant } from "@edgecms/config";
+import { ulid } from "@kalayaan/core";
+import { SYSTEM_SUBJECTS, type PermissionAction, type PermissionGrant } from "@kalayaan/config";
 import { randomToken, sha256Hex } from "./tokens.js";
 
 export interface ApiKeyRecord {

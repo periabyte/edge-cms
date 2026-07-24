@@ -1,6 +1,6 @@
 import { Hono } from "hono";
-import { EdgeCMSError, PluginHost, type Doc, type HookOperation } from "@edgecms/core";
-import type { ResolvedCollection, ResolvedConfig } from "@edgecms/config";
+import { EdgeCMSError, PluginHost, type Doc, type HookOperation } from "@kalayaan/core";
+import type { ResolvedCollection, ResolvedConfig } from "@kalayaan/config";
 import { requireAuth, requirePermission, assertPermission, type AuthEnv } from "../auth/middleware.js";
 import { csrfProtection } from "../auth/csrf.js";
 import { parseContentQuery } from "../query-params.js";
@@ -16,7 +16,7 @@ import {
   deindex,
 } from "../content/create-document.js";
 import type { VectorizeBinding } from "../ai/search-index.js";
-import type { AIProvider } from "@edgecms/core";
+import type { AIProvider } from "@kalayaan/core";
 import type { ContentEnv } from "./content.js";
 
 type AdminEnv = ContentEnv &

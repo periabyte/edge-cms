@@ -1,5 +1,5 @@
 import type { MiddlewareHandler } from "hono";
-import { EdgeCMSError } from "@edgecms/core";
+import { EdgeCMSError } from "@kalayaan/core";
 
 interface RateLimitEnv {
   Bindings: { SESSIONS: KVNamespace };

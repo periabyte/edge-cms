@@ -1,5 +1,5 @@
-import type { AIProvider, DatabaseAdapter, Doc } from "@edgecms/core";
-import type { ResolvedCollection, ResolvedConfig } from "@edgecms/config";
+import type { AIProvider, DatabaseAdapter, Doc } from "@kalayaan/core";
+import type { ResolvedCollection, ResolvedConfig } from "@kalayaan/config";
 import { computeStatus, serializeDoc } from "../status.js";
 import { VectorizeSearchIndex, type SearchIndex, type SearchVector, type VectorizeBinding } from "./search-index.js";
 

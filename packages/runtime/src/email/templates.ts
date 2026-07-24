@@ -1,4 +1,4 @@
-import type { EmailMessage } from "@edgecms/core";
+import type { EmailMessage } from "@kalayaan/core";
 
 /** Invite email: a plain, client-safe template (inline styles, html + text). */
 export function inviteEmail(opts: { to: string; url: string; projectName: string; temporaryPassword: string }): EmailMessage {

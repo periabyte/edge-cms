@@ -1,11 +1,11 @@
-import type { SchemaChange, SchemaSnapshot, SnapshotCollection, SnapshotField } from "@edgecms/config";
+import type { SchemaChange, SchemaSnapshot, SnapshotCollection, SnapshotField } from "@kalayaan/config";
 import {
   emitDDL as emitDDLWith,
   createCollection as createCollectionWith,
   columnNameFor,
   joinTableNameFor,
   type SqlStatement,
-} from "@edgecms/adapter-relational";
+} from "@kalayaan/adapter-relational";
 import { sqliteDialect } from "./dialect.js";
 
 export type { SqlStatement };

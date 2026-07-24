@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { z } from "zod";
-import { EdgeCMSError } from "@edgecms/core";
+import { EdgeCMSError } from "@kalayaan/core";
 import { requirePermission, requireAuth, type AuthEnv } from "../auth/middleware.js";
 import { csrfProtection } from "../auth/csrf.js";
 import { WEBHOOK_EVENTS, WebhookStore, stripSecret } from "../webhooks/webhook-store.js";

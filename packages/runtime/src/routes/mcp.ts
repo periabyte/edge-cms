@@ -1,16 +1,16 @@
 import { Hono } from "hono";
-import { EdgeCMSError } from "@edgecms/core";
-import type { ResolvedConfig } from "@edgecms/config";
+import { EdgeCMSError } from "@kalayaan/core";
+import type { ResolvedConfig } from "@kalayaan/config";
 import { requireAuth, type Actor, type AuthEnv } from "../auth/middleware.js";
-import type { Action } from "@edgecms/core";
-import type { SystemSubject } from "@edgecms/config";
+import type { Action } from "@kalayaan/core";
+import type { SystemSubject } from "@kalayaan/config";
 import { MediaStore } from "../media/media-store.js";
 import { searchServiceFrom } from "../ai/search-service.js";
 import { serializeDoc } from "../status.js";
 import type { MediaEnv } from "./media.js";
 import type { ContentEnv } from "./content.js";
 import type { VectorizeBinding } from "../ai/search-index.js";
-import type { AIProvider } from "@edgecms/core";
+import type { AIProvider } from "@kalayaan/core";
 
 type McpEnv = ContentEnv &
   AuthEnv &

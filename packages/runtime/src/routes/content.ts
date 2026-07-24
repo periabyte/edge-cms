@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import type { DatabaseAdapter } from "@edgecms/core";
-import { EdgeCMSError } from "@edgecms/core";
-import type { ResolvedConfig } from "@edgecms/config";
+import type { DatabaseAdapter } from "@kalayaan/core";
+import { EdgeCMSError } from "@kalayaan/core";
+import type { ResolvedConfig } from "@kalayaan/config";
 import { parseContentQuery } from "../query-params.js";
 import { serializeDoc, serializePage } from "../status.js";
 import { publicAuth, can, type AuthEnv } from "../auth/middleware.js";

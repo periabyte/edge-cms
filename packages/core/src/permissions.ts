@@ -5,7 +5,7 @@
  * library into the Worker bundle.
  *
  * The permission *vocabulary* (actions, grant/role shapes, the system-subject
- * list, the built-in roles) is defined in @edgecms/config, which is the more
+ * list, the built-in roles) is defined in @kalayaan/config, which is the more
  * foundational package. This module only adds the runtime `Ability`.
  *
  * A grant pairs a set of `subjects` with a set of `actions`. A subject is
@@ -19,7 +19,7 @@ import {
   type PermissionAction,
   type PermissionGrant,
   type RolesConfig,
-} from "@edgecms/config";
+} from "@kalayaan/config";
 
 export type Action = PermissionAction;
 

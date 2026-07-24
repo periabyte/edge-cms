@@ -1,6 +1,6 @@
-import { EdgeCMSError, PluginHost, type Doc } from "@edgecms/core";
-import type { AIProvider } from "@edgecms/core";
-import type { ResolvedCollection, ResolvedConfig } from "@edgecms/config";
+import { EdgeCMSError, PluginHost, type Doc } from "@kalayaan/core";
+import type { AIProvider } from "@kalayaan/core";
+import type { ResolvedCollection, ResolvedConfig } from "@kalayaan/config";
 import { computeStatus } from "../status.js";
 import { VersionStore, type VersionStatus } from "../versions/version-store.js";
 import { dispatch, type WaitUntilCtx } from "../webhooks/dispatch.js";

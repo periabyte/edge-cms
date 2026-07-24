@@ -15,11 +15,11 @@ builders — keep the free path free and setup friction low. Full plan: `docs/de
 pnpm build          # turbo build (respects package graph)
 pnpm typecheck      # tsc --noEmit across packages
 pnpm test           # vitest (node + @cloudflare/vitest-pool-workers)
-pnpm --filter @edgecms/<pkg> test   # one package
+pnpm --filter @kalayaan/<pkg> test   # one package
 ```
 
 Always run `pnpm build && pnpm typecheck && pnpm test` before considering a change done. Packages
-depend on each other's `dist/`, so **rebuild `@edgecms/config` / `@edgecms/core` after editing them**
+depend on each other's `dist/`, so **rebuild `@kalayaan/config` / `@kalayaan/core` after editing them**
 before typechecking a downstream package.
 
 ## Admin UI conventions (`packages/admin`)
@@ -70,14 +70,14 @@ before typechecking a downstream package.
 
 - **ESM everywhere**, `.js` extensions on relative imports (TS resolves to `.ts`).
 - **Config is the source of truth.** Collections/fields/roles/services are defined in `cms.config.ts`
-  and validated by `@edgecms/config` (zod). The Worker **bundles the config at build time** — config
+  and validated by `@kalayaan/config` (zod). The Worker **bundles the config at build time** — config
   changes require `migrate` + redeploy, never a hot reload.
 - **Auth & access:** every request resolves to an `Ability` (`action × subject`); gate routes with
   `requirePermission()` / `publicAuth()` (`packages/runtime/src/auth/middleware.ts`). Don't reintroduce
   the old `read`/`write`/`manage` scope strings — that model was replaced by config-defined roles +
   granular token grants.
-- **Providers follow one seam:** `AIProvider` / `EmailProvider` interfaces in `@edgecms/core`, a
-  binding-backed impl in `@edgecms/runtime`, injected in `app.ts`, mocked in tests. Add new
+- **Providers follow one seam:** `AIProvider` / `EmailProvider` interfaces in `@kalayaan/core`, a
+  binding-backed impl in `@kalayaan/runtime`, injected in `app.ts`, mocked in tests. Add new
   capabilities the same way.
 - **CLI state:** resource IDs + migration journal live in `.kalayaan/state.json` (committed, no
   secrets). User credentials from `kalayaan login` live in `~/.kalayaan/credentials.json` (0600).

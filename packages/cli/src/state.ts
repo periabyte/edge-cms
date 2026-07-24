@@ -1,7 +1,7 @@
 import { existsSync } from "node:fs";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { join } from "node:path";
-import type { SchemaSnapshot } from "@edgecms/config";
+import type { SchemaSnapshot } from "@kalayaan/config";
 
 export interface MigrationRecord {
   id: string;

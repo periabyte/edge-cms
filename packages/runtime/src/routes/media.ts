@@ -1,8 +1,8 @@
 import { Hono } from "hono";
 import { z } from "zod";
-import type { AIProvider, StorageAdapter } from "@edgecms/core";
-import { EdgeCMSError } from "@edgecms/core";
-import type { ResolvedConfig } from "@edgecms/config";
+import type { AIProvider, StorageAdapter } from "@kalayaan/core";
+import { EdgeCMSError } from "@kalayaan/core";
+import type { ResolvedConfig } from "@kalayaan/config";
 import { requireAuth, requirePermission, type AuthEnv } from "../auth/middleware.js";
 import { csrfProtection } from "../auth/csrf.js";
 import { MediaStore } from "../media/media-store.js";

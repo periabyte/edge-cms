@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from "vitest";
-import { defineConfig, collection, field, resolveConfig } from "@edgecms/config";
-import type { AIProvider, DatabaseAdapter, Doc, Page } from "@edgecms/core";
+import { defineConfig, collection, field, resolveConfig } from "@kalayaan/config";
+import type { AIProvider, DatabaseAdapter, Doc, Page } from "@kalayaan/core";
 import { SearchService, extractSearchText } from "../src/ai/search-service.js";
 import type { SearchIndex, SearchMatch, SearchVector } from "../src/ai/search-index.js";
 

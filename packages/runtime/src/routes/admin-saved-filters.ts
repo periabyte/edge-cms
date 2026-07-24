@@ -1,6 +1,6 @@
 import { Hono } from "hono";
 import { z } from "zod";
-import { EdgeCMSError, ulid } from "@edgecms/core";
+import { EdgeCMSError, ulid } from "@kalayaan/core";
 import { requireAuth, type AuthEnv } from "../auth/middleware.js";
 import { csrfProtection } from "../auth/csrf.js";
 

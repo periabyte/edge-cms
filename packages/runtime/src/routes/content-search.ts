@@ -1,7 +1,7 @@
 import { Hono } from "hono";
-import { EdgeCMSError, type AIProvider } from "@edgecms/core";
-import type { ResolvedConfig } from "@edgecms/config";
-import { MAX_LIMIT } from "@edgecms/core";
+import { EdgeCMSError, type AIProvider } from "@kalayaan/core";
+import type { ResolvedConfig } from "@kalayaan/config";
+import { MAX_LIMIT } from "@kalayaan/core";
 import { searchServiceFrom } from "../ai/search-service.js";
 import type { VectorizeBinding } from "../ai/search-index.js";
 import type { ContentEnv } from "./content.js";

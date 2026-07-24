@@ -7,8 +7,8 @@ import {
   snapshotOf,
   type EdgeCMSConfig,
   type SchemaSnapshot,
-} from "@edgecms/config";
-import { emitDDL, type SqlStatement } from "@edgecms/adapter-relational";
+} from "@kalayaan/config";
+import { emitDDL, type SqlStatement } from "@kalayaan/adapter-relational";
 import { postgresDialect } from "../src/dialect.js";
 
 export function blogConfig(): EdgeCMSConfig {

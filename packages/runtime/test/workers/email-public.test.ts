@@ -1,7 +1,7 @@
 import { env, SELF } from "cloudflare:test";
 import { beforeAll, describe, expect, it } from "vitest";
-import { PluginHost } from "@edgecms/core";
-import { D1Adapter, SYSTEM_TABLE_DDL } from "@edgecms/adapter-d1";
+import { PluginHost } from "@kalayaan/core";
+import { D1Adapter, SYSTEM_TABLE_DDL } from "@kalayaan/adapter-d1";
 import { testDiff, testResolved, testSnapshot } from "../fixture.js";
 import { UsersStore } from "../../src/auth/users-store.js";
 import { createDocument } from "../../src/content/create-document.js";
