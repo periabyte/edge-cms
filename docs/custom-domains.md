@@ -1,14 +1,23 @@
 # Custom domains
 
-By default `edgecms deploy` serves your site on a free `*.workers.dev` URL. To use
+By default `kalayaan deploy` serves your site on a free `*.workers.dev` URL. To use
 your own domain (e.g. `blog.example.com`), set it in config or pass a flag.
+
+## Subdomain vs. root domain
+
+Kalayaan is headless — it has no homepage, so `example.com` itself would serve nothing useful.
+Prefer a subdomain for the CMS, e.g. `cms.example.com` or `content.example.com`, and keep the
+root domain free for your own site (hosted however you like — see
+[`docs/custom-root-page.md`](custom-root-page.md) if you want both on the same domain instead).
+`kalayaan init` nudges you toward this if you enter a bare root domain, and `kalayaan doctor` warns
+if your config is set to one.
 
 ## Prerequisite
 
 The domain must already be a **zone in your Cloudflare account** — i.e. its
 nameservers point at Cloudflare. Add the site once at
 [dash.cloudflare.com](https://dash.cloudflare.com) (Add a site → follow the
-nameserver step). EdgeCMS can't do this for you because it requires a change at
+nameserver step). Kalayaan can't do this for you because it requires a change at
 your domain registrar.
 
 ## Usage
@@ -26,22 +35,22 @@ export default defineConfig({
 or per-deploy:
 
 ```bash
-npx edgecms deploy --domain blog.example.com
+npx kalayaan deploy --domain blog.example.com
 ```
 
-On deploy, EdgeCMS attaches the domain to your Worker via Cloudflare's Workers
+On deploy, Kalayaan attaches the domain to your Worker via Cloudflare's Workers
 Custom Domains API — Cloudflare creates the proxied DNS record and provisions the
 TLS certificate automatically. The step is **idempotent** (re-deploys don't
 duplicate it) and **best-effort**: if the domain isn't a Cloudflare zone yet, the
 deploy still succeeds on the `*.workers.dev` URL and prints guidance.
 
-`edgecms login` requests DNS + Workers Routes permissions so this works with no
-re-authentication. `edgecms down` detaches the domain before removing the Worker.
+`kalayaan login` requests DNS + Workers Routes permissions so this works with no
+re-authentication. `kalayaan down` detaches the domain before removing the Worker.
 
 ## Bonus
 
 A custom domain is also what unlocks **Cloudflare Email Sending** for user
 invites — set `email: { from: "hello@yourdomain.com" }` in your config, and
-`edgecms deploy` onboards that domain for Email Routing + Sending automatically
+`kalayaan deploy` onboards that domain for Email Routing + Sending automatically
 (same best-effort posture as the domain attach above: if it fails, invites just
 fall back to a copyable link until it's resolved).

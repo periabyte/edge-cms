@@ -1,5 +1,5 @@
-name: "EdgeCMS Deploy"
-description: "Provision Cloudflare resources, run migrations, and deploy an EdgeCMS project."
+name: "Kalayaan Deploy"
+description: "Provision Cloudflare resources, run migrations, and deploy a Kalayaan project."
 branding:
   icon: "upload-cloud"
   color: "orange"
@@ -24,7 +24,7 @@ inputs:
     required: false
     default: "20"
   args:
-    description: "Extra flags passed to `edgecms deploy`."
+    description: "Extra flags passed to `kalayaan deploy`."
     required: false
     default: ""
 
@@ -57,7 +57,7 @@ runs:
       run: |
         set -euo pipefail
         # Capture output so the deployed URL can be surfaced as a step output.
-        npx --yes edgecms deploy ${{ inputs.args }} | tee deploy.log
+        npx --yes kalayaan deploy ${{ inputs.args }} | tee deploy.log
         url="$(grep -oE 'https://[a-zA-Z0-9./_-]+workers\.dev[a-zA-Z0-9./_-]*' deploy.log | head -1 || true)"
         echo "url=${url}" >> "$GITHUB_OUTPUT"
         rm -f deploy.log

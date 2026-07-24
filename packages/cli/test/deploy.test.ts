@@ -11,7 +11,7 @@ let dir: string;
 const creds = { apiToken: "tok", accountId: "acct" };
 
 const CONFIG_TS = `
-import { defineConfig, collection, field } from "edgecms";
+import { defineConfig, collection, field } from "kalayaan";
 
 export default defineConfig({
   name: "e2e-deploy",
@@ -22,18 +22,18 @@ export default defineConfig({
 `;
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), "edgecms-deploy-"));
+  dir = await mkdtemp(join(tmpdir(), "kalayaan-deploy-"));
   await writeFile(join(dir, "cms.config.ts"), CONFIG_TS);
   await mkdir(join(dir, "node_modules", "@edgecms"), { recursive: true });
-  // Unlike `edgecms dev` (which hands off to wrangler's own bundler, whose
+  // Unlike `kalayaan dev` (which hands off to wrangler's own bundler, whose
   // symlink-realpath resolution reaches into the monorepo's nested
   // node_modules), `deploy` bundles with our own esbuild call — so this
-  // mirrors what a flat `npm install edgecms` actually hoists to the
+  // mirrors what a flat `npm install kalayaan` actually hoists to the
   // project root, rather than relying on that extra resolution behavior.
   const packagesDir = join(import.meta.dirname, "../..");
   const link = (name: string, target: string) =>
     symlink(join(packagesDir, target), join(dir, "node_modules", "@edgecms", name), "dir").catch(() => undefined);
-  await symlink(join(packagesDir, "edgecms"), join(dir, "node_modules", "edgecms"), "dir").catch(() => undefined);
+  await symlink(join(packagesDir, "kalayaan"), join(dir, "node_modules", "kalayaan"), "dir").catch(() => undefined);
   await link("config", "config");
   await link("core", "core");
   await link("runtime", "runtime");

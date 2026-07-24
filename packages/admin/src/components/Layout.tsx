@@ -84,13 +84,13 @@ export function Layout() {
 			>
 				{/* brand header */}
 				<div className="h-14 flex-shrink-0 flex items-center gap-2.5 px-3.5 border-b border-border relative">
-					<div className="w-7 h-7 flex-shrink-0 rounded-lg bg-brand flex items-center justify-center text-brand-foreground font-bold text-[15px] shadow-token">
-						{(schema?.name ?? "E").slice(0, 1).toUpperCase()}
+					<div className="w-7 h-7 flex-shrink-0 rounded-lg bg-brand flex items-center justify-center text-brand-foreground font-display font-bold text-[15px] shadow-token">
+						{(schema?.name ?? "K").slice(0, 1).toUpperCase()}
 					</div>
 					{expanded && (
 						<div className="flex flex-col leading-tight flex-1 overflow-hidden">
 							<span className="font-semibold text-sm truncate">
-								{schema?.name ?? "EdgeCMS"}
+								{schema?.name ?? "Kalayaan"}
 							</span>
 							<span className="text-[11px] text-muted-foreground">
 								Content workspace
@@ -196,11 +196,11 @@ export function Layout() {
 					>
 						<Menu size={18} />
 					</button>
-					<div className="w-6 h-6 flex-shrink-0 rounded-md bg-brand flex items-center justify-center text-brand-foreground font-bold text-[13px]">
-						{(schema?.name ?? "E").slice(0, 1).toUpperCase()}
+					<div className="w-6 h-6 flex-shrink-0 rounded-md bg-brand flex items-center justify-center text-brand-foreground font-display font-bold text-[13px]">
+						{(schema?.name ?? "K").slice(0, 1).toUpperCase()}
 					</div>
 					<span className="font-semibold text-sm truncate">
-						{schema?.name ?? "EdgeCMS"}
+						{schema?.name ?? "Kalayaan"}
 					</span>
 					<button
 						onClick={() => setPaletteOpen(true)}

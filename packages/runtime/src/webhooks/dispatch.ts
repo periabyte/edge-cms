@@ -51,8 +51,8 @@ async function deliver(db: D1Database, event: WebhookEvent, payload: WebhookPayl
           method: "POST",
           headers: {
             "content-type": "application/json",
-            "x-edgecms-event": event,
-            "x-edgecms-signature": `sha256=${sig}`,
+            "x-kalayaan-event": event,
+            "x-kalayaan-signature": `sha256=${sig}`,
           },
           body,
         });

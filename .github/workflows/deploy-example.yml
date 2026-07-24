@@ -1,4 +1,4 @@
-# Dogfoods edgecms/deploy-action against examples/blog. Runs only when the
+# Dogfoods kalayaan/deploy-action against examples/blog. Runs only when the
 # deploy secrets are configured, so it's a no-op on forks/PRs without them.
 name: Deploy example blog
 

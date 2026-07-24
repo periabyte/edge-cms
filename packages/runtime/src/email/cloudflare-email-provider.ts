@@ -25,7 +25,7 @@ export interface EmailDefaults {
 
 /**
  * EmailProvider backed by the Cloudflare Email Sending binding. The `from`
- * domain must be onboarded for Email Sending — `edgecms deploy` does this
+ * domain must be onboarded for Email Sending — `kalayaan deploy` does this
  * automatically (see `packages/cli/src/cf/email.ts`) — or sends fail with
  * `E_SENDER_NOT_VERIFIED`, surfaced here as an EdgeCMSError.
  */

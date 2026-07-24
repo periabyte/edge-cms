@@ -35,7 +35,7 @@ export interface EdgeCmsState {
 }
 
 export function statePath(projectDir: string): string {
-  return join(projectDir, ".edgecms", "state.json");
+  return join(projectDir, ".kalayaan", "state.json");
 }
 
 export function emptyState(): EdgeCmsState {
@@ -49,7 +49,7 @@ export async function readState(projectDir: string): Promise<EdgeCmsState> {
 }
 
 export async function writeState(projectDir: string, state: EdgeCmsState): Promise<void> {
-  await mkdir(join(projectDir, ".edgecms"), { recursive: true });
+  await mkdir(join(projectDir, ".kalayaan"), { recursive: true });
   await writeFile(statePath(projectDir), JSON.stringify(state, null, 2) + "\n");
 }
 

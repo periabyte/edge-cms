@@ -1,14 +1,14 @@
 {
-  "name": "edgecms-example-blog",
+  "name": "kalayaan-example-blog",
   "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "edgecms dev",
-    "migrate": "edgecms migrate",
-    "deploy": "edgecms deploy"
+    "dev": "kalayaan dev",
+    "migrate": "kalayaan migrate",
+    "deploy": "kalayaan deploy"
   },
   "dependencies": {
-    "edgecms": "workspace:*"
+    "kalayaan": "workspace:*"
   }
 }

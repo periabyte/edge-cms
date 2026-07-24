@@ -1,6 +1,6 @@
 # Roadmap: pluggable email providers (Resend)
 
-EdgeCMS ships transactional email (user invites) with **Cloudflare Email Sending**
+Kalayaan ships transactional email (user invites) with **Cloudflare Email Sending**
 as the built-in provider. This note describes the planned path to a **Resend
 plugin** — it is not yet implemented.
 

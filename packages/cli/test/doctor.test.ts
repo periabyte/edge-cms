@@ -7,7 +7,7 @@ import { runDoctor } from "../src/commands/doctor.js";
 let dir: string;
 
 const CONFIG_TS = `
-import { defineConfig, collection, field } from "edgecms";
+import { defineConfig, collection, field } from "kalayaan";
 export default defineConfig({
   name: "doctor-site",
   collections: [collection("posts", { fields: { title: field.text({ required: true }) } })],
@@ -15,7 +15,7 @@ export default defineConfig({
 `;
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), "edgecms-doctor-"));
+  dir = await mkdtemp(join(tmpdir(), "kalayaan-doctor-"));
 });
 
 afterEach(async () => {
@@ -35,7 +35,7 @@ describe("runDoctor", () => {
   it("reports config ok, wrangler ok, and a warning for missing Cloudflare credentials", async () => {
     await writeFile(join(dir, "cms.config.ts"), CONFIG_TS);
     await mkdir(join(dir, "node_modules"), { recursive: true });
-    await symlink(join(import.meta.dirname, "../../edgecms"), join(dir, "node_modules", "edgecms"), "dir").catch(
+    await symlink(join(import.meta.dirname, "../../kalayaan"), join(dir, "node_modules", "kalayaan"), "dir").catch(
       () => undefined,
     );
     delete process.env.EDGE_API_TOKEN;
@@ -47,6 +47,6 @@ describe("runDoctor", () => {
     expect(byName.wrangler?.status).toBe("ok");
     expect(byName["cloudflare-credentials"]?.status).toBe("warn");
     expect(byName.migrations?.status).toBe("warn"); // no migration applied yet
-    expect(byName.migrations?.message).toContain("edgecms migrate");
+    expect(byName.migrations?.message).toContain("kalayaan migrate");
   }, 20_000);
 });

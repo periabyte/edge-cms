@@ -1,55 +1,58 @@
-/* EdgeCMS brand — full token pass over Starlight's CSS variable surface.
-   Source values: docs/design-system/tokens/colors.css (indigo-charcoal base,
-   signal-orange interactive accent) and typography.css (JetBrains Mono +
-   Manrope). Dark is the default theme (CLI-first); light is warm paper.
-   Scoped entirely to Starlight's documented --sl-* variables plus a couple
-   of targeted selectors for headings (Starlight has no separate heading-font
-   variable) — sidebar/search/nav structure stays stock Starlight. */
+/* Kalayaan "Dawn" brand — full token pass over Starlight's CSS variable
+   surface. Source values: the rebrand design system's tokens/colors.css
+   (warm paper/ink base, dawn-gold interactive accent) and typography.css
+   (Figtree + JetBrains Mono + Spectral). Light is the default theme (Dawn
+   reads as open/airy); dark is a first-class equal. Scoped entirely to
+   Starlight's documented --sl-* variables plus a couple of targeted
+   selectors for headings (Starlight has no separate heading-font variable)
+   — sidebar/search/nav structure stays stock Starlight. */
 
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Spectral:ital,wght@0,500;0,600;1,600&display=swap");
 
 :root {
-  --sl-font: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --sl-font: "Figtree", ui-sans-serif, system-ui, sans-serif;
   --sl-font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --sl-font-heading: "Spectral", Georgia, serif;
 
-  /* Colors (dark mode, default) — indigo-charcoal ramp */
-  --sl-color-white: hsl(231, 23%, 94%);
-  --sl-color-gray-1: hsl(228, 19%, 84%);
-  --sl-color-gray-2: hsl(226, 17%, 75%);
-  --sl-color-gray-3: hsl(228, 12%, 54%);
-  --sl-color-gray-4: hsl(228, 15%, 40%);
-  --sl-color-gray-5: hsl(229, 21%, 27%);
-  --sl-color-gray-6: hsl(230, 25%, 14%);
-  --sl-color-black: hsl(234, 28%, 7%);
-
-  --sl-color-accent-low: hsl(16, 68%, 10%);
-  --sl-color-accent: hsl(14, 100%, 62%);
-  --sl-color-accent-high: hsl(16, 100%, 74%);
-
-  --sl-color-bg-inline-code: hsl(228, 26%, 11%);
-}
-
-:root[data-theme="light"] {
-  /* Colors (light mode) — warm paper ramp */
-  --sl-color-white: hsl(229, 22%, 10%);
-  --sl-color-gray-1: hsl(228, 14%, 29%);
-  --sl-color-gray-2: hsl(226, 9%, 46%);
-  --sl-color-gray-3: hsl(227, 10%, 62%);
-  --sl-color-gray-4: hsl(60, 11%, 79%);
-  --sl-color-gray-5: hsl(60, 13%, 86%);
-  --sl-color-gray-6: hsl(60, 15%, 94%);
-  --sl-color-gray-7: hsl(60, 18%, 97%);
+  /* Colors (light mode, default) — warm paper ramp */
+  --sl-color-white: hsl(34, 33%, 12%);
+  --sl-color-gray-1: hsl(36, 18%, 30%);
+  --sl-color-gray-2: hsl(37, 15%, 47%);
+  --sl-color-gray-3: hsl(38, 18%, 60%);
+  --sl-color-gray-4: hsl(37, 36%, 79%);
+  --sl-color-gray-5: hsl(40, 44%, 87%);
+  --sl-color-gray-6: hsl(40, 65%, 95%);
+  --sl-color-gray-7: hsl(40, 100%, 99%);
   --sl-color-black: hsl(0, 0%, 100%);
 
-  --sl-color-accent-low: hsl(16, 100%, 95%);
-  --sl-color-accent: hsl(16, 81%, 54%);
-  --sl-color-accent-high: hsl(16, 74%, 38%);
+  --sl-color-accent-low: hsl(36, 90%, 95%);
+  --sl-color-accent: hsl(34, 75%, 52%);
+  --sl-color-accent-high: hsl(31, 80%, 30%);
 
-  --sl-color-bg-inline-code: hsl(60, 15%, 94%);
+  --sl-color-bg-inline-code: hsl(40, 65%, 95%);
+}
+
+:root[data-theme="dark"] {
+  /* Colors (dark mode) — warm charcoal ramp */
+  --sl-color-white: hsl(40, 51%, 92%);
+  --sl-color-gray-1: hsl(39, 30%, 80%);
+  --sl-color-gray-2: hsl(39, 20%, 70%);
+  --sl-color-gray-3: hsl(39, 17%, 53%);
+  --sl-color-gray-4: hsl(39, 18%, 37%);
+  --sl-color-gray-5: hsl(36, 25%, 22%);
+  --sl-color-gray-6: hsl(36, 22%, 13%);
+  --sl-color-black: hsl(38, 26%, 8%);
+
+  --sl-color-accent-low: hsl(36, 40%, 14%);
+  --sl-color-accent: hsl(36, 80%, 59%);
+  --sl-color-accent-high: hsl(38, 85%, 68%);
+
+  --sl-color-bg-inline-code: hsl(36, 22%, 13%);
 }
 
 /* Starlight has no dedicated heading-font variable — headings carry the
-   brand's mono "CLI is the hero" identity, everything else stays Manrope. */
+   brand's editorial serif, matching the Dawn identity's display/body split;
+   everything else stays Figtree. */
 .sl-markdown-content h1,
 .sl-markdown-content h2,
 .sl-markdown-content h3,
@@ -59,16 +62,17 @@
 starlight-hero h1,
 .hero .tagline,
 site-title {
-  font-family: var(--sl-font-mono);
-  letter-spacing: -0.015em;
+  font-family: var(--sl-font-heading);
+  font-weight: 600;
+  letter-spacing: -0.02em;
 }
 
-/* Tighter, "blade" radii on cards/code blocks — Starlight has no radius
+/* Soft, generous "Dawn" radii on cards/code blocks — Starlight has no radius
    variable, so this targets the elements that render rounded corners. */
 .sl-markdown-content pre,
 .sl-markdown-content :not(pre) > code,
 .card,
 .tip,
 .starlight-aside {
-  border-radius: 7px;
+  border-radius: 11px;
 }

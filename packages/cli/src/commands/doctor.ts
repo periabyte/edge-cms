@@ -3,6 +3,7 @@ import { resolveCredentials, CfClient } from "../cf/client.js";
 import { resolveWranglerBin } from "../wrangler-bin.js";
 import { lastSnapshot, readState } from "../state.js";
 import { planMigration } from "../migration.js";
+import { isApexDomain } from "../domain-utils.js";
 
 export interface DoctorCheck {
   name: string;
@@ -11,7 +12,7 @@ export interface DoctorCheck {
 }
 
 /**
- * `edgecms doctor`: validates config, token scopes, and migration state so
+ * `kalayaan doctor`: validates config, token scopes, and migration state so
  * a broken setup fails with a clear message instead of a confusing error
  * three commands later.
  */
@@ -20,7 +21,7 @@ export async function runDoctor(projectDir: string): Promise<DoctorCheck[]> {
 
   const configPath = findConfigFile(projectDir);
   if (!configPath) {
-    checks.push({ name: "config", status: "fail", message: "No cms.config file found. Run `edgecms init`." });
+    checks.push({ name: "config", status: "fail", message: "No cms.config file found. Run `kalayaan init`." });
     return checks;
   }
 
@@ -39,6 +40,18 @@ export async function runDoctor(projectDir: string): Promise<DoctorCheck[]> {
       });
     } else {
       checks.push({ name: "free-tier", status: "ok", message: "Only free Cloudflare services are enabled" });
+    }
+
+    const apexDomains = resolved.domain.filter(isApexDomain);
+    if (apexDomains.length > 0) {
+      checks.push({
+        name: "domain",
+        status: "warn",
+        message:
+          `${apexDomains.join(", ")} looks like a root domain. Kalayaan is headless (no homepage) — ` +
+          `consider a subdomain (e.g. cms.${apexDomains[0]}) instead, so the root domain stays free ` +
+          "for your own site. See docs/custom-root-page.md.",
+      });
     }
   } catch (err) {
     checks.push({
@@ -62,7 +75,7 @@ export async function runDoctor(projectDir: string): Promise<DoctorCheck[]> {
       name: "cloudflare-credentials",
       status: "warn",
       message:
-        "Not signed in to Cloudflare — run `edgecms login` (or set EDGE_API_TOKEN / EDGE_ACCOUNT_ID for CI). `dev` and `migrate` still work locally.",
+        "Not signed in to Cloudflare — run `kalayaan login` (or set EDGE_API_TOKEN / EDGE_ACCOUNT_ID for CI). `dev` and `migrate` still work locally.",
     });
   } else {
     try {
@@ -86,7 +99,7 @@ export async function runDoctor(projectDir: string): Promise<DoctorCheck[]> {
     checks.push({
       name: "migrations",
       status: "warn",
-      message: `${plan.statements.length} pending statement(s)${plan.destructive ? " (includes destructive changes)" : ""} — run \`edgecms migrate\``,
+      message: `${plan.statements.length} pending statement(s)${plan.destructive ? " (includes destructive changes)" : ""} — run \`kalayaan migrate\``,
     });
   }
 

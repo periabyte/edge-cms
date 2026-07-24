@@ -1,0 +1,86 @@
+# Kalayaan — rebrand design handoff
+
+In-repo copy of the Kalayaan rebrand briefs. Four ready-to-use prompts — hand them to a designer,
+or paste them directly into an AI design/coding tool. All share one positioning so the marketing
+page, the admin, the About page, and the API root page feel like the same product.
+
+**This is a rename, not a new product.** The project previously shipped under the name "EdgeCMS,"
+with a brand built entirely around a blade/edge metaphor (a "lone silhouette carrying an oversized
+blade" mark, the line "you don't need a big budget — just a big enough blade," the tagline
+"content with an edge"). The npm package name `edgecms` turned out to be already taken, and in
+working through alternatives the team landed on something that fits the actual product better than
+a like-for-like rename: **Kalayaan**, Tagalog for *freedom*. That old identity is retired
+outright — treat this as a clean slate, not a palette swap. Nothing about the previous visual
+system (colors, type, radii, the "edge network" hero motif) should carry forward or constrain what
+you propose here.
+
+Positioning these four briefs encode (keep them consistent across all four):
+
+- **Mission / north star:** free, low-friction self-hosting for a solo dev or aspiring builder — a
+  short guided setup (`login → init → deploy`), no server to manage, on Cloudflare's permanent free
+  tier.
+- **Name:** Kalayaan. **Tagline / mission line, use verbatim:** *"Freedom to deploy. Freedom to
+  own. Freedom from recurring CMS costs."*
+- **Audience:** builders who need to put a site online for free — students, indie devs, and
+  first-time makers on a budget (Philippines-first, everywhere in reach) — plus developers already
+  on Cloudflare.
+- **Visual direction is intentionally open.** No palette, typeface, radius scale, or signature
+  motif is dictated here — propose a fresh identity for *freedom* from scratch. (If it's useful
+  context: the retired EdgeCMS system was a dark-by-default, CLI-terminal aesthetic with a
+  monospace display face — you are not bound by any of that, including "dark by default" or
+  "CLI-terminal.")
+- **IP guardrail:** no literal or named copyrighted character, franchise, logo, or weapon in copy,
+  alt text, imagery, or credits. Additionally: "Kalayaan" is the Filipino word for *freedom* (as in
+  *Araw ng Kalayaan*, Independence Day) — it also happens to be the name of a disputed municipality
+  in the West Philippine Sea. Keep every visual and copy choice anchored to the *freedom* meaning;
+  avoid flags, maps, or geography-coded imagery that could pull the reading toward the place name.
+- **Voice:** confident and plain-spoken, sentence case everywhere, no marketing filler. Every claim
+  on any page must be true of the current release.
+
+---
+
+## 1. Marketing landing page
+
+> **Brief:** Design and build the marketing landing page for Kalayaan, an open-source CMS that takes an idea from an empty folder to a live site on the builder's own domain — free, on Cloudflare, through a short guided setup (`login → init → deploy`; `init` can run the whole thing for you). Audience: builders who need to put a site online for free — students, indie devs, and first-time makers on a budget (Philippines-first, everywhere in reach) — plus developers already on Cloudflare. The page's single job: get a visitor to run `npx kalayaan init` within 60 seconds of landing. Keep the page about the *outcome* (a live site, for free); the founder/origin story lives on the About page (§3), not here.
+>
+> **Hero as thesis:** the hero is not a headline over a screenshot — it is the deploy itself. Show an animated terminal running the real flow — **`kalayaan login`** (a quick one-time sign-in), then **`kalayaan init`** (a short wizard: pick content models, toggle services, enter a domain, "Deploy now? → yes"), then **`kalayaan deploy`** provisioning and attaching the domain — resolving in seconds to the live site at `https://yourname.com`, with an elapsed-cost counter reading "$0.00/mo". (`init` can chain login + deploy itself, so the animation may collapse to the single `kalayaan init` for punch — just don't claim it's the *only* command.) Headline and supporting copy should anchor on the mission line: *"Freedom to deploy. Freedom to own. Freedom from recurring CMS costs."* Subhead names the stack plainly: a guided setup — sign in once, answer a few questions, deploy — on your own Cloudflare account (D1 + R2 + Workers), permanent free tier. Primary CTA is a copyable `npx kalayaan init` command block, not a "Get started" button; secondary CTA links to a 90-second demo video.
+>
+> **Structure (in order):** hero → "how it works" as a three-step flow — **① `kalayaan login`** (one-time; opens a Cloudflare token page with permissions pre-filled and auto-detects the account) → **② `kalayaan init`** (the guided wizard — content models + services + domain; show the real `cms.config.ts` it writes, not lorem) → **③ `kalayaan deploy`** (provisions D1/R2/KV, uploads the admin, attaches your domain with automatic DNS + TLS) resolving to a live URL → live-rendered feature grid (schema-driven admin; D1 default database plus Postgres and MySQL via Hyperdrive; AI alt-text / translate / editorial assist + semantic search; REST + GraphQL + MCP agent access; roles & permissions, email invites, scoped API tokens + audit log; media, versioning, localization; moderated public submissions with Turnstile; custom domains) → honest cost table comparing free-tier Kalayaan vs. Strapi hosting vs. Contentful seats → template gallery (blog, portfolio, docs) with Deploy-to-Cloudflare buttons → open-source footer with GitHub stars, license, roadmap, and an **About** link. Do not put the founder/mission narrative in the hero or body — link out to §3.
+>
+> **Visual direction:** wide open — there is no prior system to reconcile with. Propose a palette, type pairing, and overall aesthetic that reads as *freedom*: could be light-forward, could stay dark, could lean editorial rather than terminal-native — your call, just make the reasoning explicit. Avoid the generic near-black + single acid accent look purely as a default-avoidance heuristic, not because anything specific is off-limits. Propose your own signature hero element (no motif is mandated) — something that encodes the product's real value (a live site, free, in under a minute) rather than decorating. **IP guardrail:** see the shared guardrail above — no copyrighted character/franchise, and keep "Kalayaan" reading as *freedom*, not the place name.
+>
+> **Constraints:** static site deployable on Workers Assets; Tailwind; respects `prefers-reduced-motion` (any hero animation falls back to a completed state); Lighthouse ≥ 95; responsive to 360px; light + dark; all copy in sentence case, no marketing filler — every claim on the page must be true of the current release (the `login` → `init` wizard → `deploy` flow, custom domains, AI features, invites, moderated submissions, RBAC).
+
+## 2. CMS admin dashboard
+
+> **Brief:** Design the Kalayaan admin dashboard — a schema-driven React SPA (Tailwind + shadcn/ui) rendered entirely from the user's `cms.config.ts`. Audience: developers and their non-technical clients editing content. The dashboard's single job: from login to published change in under a minute, with zero training.
+>
+> **Information architecture:** persistent left sidebar listing collections (grouped, with counts), plus Media, and Settings; global command palette (⌘K) as the primary power-user navigation — every action (open document, create, publish, search) is reachable from it. Main views: (1) **Collection browser** — dense data table with server-side pagination, saved filters as chips, column visibility per user, inline status badges (draft/published/machine-translated); (2) **Document editor** — two-column: fields left, a sticky meta rail right (status, publish/schedule actions, version history, locale switcher, AI assist actions); rich text via TipTap styled to match shadcn tokens; (3) **Media library** — grid with drag-drop upload, R2-backed, showing generated alt-text suggestions as accept/reject chips; (4) **Settings** — users & roles, API keys with a scope editor, webhooks, AI feature toggles.
+>
+> **Design system:** build on shadcn/ui defaults but establish product identity through a semantic color layer, not decoration: a single brand accent (themeable from `ui.brandColor` in the config — every color must derive from CSS variables so re-branding is one token change), plus fixed semantic hues for content state (draft amber, published green, error red) used consistently in badges, dots, and toasts. Type: an open choice of UI-appropriate sans + mono pairing (no specific typeface mandated), with a tabular-numeral variant for tables and IDs; a mono face only for slugs, IDs, and API keys. Light and dark mode from day one via Tailwind class strategy.
+>
+> **Interaction quality bar:** every mutation is optimistic with toast + undo where safe ("Published — Undo"); button labels state the action ("Publish", "Save draft" — never "Submit") and stay consistent through toasts; destructive actions require typed confirmation; empty states teach (an empty collection shows the config snippet that would add a field, and a "Create first entry" action); errors say what happened and what to do, never apologize; full keyboard navigability, visible focus rings, WCAG AA contrast in both themes.
+>
+> **Signature element:** the publish bar. Make the draft→published transition the one memorable interaction — a single control that shows diff-awareness ("3 fields changed since last publish"), scheduling, and per-locale publish state in one compact surface. Everything else stays quiet and utilitarian.
+>
+> **Deliverables:** Figma (or coded prototype) covering the four views in both themes, mobile layouts for browser + editor, the empty/loading/error states for each view, and a token sheet (colors, type scale, spacing, radii) engineering can map 1:1 to Tailwind config.
+
+## 3. About / mission page
+
+> **Brief:** Design a short About page that carries the origin story and mission — deliberately moved off the landing page so the landing page stays about the outcome. Audience: a visitor who clicked "About" after the landing page did its job; they're already interested and want to know who's behind it and why. Single job: earn trust with a real reason, not a slogan.
+>
+> **Content:** a first-person origin beat — Kalayaan began with a question heard again and again from app builders in the Philippines, *"where can I put this online for free?"* Too many good ideas never go live because hosting costs money someone doesn't have yet — not because the idea, or the builder, wasn't good enough. State the mission plainly: your idea, on your own domain, running free — no budget required to start. Lead with the mission line **"Freedom to deploy. Freedom to own. Freedom from recurring CMS costs."** Two or three short paragraphs, first person, specific — name the real thing (a domain, a command, a free tier that doesn't expire), never inspirational-poster language.
+>
+> **Structure (in order):** the mission line set large → the origin paragraphs → a short "what we won't do" honesty note (no seat pricing; the only dependency is Cloudflare, said plainly, not hidden; no fake "free forever\*") → open-source + how to contribute → a single CTA back to `npx kalayaan init`.
+>
+> **Visual direction:** quieter and more text-forward than the landing page, same open token system as §1. The primary brand mark appears once, larger, as the page's single image — whatever mark emerges from §1, reused here at scale, not redesigned per page. Same IP guardrail as above. Light + dark, sentence case, Lighthouse ≥ 95, responsive to 360px.
+
+## 4. API root page (`GET /`)
+
+> **Brief:** Design (and this brief doubles as the spec for) the page a Kalayaan-deployed Worker serves at its bare root `/`. Context: Kalayaan is headless — every real request goes to `/api/v1`, `/api/graphql`, `/media`, `/admin/*`, or `/mcp` (see `packages/runtime/src/app.ts`); today an unmatched `GET /` falls through to the generic JSON 404 in `packages/runtime/src/errors.ts`. That's a broken first impression for anyone who pastes the bare domain into a browser — a curious visitor, the site owner themselves right after `kalayaan deploy`, or a bot/crawler. Audience: that visitor. Single job: in one glance, tell them (a) this is a Kalayaan-powered API, not a broken site, and (b) where to actually go next.
+>
+> **Content, in order:** the brand mark + wordmark; one line stating what this is — *"This is a Kalayaan API."* — followed by a short line naming the site/project (from config, if available) so it doesn't read as a generic error page; a compact list of live entry points with real, clickable links: **Admin** (`/admin`), **REST API** (`/api/v1`, linking to its OpenAPI/docs route if one exists), **GraphQL** (`/api/graphql`), and **MCP** (`/mcp`) — omit any the deployment didn't enable; a small "powered by Kalayaan" footer credit linking to the OSS repo, matching the honesty-over-hype tone of §3. No marketing copy, no CTA to deploy your own — that pitch belongs on the landing page (§1), this page is a *utility* screen for someone already looking at a live deployment.
+>
+> **Visual direction:** same open token system as §1–3, but far quieter — think a well-made CLI `--help` output rendered as a webpage, not a hero section. Centered, single column, generous whitespace, no imagery beyond a small static rendering of the brand mark (no animation — this ships as a tiny inline-HTML response, not a bundled SPA). Light + dark via `prefers-color-scheme` (no JS toggle available at this layer). Same IP guardrail as the other briefs.
+>
+> **Implementation constraints (this is a real route, not just a mockup):** served directly by `packages/runtime` as a `GET /` handler ahead of `app.notFound` in `packages/runtime/src/app.ts`, returning a single self-contained HTML string (inline `<style>`, no external assets, no build step) so it works whether or not the Assets binding intercepts `/` first in production — this is the fallback for API-only deployments (no admin/static site attached) and for local `wrangler dev`. Keep the payload under ~4KB. Respond `200 text/html` for browser navigations (`Accept: text/html`) and continue returning the existing JSON 404 body for programmatic/API clients that don't send that header, so tooling and health checks don't regress. Every link and the site name must come from the already-bundled `cms.config.ts` / route table, never hardcoded — if a service (GraphQL, MCP) is disabled in config, its link is omitted, not shown broken.

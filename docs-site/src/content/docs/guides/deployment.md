@@ -1,11 +1,11 @@
 ---
 title: Deployment
-description: How edgecms deploy provisions Cloudflare, and how to automate it in CI.
+description: How kalayaan deploy provisions Cloudflare, and how to automate it in CI.
 ---
 
-## What `edgecms deploy` does
+## What `kalayaan deploy` does
 
-`edgecms deploy` is idempotent — safe to run again and again as your project evolves. Each run:
+`kalayaan deploy` is idempotent — safe to run again and again as your project evolves. Each run:
 
 1. Provisions D1, R2, and KV (and Hyperdrive/Vectorize, if your config uses an external database or
    semantic search) — skipping anything that already exists.
@@ -16,24 +16,24 @@ description: How edgecms deploy provisions Cloudflare, and how to automate it in
 5. Sets up first-run secrets, and prints the live URL.
 
 Destructive migrations (e.g. dropping a column) are never applied automatically — they need
-`edgecms migrate --allow-destructive`, run deliberately after reviewing the SQL with `--dry-run`.
+`kalayaan migrate --allow-destructive`, run deliberately after reviewing the SQL with `--dry-run`.
 
 ## Credentials
 
-Locally, `edgecms deploy`/`down`/`doctor` read credentials from `~/.edgecms/credentials.json`,
-written once by `edgecms login`. For CI or any non-interactive environment, set:
+Locally, `kalayaan deploy`/`down`/`doctor` read credentials from `~/.kalayaan/credentials.json`,
+written once by `kalayaan login`. For CI or any non-interactive environment, set:
 
 ```sh
 EDGE_API_TOKEN=...
 EDGE_ACCOUNT_ID=...
 ```
 
-These take priority over the stored credentials, so a CI runner never needs `edgecms login`.
+These take priority over the stored credentials, so a CI runner never needs `kalayaan login`.
 
 ## Tearing down
 
 ```sh
-npx edgecms down
+npx kalayaan down
 ```
 
 Detaches any custom domain, then deletes the Worker and every resource it provisioned — D1, R2,
@@ -41,7 +41,7 @@ KV, and Hyperdrive/Vectorize if enabled. Asks for confirmation unless you pass `
 
 ## Deploying from GitHub Actions
 
-The `edgecms/deploy-action` GitHub Action wraps `edgecms deploy`:
+The `kalayaan/deploy-action` GitHub Action wraps `kalayaan deploy`:
 
 ```yaml
 name: Deploy CMS
@@ -55,7 +55,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: cms
-        uses: edgecms/deploy-action@v1
+        uses: kalayaan/deploy-action@v1
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -65,18 +65,18 @@ jobs:
 
 | Input | Required | Description |
 |---|---|---|
-| `cloudflare-api-token` | yes | Token with Workers/D1/R2/KV — plus DNS + Workers Routes for a custom domain. `edgecms login` mints one with the right scopes. |
+| `cloudflare-api-token` | yes | Token with Workers/D1/R2/KV — plus DNS + Workers Routes for a custom domain. `kalayaan login` mints one with the right scopes. |
 | `cloudflare-account-id` | yes | Your Cloudflare account ID. |
 | `working-directory` | no (`.`) | Directory containing `cms.config.ts`. |
 | `database-url` | no | Postgres/MySQL connection string (external-DB projects only). |
 | `node-version` | no (`20`) | Node.js version. |
-| `args` | no | Extra flags for `edgecms deploy`, e.g. `--domain blog.example.com`. |
+| `args` | no | Extra flags for `kalayaan deploy`, e.g. `--domain blog.example.com`. |
 
 It outputs `url` — the deployed Worker URL. As with the CLI, only non-destructive migrations run
 automatically; the action never passes `--allow-destructive` on its own.
 
 ## Free tier by default
 
-`edgecms init` only scaffolds free services by default. `doctor` and `deploy` print a heads-up the
+`kalayaan init` only scaffolds free services by default. `doctor` and `deploy` print a heads-up the
 moment your config turns on the one paid feature (semantic search, which needs Vectorize) — so you
 always know before you deploy whether you're still on the free path.

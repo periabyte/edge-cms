@@ -20,8 +20,8 @@ export interface AdapterHandle {
 
 /**
  * Builds the DatabaseAdapter for a request. D1 is the default and needs no
- * factory. Postgres/MySQL factories live in the `edgecms/postgres` and
- * `edgecms/mysql` subpaths and are wired in by the CLI-generated Worker entry
+ * factory. Postgres/MySQL factories live in the `kalayaan/postgres` and
+ * `kalayaan/mysql` subpaths and are wired in by the CLI-generated Worker entry
  * only for those engines — so a D1 project's bundle never references the
  * external drivers (`mysql2`/`postgres`) at all.
  */

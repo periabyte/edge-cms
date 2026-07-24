@@ -1,4 +1,4 @@
-import { collection, defineConfig, field } from "edgecms";
+import { collection, defineConfig, field } from "kalayaan";
 
 export default defineConfig({
 	name: "blog-example",

@@ -79,7 +79,7 @@ async function handle(
       return {
         protocolVersion: PROTOCOL_VERSION,
         capabilities: { tools: {} },
-        serverInfo: { name: `${config.name} (EdgeCMS)`, version: "1" },
+        serverInfo: { name: `${config.name} (Kalayaan)`, version: "1" },
       };
     case "ping":
       return {};

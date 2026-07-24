@@ -22,7 +22,7 @@ export function Login() {
             {(schema?.name ?? "E").slice(0, 1).toUpperCase()}
           </div>
           <div>
-            <div className="font-semibold text-sm">{schema?.name ?? "EdgeCMS"}</div>
+            <div className="font-semibold text-sm">{schema?.name ?? "Kalayaan"}</div>
             <div className="text-[11px] text-muted-foreground">Sign in to continue</div>
           </div>
         </div>

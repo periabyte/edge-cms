@@ -1,5 +1,5 @@
 {
-  "name": "edgecms",
+  "name": "kalayaan",
   "version": "0.0.0",
   "type": "module",
   "main": "./dist/index.js",
@@ -27,7 +27,7 @@
     "typecheck": "tsc --noEmit"
   },
   "bin": {
-    "edgecms": "./dist/bin.js"
+    "kalayaan": "./dist/bin.js"
   },
   "dependencies": {
     "@edgecms/cli": "workspace:*",

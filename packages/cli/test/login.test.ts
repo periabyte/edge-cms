@@ -16,7 +16,7 @@ import { mockFetch } from "./cf/mock-fetch.js";
 let home: string;
 
 beforeEach(async () => {
-  home = await mkdtemp(join(tmpdir(), "edgecms-home-"));
+  home = await mkdtemp(join(tmpdir(), "kalayaan-home-"));
 });
 afterEach(async () => {
   await rm(home, { recursive: true, force: true });

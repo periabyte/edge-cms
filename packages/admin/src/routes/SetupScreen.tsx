@@ -27,7 +27,7 @@ export function SetupScreen() {
             {(schema?.name ?? "E").slice(0, 1).toUpperCase()}
           </div>
           <div>
-            <div className="font-semibold text-sm">Welcome to {schema?.name ?? "EdgeCMS"}</div>
+            <div className="font-semibold text-sm">Welcome to {schema?.name ?? "Kalayaan"}</div>
             <div className="text-[11px] text-muted-foreground">Create your first administrator</div>
           </div>
         </div>

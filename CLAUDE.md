@@ -4,8 +4,8 @@ Guidance for working in this repo. Keep changes consistent with what's already h
 
 ## What this is
 
-EdgeCMS — a config-driven, self-deploying headless CMS for Cloudflare. One `cms.config.ts` +
-`edgecms login → init → deploy` yields a live site on Workers + D1 + R2 + KV. pnpm workspace +
+Kalayaan — a config-driven, self-deploying headless CMS for Cloudflare. One `cms.config.ts` +
+`kalayaan login → init → deploy` yields a live site on Workers + D1 + R2 + KV. pnpm workspace +
 Turborepo, TypeScript, ESM. **Mission:** free, low-friction self-hosting for solo devs / aspiring
 builders — keep the free path free and setup friction low. Full plan: `docs/development-plan.md`.
 
@@ -79,8 +79,8 @@ before typechecking a downstream package.
 - **Providers follow one seam:** `AIProvider` / `EmailProvider` interfaces in `@edgecms/core`, a
   binding-backed impl in `@edgecms/runtime`, injected in `app.ts`, mocked in tests. Add new
   capabilities the same way.
-- **CLI state:** resource IDs + migration journal live in `.edgecms/state.json` (committed, no
-  secrets). User credentials from `edgecms login` live in `~/.edgecms/credentials.json` (0600).
+- **CLI state:** resource IDs + migration journal live in `.kalayaan/state.json` (committed, no
+  secrets). User credentials from `kalayaan login` live in `~/.kalayaan/credentials.json` (0600).
 
 ## Testing conventions
 
@@ -96,7 +96,7 @@ before typechecking a downstream package.
 
 ## Safety
 
-- Migrations: `edgecms migrate --dry-run` first; **never** `--allow-destructive` without explicit human
+- Migrations: `kalayaan migrate --dry-run` first; **never** `--allow-destructive` without explicit human
   approval.
 - Commit only when asked. End commit messages with the Co-Authored-By / session trailers already used
   in this repo's history.

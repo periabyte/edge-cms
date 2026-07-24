@@ -7,7 +7,7 @@ import { emptyState, lastSnapshot, readState, writeState } from "../src/state.js
 let dir: string;
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), "edgecms-state-"));
+  dir = await mkdtemp(join(tmpdir(), "kalayaan-state-"));
 });
 
 afterEach(async () => {

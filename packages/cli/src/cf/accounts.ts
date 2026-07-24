@@ -13,7 +13,7 @@ interface AccountInfo {
 /**
  * List the accounts a token can access. The list endpoint is not
  * account-scoped, so a client built with an empty accountId is fine — this both
- * validates the token and discovers the account id for `edgecms login`.
+ * validates the token and discovers the account id for `kalayaan login`.
  */
 export async function listAccounts(client: CfClient): Promise<CfAccount[]> {
   const accounts = await client.request<AccountInfo[]>("GET", "/accounts");

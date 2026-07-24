@@ -1,18 +1,18 @@
 ---
-name: edgecms
+name: kalayaan
 description: >
-  Provision, migrate, deploy, and manage an EdgeCMS project on Cloudflare — a
+  Provision, migrate, deploy, and manage a Kalayaan project on Cloudflare — a
   config-driven headless CMS (D1/Postgres/MySQL, R2/S3 media, admin SPA, REST +
   GraphQL + MCP APIs). Use when a task involves scaffolding a CMS, editing
-  cms.config.ts, running edgecms login/init/dev/migrate/deploy, or driving content
+  cms.config.ts, running kalayaan login/init/dev/migrate/deploy, or driving content
   through the admin or MCP APIs. Follow the guardrails: always dry-run a
   migration first, and never pass --allow-destructive without explicit human
   approval.
 ---
 
-# EdgeCMS
+# Kalayaan
 
-EdgeCMS turns a single `cms.config.ts` plus a Cloudflare API token into a
+Kalayaan turns a single `cms.config.ts` plus a Cloudflare API token into a
 running CMS: a Worker serving a public content API, an authenticated admin API,
 a schema-driven admin SPA, R2/S3 media, and optional AI + GraphQL + MCP
 surfaces. Everything is derived from the config — collections, fields,
@@ -20,24 +20,24 @@ localization, auth, storage, and database engine.
 
 ## Golden path: empty directory → deployed URL
 
-1. **Sign in, then scaffold.** `npx edgecms login` does a one-time guided
+1. **Sign in, then scaffold.** `npx kalayaan login` does a one-time guided
    Cloudflare sign-in (opens a token page with permissions pre-filled, then
-   auto-discovers the account). `npx edgecms init` (or `--yes` with flags) is a
+   auto-discovers the account). `npx kalayaan init` (or `--yes` with flags) is a
    guided wizard — content models, services (AI, email invites, custom domain,
    public submissions), then it writes `cms.config.ts` and `package.json`. Never
    hand-write these if `init` can produce them.
 2. **Inspect the schema.** Read `cms.config.ts`. Collections and fields here are
    the single source of truth; the admin UI, the database schema, and the APIs
    are all generated from it.
-3. **Dry-run the migration FIRST.** `npx edgecms migrate --dry-run` prints the
+3. **Dry-run the migration FIRST.** `npx kalayaan migrate --dry-run` prints the
    exact SQL. Read it. If it contains `DROP`, `rebuild`, or is flagged
    destructive, STOP and surface it to the human before doing anything else.
-4. **Apply the migration.** `npx edgecms migrate`. This only runs
+4. **Apply the migration.** `npx kalayaan migrate`. This only runs
    non-destructive changes. Destructive changes require `--allow-destructive`,
    which you must never add on your own initiative — ask first, every time.
-5. **Run locally.** `npx edgecms dev` serves the Worker + admin SPA on a local
+5. **Run locally.** `npx kalayaan dev` serves the Worker + admin SPA on a local
    URL via wrangler. Use it to verify before deploying.
-6. **Deploy.** `npx edgecms deploy` idempotently provisions D1/R2/KV (and
+6. **Deploy.** `npx kalayaan deploy` idempotently provisions D1/R2/KV (and
    Hyperdrive/Vectorize when configured), applies pending migrations to the
    remote database, uploads the Worker + admin assets, attaches a custom domain
    when `domain` is set (or `--domain <host>`), and prints the live URL. Safe to
@@ -45,10 +45,10 @@ localization, auth, storage, and database engine.
 7. **First-run setup.** The first visit to `/admin` creates the initial admin
    user (or bootstrap non-interactively with `--admin-email`/`--admin-password`).
 
-`deploy`/`down`/`doctor` use the credentials from `edgecms login` (stored at
-`~/.edgecms/`), or `EDGE_API_TOKEN` + `EDGE_ACCOUNT_ID` for CI. Run
-`npx edgecms doctor` to check credentials, free-tier posture, and config health.
-Tear everything down with `npx edgecms down`.
+`deploy`/`down`/`doctor` use the credentials from `kalayaan login` (stored at
+`~/.kalayaan/`), or `EDGE_API_TOKEN` + `EDGE_ACCOUNT_ID` for CI. Run
+`npx kalayaan doctor` to check credentials, free-tier posture, and config health.
+Tear everything down with `npx kalayaan down`.
 
 ## Guardrails (non-negotiable)
 
@@ -58,7 +58,7 @@ Tear everything down with `npx edgecms down`.
   surface the diff and wait.
 - **Config changes require redeploy.** The Worker bundles the config at build
   time; editing `cms.config.ts` has no effect until `migrate` + `deploy`.
-- **Secrets never go in `.edgecms/state.json`.** It's committed to git and holds
+- **Secrets never go in `.kalayaan/state.json`.** It's committed to git and holds
   only resource IDs and the migration journal. Session secrets and DB passwords
   live in Worker secrets / env.
 - **External databases** (`database.adapter: "postgres" | "mysql"`) need

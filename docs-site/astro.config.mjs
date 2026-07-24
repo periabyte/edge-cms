@@ -2,19 +2,19 @@ import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import { ExpressiveCodeTheme } from "astro-expressive-code";
 // @ts-ignore -- Vite raw-import query, not a real .jsonc export
-import edgecmsDarkTheme from "./src/ec-themes/edgecms-dark.jsonc?raw";
+import kalayaanDarkTheme from "./src/ec-themes/kalayaan-dark.jsonc?raw";
 // @ts-ignore -- Vite raw-import query, not a real .jsonc export
-import edgecmsLightTheme from "./src/ec-themes/edgecms-light.jsonc?raw";
+import kalayaanLightTheme from "./src/ec-themes/kalayaan-light.jsonc?raw";
 
 export default defineConfig({
   site: "https://edge.periabyte.dev",
   integrations: [
     starlight({
-      title: "EdgeCMS",
-      tagline: "Content with an edge.",
+      title: "Kalayaan",
+      tagline: "Freedom to deploy. Freedom to own. Freedom from recurring CMS costs.",
       logo: {
         src: "./src/assets/logo.svg",
-        alt: "EdgeCMS",
+        alt: "Kalayaan",
       },
       social: {
         github: "https://github.com/periabyte/edge-cms",
@@ -26,8 +26,8 @@ export default defineConfig({
       // colors swapped to match (see src/ec-themes/).
       expressiveCode: {
         themes: [
-          ExpressiveCodeTheme.fromJSONString(edgecmsDarkTheme),
-          ExpressiveCodeTheme.fromJSONString(edgecmsLightTheme),
+          ExpressiveCodeTheme.fromJSONString(kalayaanDarkTheme),
+          ExpressiveCodeTheme.fromJSONString(kalayaanLightTheme),
         ],
       },
       head: [

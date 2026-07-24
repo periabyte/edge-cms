@@ -7,7 +7,7 @@ import { runInit } from "../src/commands/init.js";
 let dir: string;
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), "edgecms-init-"));
+  dir = await mkdtemp(join(tmpdir(), "kalayaan-init-"));
 });
 
 afterEach(async () => {
@@ -41,7 +41,7 @@ describe("runInit", () => {
 
   it("produces a config that resolves without error", async () => {
     await runInit({ projectDir: dir, name: "valid-site", template: "blog", db: "d1", yes: true });
-    // node_modules/edgecms doesn't exist in this temp dir, so we only check
+    // node_modules/kalayaan doesn't exist in this temp dir, so we only check
     // the generated source is syntactically loadable JSON-shape data via a
     // direct resolveConfig call on the parsed collections, not full esbuild
     // resolution (that's covered by the CLI e2e test with a real symlink).
@@ -50,12 +50,12 @@ describe("runInit", () => {
   });
 
   it("scaffolds blank/portfolio/docs templates with distinct collections", async () => {
-    const portfolio = await mkdtemp(join(tmpdir(), "edgecms-init-portfolio-"));
+    const portfolio = await mkdtemp(join(tmpdir(), "kalayaan-init-portfolio-"));
     await runInit({ projectDir: portfolio, template: "portfolio", db: "d1", yes: true });
     expect(await readFile(join(portfolio, "cms.config.ts"), "utf-8")).toContain('collection("projects"');
     await rm(portfolio, { recursive: true, force: true });
 
-    const blank = await mkdtemp(join(tmpdir(), "edgecms-init-blank-"));
+    const blank = await mkdtemp(join(tmpdir(), "kalayaan-init-blank-"));
     await runInit({ projectDir: blank, template: "blank", db: "d1", yes: true });
     const blankSrc = await readFile(join(blank, "cms.config.ts"), "utf-8");
     expect(blankSrc).toContain("collections: [\n  ]");
@@ -65,10 +65,10 @@ describe("runInit", () => {
   it("writes .env.example, .gitignore, and a package.json", async () => {
     await runInit({ projectDir: dir, name: "x", template: "blank", db: "d1", yes: true });
     expect(await readFile(join(dir, ".env.example"), "utf-8")).toContain("EDGE_API_TOKEN");
-    expect(await readFile(join(dir, ".gitignore"), "utf-8")).toContain(".edgecms/");
+    expect(await readFile(join(dir, ".gitignore"), "utf-8")).toContain(".kalayaan/");
     const pkg = JSON.parse(await readFile(join(dir, "package.json"), "utf-8"));
-    expect(pkg.dependencies.edgecms).toBeDefined();
-    expect(pkg.scripts.deploy).toBe("edgecms deploy");
+    expect(pkg.dependencies.kalayaan).toBeDefined();
+    expect(pkg.scripts.deploy).toBe("kalayaan deploy");
   });
 
   it("threads wizard flags into config (domain, email, extra models) and never deploys on --yes", async () => {

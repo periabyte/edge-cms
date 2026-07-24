@@ -3,7 +3,7 @@ title: AI features
 description: Alt-text, translation, editorial assist, and optional semantic search — powered by Workers AI.
 ---
 
-EdgeCMS's AI features run on Workers AI — no separate API key or third-party account to set up.
+Kalayaan's AI features run on Workers AI — no separate API key or third-party account to set up.
 Turn them on in `cms.config.ts`:
 
 ```ts
@@ -50,10 +50,10 @@ GET /api/v1/search?q=<query>&collection=<name>&locale=<locale>&limit=20
 ```
 
 Only `q` is required. Semantic search needs **Vectorize**, which is on Cloudflare's paid Workers
-plan — everything else in EdgeCMS runs on the permanent free tier. To keep the free path free by
+plan — everything else in Kalayaan runs on the permanent free tier. To keep the free path free by
 default:
 
-- `edgecms doctor` and `edgecms deploy` print a heads-up the moment `semantic-search` is enabled,
+- `kalayaan doctor` and `kalayaan deploy` print a heads-up the moment `semantic-search` is enabled,
   so you always know before you deploy.
 - Without Vectorize, `/api/v1/search` still works — it falls back to a plain SQL text-match scan,
   just without semantic ranking.
@@ -86,7 +86,7 @@ higher-quality writing help, or a smaller one to spend fewer neurons.
 
 Cloudflare periodically deprecates older model versions — check the
 [Workers AI model catalog](https://developers.cloudflare.com/workers-ai/models/) if a request
-starts failing. EdgeCMS's own defaults are updated when that happens, so staying on the default
+starts failing. Kalayaan's own defaults are updated when that happens, so staying on the default
 (by omitting `models` entirely) is the lowest-maintenance choice.
 
 **`embed` is special:** if you override it, you must also set `embedDimensions` to that model's
@@ -102,4 +102,4 @@ models: {
 ## No AI features enabled?
 
 Everything above is opt-in — leave `ai` unset (or `enabled: false`) and none of it runs. The rest
-of EdgeCMS (content modeling, roles, media, deployment) needs no AI configuration at all.
+of Kalayaan (content modeling, roles, media, deployment) needs no AI configuration at all.

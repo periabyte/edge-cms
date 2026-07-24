@@ -4,59 +4,72 @@
    Starlight's own pages). Full token set inlined here rather than imported
    from docs/design-system/ so these pages ship self-contained. */
 
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Spectral:ital,wght@0,500;0,600;1,600&display=swap");
 
-:root,
-[data-theme="dark"] {
-  color-scheme: dark;
-  --bg: #0D0E17;
-  --bg-elevated: #111320;
-  --surface-1: #151824;
-  --surface-2: #1B1E2D;
-  --surface-3: #232739;
-  --border: #262A3B;
-  --border-strong: #363B52;
-  --border-subtle: #1C2030;
-  --text-1: #ECEDF3;
-  --text-2: #B4B9CA;
-  --text-3: #7C8299;
-  --text-4: #565C74;
-  --text-on-accent: #1A0A03;
-  --accent: #FF6A3D;
-  --accent-hover: #FF7E56;
-  --accent-active: #E85D2A;
-  --accent-soft: rgba(255, 106, 61, 0.14);
-  --accent-border: rgba(255, 106, 61, 0.45);
-  --teal: #12B5A8;
-  --teal-hover: #2CCFC1;
-  --teal-soft: rgba(18, 181, 168, 0.14);
-  --focus-ring: rgba(255, 106, 61, 0.55);
+/* The command block / terminal / code panels always sit on the dark
+   --surface-code, in both themes, so their text needs fixed colors rather
+   than the theme-dependent --text, --accent, --teal tokens. */
+:root {
+  --code-text: #ECE5D8;
+  --code-text-dim: #9C8E74;
+  --code-gold: #EAA844;
+  --code-sky: #5F97D0;
+  --code-green: #3F9D63;
 }
 
+:root,
 [data-theme="light"] {
   color-scheme: light;
-  --bg: #F8F8F5;
+  --bg: #FFFDF9;
   --bg-elevated: #FFFFFF;
   --surface-1: #FFFFFF;
-  --surface-2: #F1F1EC;
-  --surface-3: #E6E6DF;
-  --border: #E1E1D8;
-  --border-strong: #CFCFC3;
-  --border-subtle: #ECECE5;
-  --text-1: #14161F;
-  --text-2: #3F4353;
-  --text-3: #6A6F80;
-  --text-4: #9599A8;
-  --text-on-accent: #FFFFFF;
-  --accent: #E85D2A;
-  --accent-hover: #FF6A3D;
-  --accent-active: #C64A1E;
-  --accent-soft: rgba(232, 93, 42, 0.12);
-  --accent-border: rgba(232, 93, 42, 0.4);
-  --teal: #0E9D91;
-  --teal-hover: #12B5A8;
-  --teal-soft: rgba(14, 157, 145, 0.12);
-  --focus-ring: rgba(232, 93, 42, 0.5);
+  --surface-2: #FBF6EC;
+  --surface-3: #F3EBDA;
+  --surface-code: #241C12;
+  --border: #ECE2CE;
+  --border-strong: #DDCEB6;
+  --border-subtle: #F3EEE0;
+  --text-1: #2A2115;
+  --text-2: #5A4F3F;
+  --text-3: #8A7C66;
+  --text-4: #AB9D85;
+  --text-on-accent: #241B0C;
+  --accent: #8A4F0F;
+  --accent-hover: #A96311;
+  --accent-active: #C8781A;
+  --accent-soft: rgba(224, 144, 42, 0.12);
+  --accent-border: rgba(224, 144, 42, 0.4);
+  --teal: #255488;
+  --teal-hover: #2F66A6;
+  --teal-soft: rgba(63, 123, 191, 0.12);
+  --focus-ring: rgba(224, 144, 42, 0.5);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #1B1710;
+  --bg-elevated: #221D15;
+  --surface-1: #221D15;
+  --surface-2: #29231A;
+  --surface-3: #332C20;
+  --surface-code: #14100A;
+  --border: #322A1E;
+  --border-strong: #453A29;
+  --border-subtle: #24200F;
+  --text-1: #F5EEE0;
+  --text-2: #C9BCA4;
+  --text-3: #9C8E74;
+  --text-4: #71654E;
+  --text-on-accent: #241B0C;
+  --accent: #EAA844;
+  --accent-hover: #F3C069;
+  --accent-active: #E0902A;
+  --accent-soft: rgba(234, 168, 68, 0.15);
+  --accent-border: rgba(234, 168, 68, 0.42);
+  --teal: #5F97D0;
+  --teal-hover: #8FBDE6;
+  --teal-soft: rgba(95, 151, 208, 0.16);
+  --focus-ring: rgba(234, 168, 68, 0.6);
 }
 
 * {
@@ -72,10 +85,14 @@ body {
 }
 
 body {
-  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Figtree", ui-sans-serif, system-ui, sans-serif;
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+.ec-display {
+  font-family: "Spectral", Georgia, serif;
 }
 
 .ec-mono {
@@ -94,7 +111,7 @@ a:hover {
 :focus-visible {
   outline: none;
   box-shadow: 0 0 0 2px var(--bg), 0 0 0 4px var(--focus-ring);
-  border-radius: 5px;
+  border-radius: 8px;
 }
 
 code {
@@ -135,9 +152,9 @@ code {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-weight: 800;
-  font-size: 19px;
+  font-family: "Spectral", Georgia, serif;
+  font-weight: 600;
+  font-size: 20px;
   letter-spacing: -0.02em;
   color: var(--text-1);
   text-decoration: none;
@@ -164,7 +181,7 @@ code {
   height: 36px;
   background: transparent;
   border: 1px solid var(--border);
-  border-radius: 5px;
+  border-radius: 11px;
   color: var(--text-2);
   cursor: pointer;
 }
@@ -178,7 +195,7 @@ code {
   height: 36px;
   padding: 0 13px;
   border: 1px solid var(--border-strong);
-  border-radius: 5px;
+  border-radius: 11px;
   color: var(--text-1);
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 12.5px;
@@ -198,25 +215,26 @@ code {
 }
 
 .ec-h1 {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-weight: 800;
-  font-size: 66px;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  font-family: "Spectral", Georgia, serif;
+  font-weight: 600;
+  font-size: 62px;
+  line-height: 1.06;
+  letter-spacing: -0.02em;
   color: var(--text-1);
   margin: 0;
 }
-.ec-h1 .ec-accent {
+.ec-accent {
   color: var(--accent);
+  font-style: italic;
 }
 
 .ec-command {
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: var(--surface-code, #0B0C14);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  background: var(--surface-code);
+  border: 1px solid #453A29;
+  border-radius: 16px;
   padding: 14px 16px;
 }
 .ec-command-label {
@@ -233,10 +251,10 @@ code {
 .ec-command-code {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 15px;
-  color: var(--text-1);
+  color: var(--code-text);
 }
 .ec-command-code .ec-prompt {
-  color: var(--teal);
+  color: var(--code-gold);
   margin-right: 8px;
 }
 .ec-copy-btn {
@@ -245,26 +263,26 @@ code {
   gap: 6px;
   height: 30px;
   padding: 0 10px;
-  border: 1px solid var(--border-strong);
-  border-radius: 5px;
+  border: 1px solid #453A29;
+  border-radius: 6px;
   background: transparent;
-  color: var(--text-2);
+  color: var(--code-text-dim);
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 11.5px;
   cursor: pointer;
   flex-shrink: 0;
 }
 .ec-copy-btn:hover {
-  background: var(--surface-2);
-  color: var(--text-1);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--code-text);
 }
 
 .ec-terminal {
-  background: var(--surface-code, #0B0C14);
-  border: 1px solid var(--border);
-  border-radius: 10px;
+  background: var(--surface-code);
+  border: 1px solid var(--border-strong);
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 22px 48px -12px rgba(6, 7, 14, 0.55);
+  box-shadow: 0 30px 60px -24px rgba(52, 38, 18, 0.26);
 }
 .ec-terminal-bar {
   display: flex;
@@ -283,7 +301,7 @@ code {
   margin-left: 8px;
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 11.5px;
-  color: var(--text-4);
+  color: var(--code-text-dim);
 }
 .ec-terminal-body {
   padding: 18px 16px;
@@ -294,20 +312,20 @@ code {
 }
 .ec-terminal-body .line {
   opacity: 0;
-  color: var(--text-2);
+  color: var(--code-text-dim);
   white-space: pre-wrap;
   animation: ec-line-in 240ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-.ec-terminal-body .cmd { color: var(--text-1); }
-.ec-terminal-body .cmd .ec-prompt { color: var(--teal); }
-.ec-terminal-body .ok { color: var(--teal); }
-.ec-terminal-body .accent { color: var(--accent); }
-.ec-terminal-body .dim { color: var(--text-4); }
+.ec-terminal-body .cmd { color: var(--code-text); }
+.ec-terminal-body .cmd .ec-prompt { color: var(--code-gold); }
+.ec-terminal-body .ok { color: var(--code-green); }
+.ec-terminal-body .accent { color: var(--code-gold); }
+.ec-terminal-body .dim { color: var(--code-text-dim); }
 .ec-cursor {
   display: inline-block;
   width: 7px;
   height: 14px;
-  background: var(--accent);
+  background: var(--code-gold);
   animation: ec-blink 1s steps(1) infinite;
   vertical-align: -2px;
 }
@@ -334,11 +352,11 @@ code {
   margin-bottom: 44px;
 }
 .ec-h2 {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-weight: 800;
+  font-family: "Spectral", Georgia, serif;
+  font-weight: 600;
   font-size: 38px;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
   color: var(--text-1);
   margin: 0;
 }
@@ -358,8 +376,9 @@ code {
 .ec-step {
   background: var(--bg-elevated);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 24px;
+  box-shadow: 0 1px 2px rgba(60, 45, 20, 0.06);
 }
 .ec-step-head {
   display: flex;
@@ -370,16 +389,16 @@ code {
   font-size: 13px;
 }
 .ec-step-num {
-  font-weight: 800;
+  font-weight: 700;
   color: var(--accent);
 }
 .ec-step-cmd {
   color: var(--text-3);
 }
 .ec-step-title {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "Figtree", ui-sans-serif, sans-serif;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 17px;
   color: var(--text-1);
   margin-bottom: 8px;
 }
@@ -394,17 +413,17 @@ code {
 }
 
 .ec-code {
-  background: var(--surface-code, #0B0C14);
+  background: var(--surface-code);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 16px;
   overflow: hidden;
 }
 .ec-code-head {
   padding: 10px 16px;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid #322A1E;
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 12px;
-  color: var(--text-4);
+  color: var(--code-text-dim);
 }
 .ec-code pre {
   margin: 0;
@@ -413,11 +432,11 @@ code {
   font-family: "JetBrains Mono", ui-monospace, monospace;
   font-size: 13px;
   line-height: 1.7;
-  color: var(--text-2);
+  color: var(--code-text);
 }
-.ec-code .kw { color: var(--teal); }
-.ec-code .str { color: var(--accent); }
-.ec-code .com { color: var(--text-4); }
+.ec-code .kw { color: var(--code-sky); }
+.ec-code .str { color: var(--code-gold); }
+.ec-code .com { color: var(--code-text-dim); }
 
 .ec-feat-grid {
   display: grid;
@@ -427,7 +446,7 @@ code {
 .ec-feat-card {
   background: var(--surface-1);
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 16px;
   padding: 22px;
   display: flex;
   flex-direction: column;
@@ -436,7 +455,7 @@ code {
 .ec-feat-icon {
   width: 38px;
   height: 38px;
-  border-radius: 7px;
+  border-radius: 11px;
   background: var(--accent-soft);
   border: 1px solid var(--accent-border);
   display: flex;
@@ -446,7 +465,7 @@ code {
   font-size: 16px;
 }
 .ec-feat-title {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
+  font-family: "Figtree", ui-sans-serif, sans-serif;
   font-weight: 700;
   font-size: 15.5px;
   color: var(--text-1);
@@ -460,7 +479,7 @@ code {
 
 .ec-cost-table {
   border: 1px solid var(--border);
-  border-radius: 10px;
+  border-radius: 16px;
   overflow: hidden;
   background: var(--bg-elevated);
 }
@@ -492,7 +511,7 @@ code {
 }
 .ec-cost-service {
   font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--text-1);
 }
 .ec-cost-does {
@@ -528,9 +547,7 @@ code {
   padding: 90px 40px;
 }
 .ec-cta-sub {
-  font-family: "JetBrains Mono", ui-monospace, monospace;
-  font-style: italic;
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-3);
   margin: 14px 0 26px;
 }

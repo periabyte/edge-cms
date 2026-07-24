@@ -90,7 +90,7 @@ export const SYSTEM_TABLE_DDL: string[] = [
  * clause, so these are NOT safe to re-run blindly — callers execute this
  * list separately from `SYSTEM_TABLE_DDL` and treat "duplicate column" as
  * success (see `executeRemoteSql`'s `tolerateDuplicateColumn` and the local
- * `edgecms migrate`/`deploy` reconcile step). A no-op in effect on fresh
+ * `kalayaan migrate`/`deploy` reconcile step). A no-op in effect on fresh
  * installs, since `SYSTEM_TABLE_DDL`'s `CREATE TABLE` already includes these
  * columns.
  */

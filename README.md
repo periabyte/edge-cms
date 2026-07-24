@@ -1,4 +1,4 @@
-# EdgeCMS
+# Kalayaan
 
 A config-driven, self-deploying headless CMS for Cloudflare. Define your content in one
 `cms.config.ts`, run a short guided setup (`login → init → deploy`), and get a live site on your
@@ -11,36 +11,36 @@ big budget to put your work online. The core CMS runs entirely on Cloudflare's p
 ## Quickstart
 
 ```sh
-npx edgecms login          # one-time Cloudflare sign-in (guided token, auto account discovery)
-npx edgecms init my-site   # guided wizard: content models, services, domain — can deploy at the end
+npx kalayaan login          # one-time Cloudflare sign-in (guided token, auto account discovery)
+npx kalayaan init my-site   # guided wizard: content models, services, domain — can deploy at the end
 cd my-site
 npm install
-npx edgecms dev            # runs locally under workerd, no Cloudflare account needed
+npx kalayaan dev            # runs locally under workerd, no Cloudflare account needed
 ```
 
-`edgecms init` is a guided wizard: it asks for your content models and which services to turn on
+`kalayaan init` is a guided wizard: it asks for your content models and which services to turn on
 (AI features, email invites, a custom domain, public submissions), writes `cms.config.ts`, and can
 run the deploy for you at the end. To deploy later:
 
 ```sh
-npx edgecms deploy                              # → https://my-site.<you>.workers.dev
-npx edgecms deploy --domain blog.example.com    # attach your own domain (DNS + TLS automatic)
+npx kalayaan deploy                              # → https://my-site.<you>.workers.dev
+npx kalayaan deploy --domain blog.example.com    # attach your own domain (DNS + TLS automatic)
 ```
 
 `deploy` idempotently provisions D1, R2, and KV, applies any pending schema migration, uploads the
 Worker **and the admin SPA**, attaches any custom domain, sets up first-run secrets, and prints the
-live URL — safe to re-run. Credentials come from `edgecms login` (stored at `~/.edgecms/`), or from
+live URL — safe to re-run. Credentials come from `kalayaan login` (stored at `~/.kalayaan/`), or from
 `EDGE_API_TOKEN` + `EDGE_ACCOUNT_ID` for CI. On first deploy, create your admin account
 at `<url>/admin` (or bootstrap it non-interactively with `--admin-email` / `--admin-password`).
 
-Tear it all down with `npx edgecms down`.
+Tear it all down with `npx kalayaan down`.
 
 ## Defining a schema
 
 Everything is derived from `cms.config.ts`:
 
 ```ts
-import { defineConfig, collection, field } from "edgecms";
+import { defineConfig, collection, field } from "kalayaan";
 
 export default defineConfig({
   name: "my-site",
@@ -68,7 +68,7 @@ export default defineConfig({
 });
 ```
 
-Editing this file and running `edgecms migrate` diffs it against the last applied schema and emits
+Editing this file and running `kalayaan migrate` diffs it against the last applied schema and emits
 the SQL to apply the change (`--dry-run` previews; destructive changes need `--allow-destructive`).
 
 ## Features
@@ -103,19 +103,19 @@ the SQL to apply the change (`--dry-run` previews; destructive changes need `--a
 - One guided CLI: `login`, `init` (wizard), `dev`, `migrate`, `deploy`, `doctor`, `down`, `logout`
 - Idempotent provisioning of D1 / R2 / KV / Hyperdrive / Vectorize; custom domains; free-tier
   defaults with a heads-up before you enable the one paid feature
-- `actions/deploy` GitHub Action; `edgecms-skill` package for agent-driven deploys
+- `actions/deploy` GitHub Action; `kalayaan-skill` package for agent-driven deploys
 
 ## CLI commands
 
 | Command | What it does |
 |---|---|
-| `edgecms login` / `logout` | Guided Cloudflare sign-in (pre-filled token, account auto-discovery) → `~/.edgecms/credentials.json` |
-| `edgecms init [dir]` | Guided setup wizard → scaffolds `cms.config.ts` + `package.json`; can deploy at the end |
-| `edgecms dev [--host]` | Run locally under workerd with local D1/R2/KV (`--host` for LAN access) |
-| `edgecms migrate [--dry-run] [--allow-destructive]` | Diff the schema and apply migrations to local D1 |
-| `edgecms deploy [--domain <host>]` | Provision + deploy to Cloudflare; attach a custom domain |
-| `edgecms doctor` | Validate config, credentials, wrangler, free-tier posture, and migration state |
-| `edgecms down [--yes]` | Detach domains and delete the deployed Worker + all resources |
+| `kalayaan login` / `logout` | Guided Cloudflare sign-in (pre-filled token, account auto-discovery) → `~/.kalayaan/credentials.json` |
+| `kalayaan init [dir]` | Guided setup wizard → scaffolds `cms.config.ts` + `package.json`; can deploy at the end |
+| `kalayaan dev [--host]` | Run locally under workerd with local D1/R2/KV (`--host` for LAN access) |
+| `kalayaan migrate [--dry-run] [--allow-destructive]` | Diff the schema and apply migrations to local D1 |
+| `kalayaan deploy [--domain <host>]` | Provision + deploy to Cloudflare; attach a custom domain |
+| `kalayaan doctor` | Validate config, credentials, wrangler, free-tier posture, and migration state |
+| `kalayaan down [--yes]` | Detach domains and delete the deployed Worker + all resources |
 
 ## Monorepo layout
 
@@ -132,11 +132,11 @@ decisions — lives at [`docs/development-plan.md`](docs/development-plan.md).
 | `packages/storage/r2` · `packages/storage/s3` | R2- and S3-backed `StorageAdapter` |
 | `packages/runtime` | The Hono app: content API, admin API, auth + RBAC, media, AI, GraphQL, MCP, submissions |
 | `packages/admin` | The schema-driven React/Tailwind admin SPA |
-| `packages/cli` | `edgecms` — `login`/`init`/`dev`/`migrate`/`deploy`/`doctor`/`down` |
-| `packages/edgecms` | The umbrella package users install |
+| `packages/cli` | `kalayaan` — `login`/`init`/`dev`/`migrate`/`deploy`/`doctor`/`down` |
+| `packages/kalayaan` | The umbrella package users install |
 | `packages/conformance` | Adapter conformance test suite |
-| `packages/skill` | `edgecms-skill` — lets an AI agent scaffold + deploy a site |
-| `examples/blog` | A working example scaffolded via `edgecms init --template blog` |
+| `packages/skill` | `kalayaan-skill` — lets an AI agent scaffold + deploy a site |
+| `examples/blog` | A working example scaffolded via `kalayaan init --template blog` |
 
 ## Development
 
@@ -155,7 +155,7 @@ DBs).
 ## Status & roadmap
 
 All five roadmap phases plus the access-control + onboarding layer have landed — see
-[`docs/development-plan.md`](docs/development-plan.md) for the current, per-phase status. `edgecms
+[`docs/development-plan.md`](docs/development-plan.md) for the current, per-phase status. `kalayaan
 login → deploy → down` has been run end-to-end against a real Cloudflare account. Notable open
 items:
 
@@ -173,10 +173,11 @@ items:
 
 ## Docs
 
-- **[periabyte.github.io/edge-cms](https://periabyte.github.io/edge-cms/)** — the public docs site
+- **[edge.periabyte.dev](https://edge.periabyte.dev/)** — the public docs site
   (quickstart, schema/config, roles & access, AI features, custom domains, deployment)
 - [`docs/development-plan.md`](docs/development-plan.md) — the full plan + current status
 - [`docs/custom-domains.md`](docs/custom-domains.md) — using your own domain
+- [`docs/custom-root-page.md`](docs/custom-root-page.md) — serving your own page at `/`
 - [`docs/roadmap-email-plugins.md`](docs/roadmap-email-plugins.md) — the pluggable-email roadmap
 - [`docs/design-handoff.md`](docs/design-handoff.md) — marketing + product design briefs
 - [`docs/releasing.md`](docs/releasing.md) — how to cut an npm release (GitHub Release → CI publish)

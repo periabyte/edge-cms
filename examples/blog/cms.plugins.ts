@@ -1,10 +1,10 @@
-import type { Plugin } from "edgecms";
+import type { Plugin } from "kalayaan";
 
 /**
  * Project plugins — lifecycle hooks and custom field types. The generated
  * Worker entry imports this file's default export and passes it to `createApp`.
  * The `type`-only import above is erased at build time, so nothing here needs
- * to resolve `edgecms` at runtime.
+ * to resolve `kalayaan` at runtime.
  */
 const plugins: Plugin[] = [
   {

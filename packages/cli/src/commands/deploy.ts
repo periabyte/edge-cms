@@ -54,11 +54,11 @@ export interface DeployResult {
 const COMPATIBILITY_DATE = "2025-01-01";
 
 /**
- * `edgecms deploy`: idempotently provisions D1/R2/KV, applies any pending
+ * `kalayaan deploy`: idempotently provisions D1/R2/KV, applies any pending
  * schema migration to the remote database, bundles and uploads the Worker
  * (+ admin SPA assets if built), and prints the live URL. Safe to re-run —
  * every provisioning step checks for an existing resource by name first,
- * and .edgecms/state.json is updated after each step so a failure partway
+ * and .kalayaan/state.json is updated after each step so a failure partway
  * through leaves later re-runs able to pick up where it left off.
  */
 export async function runDeploy(opts: DeployOptions): Promise<DeployResult> {
@@ -213,7 +213,7 @@ export async function runDeploy(opts: DeployOptions): Promise<DeployResult> {
   // 5. Set secrets once on first deploy only, AFTER the script exists.
   // Subsequent script uploads pass keep_secrets:true (see uploadWorkerScript),
   // so the secret survives redeploys without being re-set — and
-  // .edgecms/state.json never stores the value.
+  // .kalayaan/state.json never stores the value.
   if (!state.resources.worker?.secretsInitialized) {
     const secret = crypto.randomUUID() + crypto.randomUUID();
     await setWorkerSecret(client, workerName, "SESSION_SECRET", secret);
@@ -307,7 +307,7 @@ async function requireCredentials(): Promise<CfCredentials> {
   const creds = await resolveCredentials();
   if (!creds)
     throw new Error(
-      "Not signed in to Cloudflare. Run `edgecms login`, or set EDGE_API_TOKEN + EDGE_ACCOUNT_ID (CI).",
+      "Not signed in to Cloudflare. Run `kalayaan login`, or set EDGE_API_TOKEN + EDGE_ACCOUNT_ID (CI).",
     );
   return creds;
 }

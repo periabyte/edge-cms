@@ -49,7 +49,7 @@ export interface CreateAppOptions {
   plugins?: Plugin[];
   /**
    * Selects the database adapter per request. Defaults to D1. The CLI-generated
-   * entry supplies a Postgres/MySQL factory (from `edgecms/postgres`|`/mysql`)
+   * entry supplies a Postgres/MySQL factory (from `kalayaan/postgres`|`/mysql`)
    * only for those engines, keeping external drivers out of D1 bundles.
    */
   databaseAdapter?: DatabaseAdapterFactory;
@@ -107,7 +107,7 @@ export function createApp(config: ResolvedConfig, snapshot: SchemaSnapshot, opti
   // Agent-facing Model Context Protocol server (API-key authenticated).
   app.route("/mcp", mcpRoutes(config));
   // Bare root — a small HTML page for browser navigations (falls through to
-  // the JSON 404 for non-HTML clients), since EdgeCMS is otherwise headless.
+  // the JSON 404 for non-HTML clients), since Kalayaan is otherwise headless.
   app.get("/", homeRoute(config));
 
   app.onError(errorHandler);

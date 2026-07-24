@@ -5,7 +5,7 @@ import { listAccounts, type CfAccount } from "../cf/accounts.js";
 import { writeStoredCredentials } from "../credentials-store.js";
 
 /**
- * The Cloudflare API-token permission groups EdgeCMS needs. The first five cover
+ * The Cloudflare API-token permission groups Kalayaan needs. The first five cover
  * the entire free stack (Workers + KV + R2 + D1 + account read for discovery);
  * `vectorize` is included so opting into (paid) semantic search later doesn't
  * require re-minting. The grant itself is free — only *using* Vectorize costs.
@@ -44,7 +44,7 @@ const PERMISSION_CHECKLIST = [
 export function tokenTemplateUrl(): string {
   const keys = encodeURIComponent(JSON.stringify(PERMISSION_GROUPS));
   // zoneId=all so the zone-level DNS/Routes groups apply to the user's zones.
-  return `https://dash.cloudflare.com/?to=/:account/api-tokens&name=EdgeCMS&zoneId=all&permissionGroupKeys=${keys}`;
+  return `https://dash.cloudflare.com/?to=/:account/api-tokens&name=Kalayaan&zoneId=all&permissionGroupKeys=${keys}`;
 }
 
 export interface LoginOptions {
@@ -78,7 +78,7 @@ export async function runLogin(opts: LoginOptions = {}): Promise<LoginResult> {
   let token = opts.token;
   if (!token) {
     if (!interactive)
-      throw new Error("No token provided. Run `edgecms login` in a terminal, or pass --token <value>.");
+      throw new Error("No token provided. Run `kalayaan login` in a terminal, or pass --token <value>.");
     p.log.info(
       `Opening the Cloudflare token page (permissions are pre-filled). If it doesn't open, visit:\n${url}\n\nCreate the token, then paste it below. It needs:\n${PERMISSION_CHECKLIST.map((l) => `  • ${l}`).join("\n")}`,
     );
@@ -110,7 +110,7 @@ export async function runLogin(opts: LoginOptions = {}): Promise<LoginResult> {
   const creds: CfCredentials = { apiToken: token, accountId: account.id };
   await writeStoredCredentials(creds, opts.home);
 
-  if (interactive) p.outro(`Signed in to "${account.name}". Next: run \`edgecms deploy\`.`);
+  if (interactive) p.outro(`Signed in to "${account.name}". Next: run \`kalayaan deploy\`.`);
   return { accountId: account.id, accountName: account.name };
 }
 

@@ -698,7 +698,7 @@ function WebhooksPanel() {
               render={({ field }) => (
                 <FormItem className="space-y-1 mb-3">
                   <FormControl>
-                    <Input placeholder="https://your-app.com/hooks/edgecms" {...field} />
+                    <Input placeholder="https://your-app.com/hooks/kalayaan" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

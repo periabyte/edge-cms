@@ -1,4 +1,4 @@
-# EdgeCMS — Development Plan (All Phases)
+# Kalayaan — Development Plan (All Phases)
 
 > In-repo snapshot of the working development plan. The living copy is kept in the maintainer's
 > planning workspace; this file is the version-controlled reference. Read the **Status** section
@@ -43,9 +43,9 @@ working tree has further uncommitted changes from this session). Repo root stays
 - **CI/non-interactive credential env vars renamed** `CLOUDFLARE_API_TOKEN`/`CLOUDFLARE_ACCOUNT_ID`
   → **`EDGE_API_TOKEN`/`EDGE_ACCOUNT_ID`**, old names removed with no fallback, so a shell/CI runner
   that already has wrangler's own Cloudflare credentials set (for unrelated local `wrangler` use)
-  doesn't get silently picked up by `edgecms deploy`/`down`/`doctor` for the wrong account. Updated
+  doesn't get silently picked up by `kalayaan deploy`/`down`/`doctor` for the wrong account. Updated
   `packages/cli/src/cf/client.ts` (`credentialsFromEnv`), the `init`-generated `.env.example`, the
-  `EdgeCMS Deploy` GitHub Action's internal env (its own `cloudflare-api-token`/`cloudflare-account-id`
+  `Kalayaan Deploy` GitHub Action's internal env (its own `cloudflare-api-token`/`cloudflare-account-id`
   *input* names are unchanged), and docs/tests.
 - Verified: full monorepo `pnpm build && pnpm typecheck && pnpm test` green throughout (26 turbo
   tasks); a live browser smoke-check of the migrated `Login` screen (dev server, no backend) confirmed
@@ -70,14 +70,14 @@ Landed as four clean commits on the branch (`59cf733`, `9605cad`, `3c1ea08`, `dc
 - **Public/anonymous access.** A reserved `public` role → anonymous requests resolve to an
   `Ability`; the content API gates reads on it (configurable), and a moderated public **submission**
   endpoint (anonymous create → draft) sits behind Cloudflare Turnstile + per-IP KV rate limiting.
-- **`edgecms login` + free-tier defaults.** Guided sign-in: opens a Cloudflare token-template URL
+- **`kalayaan login` + free-tier defaults.** Guided sign-in: opens a Cloudflare token-template URL
   with permissions pre-filled and auto-discovers the account via `GET /accounts`; persists to
-  `~/.edgecms/credentials.json` (0600). `resolveCredentials()` = env → store, so deploy/down/doctor
+  `~/.kalayaan/credentials.json` (0600). `resolveCredentials()` = env → store, so deploy/down/doctor
   need no env vars. `init` now scaffolds only free services; a `doctor`/`deploy` guard warns when
   the one paid feature (semantic search → Vectorize) is enabled.
 - **Custom domains + interactive `init` wizard.** `domain` config (or `--domain`); deploy attaches a
   Workers Custom Domain (auto DNS + TLS), best-effort with graceful fallback to `*.workers.dev`;
-  `down` detaches it; the login token now carries DNS + Workers Routes edit. `edgecms init` became a
+  `down` detaches it; the login token now carries DNS + Workers Routes edit. `kalayaan init` became a
   guided wizard (content models, services, domain) that can deploy at the end. Docs:
   `docs/custom-domains.md`. Marketing briefs (landing + About) updated in the design handoff.
 
@@ -113,7 +113,7 @@ the free path free, and reduces setup friction for one person shipping a site.
 - **Phase 5 (Distribution): done (on branch).** Plugin lifecycle hooks + custom field-type
   *registry* (`PluginHost`, wired into admin-crud); config-generated **GraphQL** read API behind a
   flag; **MCP** server at `/mcp` (JSON-RPC, API-key-scoped tools); **Cloudflare Access** auth mode
-  (RS256 JWKS verify → user); `edgecms-skill` package; `actions/deploy` GitHub Action; init
+  (RS256 JWKS verify → user); `kalayaan-skill` package; `actions/deploy` GitHub Action; init
   templates (blog/portfolio/docs/blank, inline in the CLI). *Gaps:* GraphQL read-only (no
   mutations, relations return ids); MCP single-response (no SSE); Access not wired through
   `init`/`deploy`; custom field types declarable but not enforced in validation/DDL; no docs site
@@ -123,7 +123,7 @@ the free path free, and reduces setup friction for one person shipping a site.
 
 A full admin redesign (CSS-var token system, light/dark, command palette, toasts, version
 timeline, publish bar) plus, this session: **mobile-responsive layout** (sidebar → drawer +
-hamburger top bar; editor stacks; responsive headers/padding), **`edgecms dev --host`** for LAN
+hamburger top bar; editor stacks; responsive headers/padding), **`kalayaan dev --host`** for LAN
 access, an **expanded TipTap editor** (H1–H3, underline/strike/inline-code/highlight, links, task
 lists, code blocks, hr, text align, undo/redo, placeholder) with **insert-image-from-media-gallery**
 (`MediaPicker`), and a **searchable tag-cloud multi-select combobox with inline create**
@@ -139,7 +139,7 @@ write-body fix). Nothing is merged to `main`; **CI has never run**.
 
 ### P1 real-account gate: MET (2026-07-21)
 
-User ran `edgecms login` → `deploy` → `down` end-to-end against a real Cloudflare account — the
+User ran `kalayaan login` → `deploy` → `down` end-to-end against a real Cloudflare account — the
 plan's core promise (a live site from `cms.config.ts` + a token) is now proven, not just covered by
 mocked-API tests. Driving the deployed admin UI surfaced eight open bugs/UX gaps (none fixed yet):
 
@@ -163,13 +163,13 @@ punch list is next up, before further phase-3+ breadth.
 
 - **P3:** conformance green on Postgres/MySQL in CI (dockerized DBs).
 - **P4:** nightly real-account AI/Vectorize smoke.
-- **P5:** scripted `edgecms-skill` agent run empty-dir → deployed URL.
+- **P5:** scripted `kalayaan-skill` agent run empty-dir → deployed URL.
 
 ### Real bugs found ONLY by driving the live app (never by the green test suite)
 
 Six so far. Phase-1 two: umbrella-import resolution + missing system tables. Phase 3+ four:
 (1) runtime statically importing the pg/mysql adapters broke the D1 `wrangler dev` bundle — fixed
-via a `createApp` adapter-factory + `edgecms/postgres`|`/mysql` subpath exports; (2) `POST /mcp`
+via a `createApp` adapter-factory + `kalayaan/postgres`|`/mysql` subpath exports; (2) `POST /mcp`
 404/405 because `run_worker_first` used `/mcp/*` which doesn't match the bare `/mcp`; (3) auth
 cookies hard-coded `secure:true` were dropped over plain-HTTP LAN so login never stuck — fixed with
 `secureCookies(c)` keyed on request protocol; (4) the editor sent the whole doc back on save so the
@@ -180,19 +180,19 @@ the CLI-scaffolded project under real `wrangler dev`, not just the green suite.*
 
 **Recommended next up (as of 2026-07-21):** consolidation is done (working tree clean; all session
 work committed), the P1 real-account deploy gate is met, and the eight-item live-testing punch
-list is fixed (see `edgecms-live-testing-bugs` — not yet re-verified live). **Release pipeline
+list is fixed (see `kalayaan-live-testing-bugs` — not yet re-verified live). **Release pipeline
 scaffolded:** `.github/workflows/release.yml` (publish on GitHub Release, gated on `NPM_TOKEN`) +
 `docs/releasing.md` are in place; `ci.yml` already existed but has never run. Still needed before
 either fires: **(1)** create the GitHub repo + add the remote + push (`main` currently only has
 Phase 1 — decide whether to merge `feat/admin-dashboard-redesign` in first); **(2)** create the
-`@edgecms`/`edgecms` npm org access + an automation token as the `NPM_TOKEN` repo secret (both
+`@edgecms`/`kalayaan` npm org access + an automation token as the `NPM_TOKEN` repo secret (both
 names confirmed unclaimed on npm as of this check). After that: **(3)** docs site +
 Deploy-to-Cloudflare button (P5 gap) + the marketing/About pages; **(4)** the external-DB
 control-plane gap (auth/media/versions stores are D1-bound) or MongoDB, per priority.
 
 ## Context
 
-EdgeCMS is a greenfield, config-driven headless CMS that deploys entirely onto Cloudflare from one `cms.config.ts` and an API token — D1 default database, R2 media, Hono Worker runtime, React/Tailwind/shadcn admin UI, pluggable adapters (Postgres/MySQL via Hyperdrive, MongoDB), optional Workers AI features, and an MCP server. The design doc (uploaded as `cloudflarecmsplan.md`) fully specifies the architecture; this plan turns it into an executable engineering sequence. Target directory `/Users/paulperia/projects/edge-cms` is empty. Decisions locked: cover all 5 roadmap phases (Phase 1 most detailed); tooling is pnpm workspaces + Turborepo, TypeScript, Vitest (+ `@cloudflare/vitest-pool-workers`), changesets.
+Kalayaan is a greenfield, config-driven headless CMS that deploys entirely onto Cloudflare from one `cms.config.ts` and an API token — D1 default database, R2 media, Hono Worker runtime, React/Tailwind/shadcn admin UI, pluggable adapters (Postgres/MySQL via Hyperdrive, MongoDB), optional Workers AI features, and an MCP server. The design doc (uploaded as `cloudflarecmsplan.md`) fully specifies the architecture; this plan turns it into an executable engineering sequence. Target directory `/Users/paulperia/projects/edge-cms` is empty. Decisions locked: cover all 5 roadmap phases (Phase 1 most detailed); tooling is pnpm workspaces + Turborepo, TypeScript, Vitest (+ `@cloudflare/vitest-pool-workers`), changesets.
 
 ## 1. Monorepo Layout
 
@@ -212,10 +212,10 @@ edge-cms/
 │   │   └── s3/            @edgecms/storage-s3          (Phase 3)
 │   ├── runtime/           @edgecms/runtime         — createApp() Hono factory
 │   ├── admin/             @edgecms/admin           — Vite React SPA, ships dist/ as static assets
-│   ├── cli/               @edgecms/cli             — bin: edgecms (init/dev/deploy/migrate/doctor/seed)
-│   ├── edgecms/           edgecms                  — umbrella package users install
+│   ├── cli/               @edgecms/cli             — bin: kalayaan (init/dev/deploy/migrate/doctor/seed)
+│   ├── kalayaan/           kalayaan                  — umbrella package users install
 │   ├── conformance/       @edgecms/adapter-conformance — published adapter test kit
-│   └── skill/             edgecms-skill            (Phase 5)
+│   └── skill/             kalayaan-skill            (Phase 5)
 ├── templates/             blog/ portfolio/ docs/ blank/   (copied by init, not workspace deps)
 ├── examples/blog/         dogfooding app
 └── apps/docs/             docs site (Phase 5)
@@ -227,9 +227,9 @@ edge-cms/
 - **`@edgecms/adapter-relational`** — `RelationalAdapter` abstract class, DSL→parameterized-SQL query builder, dialect interface (`quoteIdent`, type mapping, `emitDDL(ChangeSet)`), keyset cursor encoding. `adapter-d1` adds the SQLite dialect, D1 executor, copy-rename ALTER strategy, and system-table DDL (`_migrations`, `_versions`, `media`, `users`, `api_keys`).
 - **`@edgecms/runtime`** — `createApp(config, env)`: content API `/api/v1`, admin API `/admin/api`, auth middleware, media routes, KV cache, queue consumer export, MCP endpoint (Phase 5), asset fallthrough.
 - **`@edgecms/admin`** — schema-driven SPA; imports only *types* from config (schema arrives at runtime via `/admin/api/schema`); `dist/` shipped inside the npm package and copied into the deploy bundle as Workers Assets.
-- **`@edgecms/cli`** — Cloudflare REST provisioning client, config loader (esbuild-bundles user `cms.config.ts`), generated worker entry + `wrangler.json`, `.edgecms/state.json` manager.
+- **`@edgecms/cli`** — Cloudflare REST provisioning client, config loader (esbuild-bundles user `cms.config.ts`), generated worker entry + `wrangler.json`, `.kalayaan/state.json` manager.
 
-Dependency graph (no cycles): `config → core → adapter-relational → d1/postgres/mysql`; `core → mongodb, storage-*, runtime`; `config → admin (types), cli, conformance`; `edgecms → config + runtime + cli`.
+Dependency graph (no cycles): `config → core → adapter-relational → d1/postgres/mysql`; `core → mongodb, storage-*, runtime`; `config → admin (types), cli, conformance`; `kalayaan → config + runtime + cli`.
 
 ## 2. Phase 1 — Core (weeks 1–6) — ✅ COMPLETE (all M0–M10)
 
@@ -257,9 +257,9 @@ spec; publish bar is a simple status+save/publish in Phase 1. Files:
 Vite dev proxy `/admin/api` → wrangler dev. Verify: field-registry component tests; manual
 walkthrough; Playwright smoke (login→create→edit→list) by end of phase.
 
-**M8 (wk 5) — ✅ DONE — CLI `dev` + config loading.** esbuild-bundle user config; **generated worker entry** (virtual module importing bundled config + `createApp`); generated `.edgecms/wrangler.json` with assets binding, `not_found_handling: "single-page-application"`, and `run_worker_first: ["/api/*","/admin/api/*","/media/*"]`; `edgecms dev` shells to `wrangler dev`; `edgecms migrate` with `--dry-run` / `--allow-destructive`. Files: `packages/cli/src/{config-loader,entry-template,wrangler-config,commands/dev,commands/migrate}.ts`. Verify: e2e temp-dir scaffold → dev → HTTP asserts; snapshot test on generated wrangler.json.
+**M8 (wk 5) — ✅ DONE — CLI `dev` + config loading.** esbuild-bundle user config; **generated worker entry** (virtual module importing bundled config + `createApp`); generated `.kalayaan/wrangler.json` with assets binding, `not_found_handling: "single-page-application"`, and `run_worker_first: ["/api/*","/admin/api/*","/media/*"]`; `kalayaan dev` shells to `wrangler dev`; `kalayaan migrate` with `--dry-run` / `--allow-destructive`. Files: `packages/cli/src/{config-loader,entry-template,wrangler-config,commands/dev,commands/migrate}.ts`. Verify: e2e temp-dir scaffold → dev → HTTP asserts; snapshot test on generated wrangler.json.
 
-**M9 (wk 6) — ✅ DONE — CLI `deploy` + `init` + `doctor`.** Typed CF REST client with retry/backoff; idempotent provisioning (D1, R2+CORS, KV×2); `.edgecms/state.json` (resource IDs + applied snapshot + migration journal, committed to git, no secrets); remote migrations via D1 HTTP `/query` (sequential statements, checksummed `_migrations` journal, resumable on failure); esbuild worker bundle + Workers upload API + assets manifest; auto-generated session secret; prints URL + invite link. `init` wizard (clack) with full flag equivalents. Files: `packages/cli/src/cf/{client,d1,r2,kv,workers,assets}.ts`, `src/state.ts`, `src/commands/{deploy,init,doctor}.ts`. Verify: mocked-CF-API unit tests + manual/nightly real-account smoke (deploy → publish → GET → teardown).
+**M9 (wk 6) — ✅ DONE — CLI `deploy` + `init` + `doctor`.** Typed CF REST client with retry/backoff; idempotent provisioning (D1, R2+CORS, KV×2); `.kalayaan/state.json` (resource IDs + applied snapshot + migration journal, committed to git, no secrets); remote migrations via D1 HTTP `/query` (sequential statements, checksummed `_migrations` journal, resumable on failure); esbuild worker bundle + Workers upload API + assets manifest; auto-generated session secret; prints URL + invite link. `init` wizard (clack) with full flag equivalents. Files: `packages/cli/src/cf/{client,d1,r2,kv,workers,assets}.ts`, `src/state.ts`, `src/commands/{deploy,init,doctor}.ts`. Verify: mocked-CF-API unit tests + manual/nightly real-account smoke (deploy → publish → GET → teardown).
 
 **M10 (wk 6) — ✅ DONE — Hardening.** `examples/blog` end-to-end; error-message pass; README quickstart. **Exit criterion: stranger goes empty-folder → published blog post in <10 min.**
 
@@ -292,18 +292,18 @@ walkthrough; Playwright smoke (login→create→edit→list) by end of phase.
 2. Cloudflare Access auth mode.
 3. Plugin hooks (`beforeChange`, `afterPublish`, custom field types) + example plugin.
 4. MCP server at `/mcp` (Agents SDK, streamable HTTP, API-key-scoped tools: `list_collections`, `query_documents`, `create_document`, `update_document`, `publish`, `upload_media_from_url`, `search`; `manage` scope for destructive tools).
-5. `edgecms-skill` package (SKILL.md + guardrails: dry-run first, never auto `--allow-destructive`). Verify: scripted agent run empty-dir → deployed URL.
+5. `kalayaan-skill` package (SKILL.md + guardrails: dry-run first, never auto `--allow-destructive`). Verify: scripted agent run empty-dir → deployed URL.
 6. Templates + frontend starters, Deploy-to-Cloudflare button, docs site (brief §15a feeds landing page). Template CI: init from each → build → dev smoke.
-7. GitHub Action wrapper (`edgecms/deploy-action`), dogfooded by examples.
+7. GitHub Action wrapper (`kalayaan/deploy-action`), dogfooded by examples.
 
 ## 4. Cross-Cutting Decisions (lock weeks 1–3)
 
 1. **Query DSL (M3):** typed object — `{ where (AND-only + optional top-level or[]), sort, limit ≤100, cursor, populate (dot paths, depth ≤2), locale, status }`; operators eq/ne/in/lt/lte/gt/gte/contains. Cursor = opaque base64url `[sortValues..., id]` keyset — no OFFSET. REST query-param grammar and GraphQL both parse into this one object.
 2. **Adapter contract (M3, frozen at 3.1):** design-doc §5 interface plus `transaction` semantics documented per family (best-effort batch on D1, real tx elsewhere); conformance tests atomicity of the batch case only.
-3. **`.edgecms/state.json`:** `{ version, resources: {d1, r2, kv:{cache,sessions}, queue, vectorize, hyperdrive, worker}, schema: {snapshotVersion, collections}, migrations: [{id, checksum, appliedAt}] }`. Committed to git; secrets never in it; snapshot format versioned independently.
+3. **`.kalayaan/state.json`:** `{ version, resources: {d1, r2, kv:{cache,sessions}, queue, vectorize, hyperdrive, worker}, schema: {snapshotVersion, collections}, migrations: [{id, checksum, appliedAt}] }`. Committed to git; secrets never in it; snapshot format versioned independently.
 4. **Auth model (M5):** PBKDF2-SHA256 600k iters; 256-bit session id in KV (7d sliding TTL) + HMAC-signed cookie; CSRF double-submit; API keys stored as SHA-256 hash with `{scopes, collections?}`.
 5. **Error format (M4):** `{ error: { code, message, details?: [{path, message}] } }` with matching HTTP status; `EdgeCMSError` in core carries code+status; same shape everywhere.
-6. **Releases:** changesets in fixed/lockstep mode for all `@edgecms/*` + `edgecms`; `0.x` until the Phase-3 contract freeze → `1.0`. Skill and templates version independently. Runtime↔CLI compatibility guaranteed by the CLI generating the worker entry from its own bundled runtime.
+6. **Releases:** changesets in fixed/lockstep mode for all `@edgecms/*` + `kalayaan`; `0.x` until the Phase-3 contract freeze → `1.0`. Skill and templates version independently. Runtime↔CLI compatibility guaranteed by the CLI generating the worker entry from its own bundled runtime.
 
 ## 5. Testing & CI
 
@@ -328,4 +328,4 @@ walkthrough; Playwright smoke (login→create→edit→list) by end of phase.
 ## 7. Verification (overall)
 
 - Per-milestone checks as listed above; every PR runs unit + worker + local-e2e + Playwright smoke.
-- Phase gates: P1 = <10-min empty-folder→published-post on a real account; P2 = examples/blog exercises versioning/localization/webhooks/cache; P3 = conformance suite green on all four DB adapters in CI; P4 = nightly real-account AI smoke; P5 = scripted-agent deploy via `edgecms-skill` succeeds.
+- Phase gates: P1 = <10-min empty-folder→published-post on a real account; P2 = examples/blog exercises versioning/localization/webhooks/cache; P3 = conformance suite green on all four DB adapters in CI; P4 = nightly real-account AI smoke; P5 = scripted-agent deploy via `kalayaan-skill` succeeds.

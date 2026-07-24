@@ -7,7 +7,7 @@ describe("GET / (API root page)", () => {
     expect(res.status).toBe(200);
     expect(res.headers.get("content-type")).toContain("text/html");
     const body = await res.text();
-    expect(body).toContain("This is an EdgeCMS API.");
+    expect(body).toContain("This is a Kalayaan API.");
     expect(body).toContain("test-site");
     expect(body).toContain('href="/admin"');
     expect(body).toContain('href="/api/v1"');

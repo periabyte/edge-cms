@@ -1,6 +1,6 @@
 ---
 title: Schema & config
-description: Everything in EdgeCMS is derived from one cms.config.ts.
+description: Everything in Kalayaan is derived from one cms.config.ts.
 ---
 
 Everything — the admin UI, the REST/GraphQL APIs, and the database schema — is derived from a
@@ -10,7 +10,7 @@ click through to define a content type.
 ## A minimal example
 
 ```ts
-import { defineConfig, collection, field } from "edgecms";
+import { defineConfig, collection, field } from "kalayaan";
 
 export default defineConfig({
   name: "my-site",
@@ -62,10 +62,10 @@ Editing `cms.config.ts` doesn't hot-reload the schema — the Worker bundles you
 time, and the database schema is a separate, explicit step:
 
 ```sh
-npx edgecms migrate               # diffs your config against the last applied schema
-npx edgecms migrate --dry-run     # preview the SQL without applying it
-npx edgecms migrate --allow-destructive   # required for anything that could drop/alter data
+npx kalayaan migrate               # diffs your config against the last applied schema
+npx kalayaan migrate --dry-run     # preview the SQL without applying it
+npx kalayaan migrate --allow-destructive   # required for anything that could drop/alter data
 ```
 
-`edgecms deploy` runs the pending migration for you as part of the deploy, but reviewing a
+`kalayaan deploy` runs the pending migration for you as part of the deploy, but reviewing a
 `--dry-run` first (especially for destructive changes) is worth the ten seconds it takes.

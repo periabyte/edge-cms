@@ -5,9 +5,9 @@ describe("generateEntrySource", () => {
   it("imports the config path, resolves it, and exports a fetch handler", () => {
     const src = generateEntrySource("./config.generated.mjs");
     expect(src).toContain('import userConfig from "./config.generated.mjs"');
-    // Imports only from "edgecms" (the umbrella package), never the
+    // Imports only from "kalayaan" (the umbrella package), never the
     // scoped @edgecms/* packages directly — see entry-template.ts for why.
-    expect(src).toContain('from "edgecms"');
+    expect(src).toContain('from "kalayaan"');
     expect(src).not.toContain("@edgecms/");
     expect(src).toContain("resolveConfig(userConfig)");
     expect(src).toContain("export default {");
@@ -21,21 +21,21 @@ describe("generateEntrySource", () => {
 
   it("imports NO external adapter for a D1 project (keeps mysql2/postgres out of the bundle)", () => {
     const src = generateEntrySource("./config.generated.mjs", "d1");
-    expect(src).not.toContain("edgecms/postgres");
-    expect(src).not.toContain("edgecms/mysql");
+    expect(src).not.toContain("kalayaan/postgres");
+    expect(src).not.toContain("kalayaan/mysql");
     expect(src).toContain("createApp(resolved, snapshot)");
   });
 
   it("wires the Postgres adapter factory only for a Postgres project", () => {
     const src = generateEntrySource("./config.generated.mjs", "postgres");
-    expect(src).toContain('import { postgresAdapter } from "edgecms/postgres"');
+    expect(src).toContain('import { postgresAdapter } from "kalayaan/postgres"');
     expect(src).toContain("createApp(resolved, snapshot, { databaseAdapter: postgresAdapter })");
-    expect(src).not.toContain("edgecms/mysql");
+    expect(src).not.toContain("kalayaan/mysql");
   });
 
   it("wires the MySQL adapter factory only for a MySQL project", () => {
     const src = generateEntrySource("./config.generated.mjs", "mysql");
-    expect(src).toContain('import { mysqlAdapter } from "edgecms/mysql"');
+    expect(src).toContain('import { mysqlAdapter } from "kalayaan/mysql"');
     expect(src).toContain("createApp(resolved, snapshot, { databaseAdapter: mysqlAdapter })");
   });
 

@@ -30,7 +30,7 @@ export function AcceptInvite() {
 					</div>
 					<div>
 						<div className="font-semibold text-sm">
-							{schema?.name ?? "EdgeCMS"}
+							{schema?.name ?? "Kalayaan"}
 						</div>
 						<div className="text-[11px] text-muted-foreground">
 							Set your password

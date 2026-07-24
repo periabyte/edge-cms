@@ -1,7 +1,7 @@
-# edgecms/deploy-action
+# kalayaan/deploy-action
 
-A GitHub Action that deploys an [EdgeCMS](../../README.md) project to Cloudflare.
-It wraps `edgecms deploy`: idempotently provisioning D1/R2/KV (and
+A GitHub Action that deploys an [Kalayaan](../../README.md) project to Cloudflare.
+It wraps `kalayaan deploy`: idempotently provisioning D1/R2/KV (and
 Hyperdrive/Vectorize when configured), applying pending migrations to the remote
 database, uploading the Worker plus the admin SPA, and attaching a custom domain
 when one is configured.
@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: cms
-        uses: edgecms/deploy-action@v1
+        uses: kalayaan/deploy-action@v1
         with:
           cloudflare-api-token: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           cloudflare-account-id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -32,12 +32,12 @@ jobs:
 
 | Input                   | Required | Default | Description                                                     |
 | ----------------------- | -------- | ------- | --------------------------------------------------------------- |
-| `cloudflare-api-token`  | yes      |         | Token with Workers/D1/R2/KV — plus DNS + Workers Routes when attaching a custom domain. `edgecms login` mints one with the right scopes. |
+| `cloudflare-api-token`  | yes      |         | Token with Workers/D1/R2/KV — plus DNS + Workers Routes when attaching a custom domain. `kalayaan login` mints one with the right scopes. |
 | `cloudflare-account-id` | yes      |         | Cloudflare account ID.                                          |
 | `working-directory`     | no       | `.`     | Directory containing `cms.config.ts`.                           |
 | `database-url`          | no       | `""`    | Postgres/MySQL connection string (external-DB projects only).   |
 | `node-version`          | no       | `20`    | Node.js version.                                                |
-| `args`                  | no       | `""`    | Extra flags for `edgecms deploy` (e.g. `--domain blog.example.com`). |
+| `args`                  | no       | `""`    | Extra flags for `kalayaan deploy` (e.g. `--domain blog.example.com`). |
 
 ## Outputs
 
@@ -47,7 +47,7 @@ jobs:
 
 ## Guardrails
 
-The action runs `edgecms deploy`, which applies **non-destructive** migrations
+The action runs `kalayaan deploy`, which applies **non-destructive** migrations
 only. Destructive schema changes require `--allow-destructive`, which is never
 passed automatically — run those deliberately (locally or via `args`) after
-reviewing the migration SQL with `edgecms migrate --dry-run`.
+reviewing the migration SQL with `kalayaan migrate --dry-run`.

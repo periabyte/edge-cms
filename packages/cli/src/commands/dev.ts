@@ -13,7 +13,7 @@ export interface DevOptions {
 }
 
 /**
- * `edgecms dev`: regenerates the Worker entry + wrangler.json, then runs
+ * `kalayaan dev`: regenerates the Worker entry + wrangler.json, then runs
  * the same Worker locally under workerd via `wrangler dev`, with local
  * D1/R2/KV simulation (Miniflare) — no Cloudflare account needed.
  */

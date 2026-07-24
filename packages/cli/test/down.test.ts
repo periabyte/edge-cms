@@ -23,7 +23,7 @@ const deployedState: EdgeCmsState = {
 };
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), "edgecms-down-"));
+  dir = await mkdtemp(join(tmpdir(), "kalayaan-down-"));
   await writeState(dir, deployedState);
 });
 
@@ -105,7 +105,7 @@ describe("runDown", () => {
   });
 
   it("is a no-op when nothing has been deployed", async () => {
-    await rm(join(dir, ".edgecms", "state.json"), { force: true });
+    await rm(join(dir, ".kalayaan", "state.json"), { force: true });
     const result = await runDown({ projectDir: dir });
     expect(result.resources).toEqual([]);
     expect(result.deleted).toEqual([]);

@@ -109,8 +109,8 @@ export function credentialsFromEnv(env: NodeJS.ProcessEnv = process.env): CfCred
 
 /**
  * Resolve credentials for a command: environment first (so CI and one-off
- * overrides win), otherwise the `edgecms login` store. Returns null when neither
- * is available — callers point the user at `edgecms login`.
+ * overrides win), otherwise the `kalayaan login` store. Returns null when neither
+ * is available — callers point the user at `kalayaan login`.
  */
 export async function resolveCredentials(env: NodeJS.ProcessEnv = process.env): Promise<CfCredentials | null> {
   const fromEnv = credentialsFromEnv(env);

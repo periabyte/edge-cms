@@ -28,8 +28,8 @@ export async function prepareProject(
   // Optional project plugins (lifecycle hooks + custom field types).
   const pluginsModulePath = await bundlePluginsModule(projectDir);
 
-  const entryPath = join(projectDir, ".edgecms", "worker-entry.mjs");
-  await mkdir(join(projectDir, ".edgecms"), { recursive: true });
+  const entryPath = join(projectDir, ".kalayaan", "worker-entry.mjs");
+  await mkdir(join(projectDir, ".kalayaan"), { recursive: true });
   await writeFile(
     entryPath,
     generateEntrySource(
@@ -49,7 +49,7 @@ export async function prepareProject(
     ...(opts.assetsDir && { assetsDir: opts.assetsDir }),
   });
 
-  const wranglerConfigPath = join(projectDir, ".edgecms", "wrangler.json");
+  const wranglerConfigPath = join(projectDir, ".kalayaan", "wrangler.json");
   await writeFile(wranglerConfigPath, JSON.stringify(wranglerConfig, null, 2) + "\n");
 
   return { loaded, entryPath, wranglerConfig, wranglerConfigPath };
@@ -57,10 +57,10 @@ export async function prepareProject(
 
 /** A stable-across-restarts secret for local dev sessions; deploy generates its own via Cloudflare secrets. */
 async function devSessionSecret(projectDir: string): Promise<string> {
-  const path = join(projectDir, ".edgecms", "dev-secret.txt");
+  const path = join(projectDir, ".kalayaan", "dev-secret.txt");
   if (existsSync(path)) return (await readFile(path, "utf-8")).trim();
   const secret = crypto.randomUUID() + crypto.randomUUID();
-  await mkdir(join(projectDir, ".edgecms"), { recursive: true });
+  await mkdir(join(projectDir, ".kalayaan"), { recursive: true });
   await writeFile(path, secret);
   return secret;
 }

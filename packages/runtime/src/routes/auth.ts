@@ -38,14 +38,14 @@ export function authRoutes() {
   const app = new Hono<AuthEnv>();
 
   // Public first-run status: lets the admin SPA show a dedicated "create your
-  // first administrator" screen and lets `edgecms deploy` poll for readiness.
+  // first administrator" screen and lets `kalayaan deploy` poll for readiness.
   app.get("/setup", async (c) => {
     const needsSetup = (await new UsersStore(c.env.DB).count()) === 0;
     return c.json({ needsSetup });
   });
 
   // First-run only: creates the initial admin user. Gated on zero users
-  // existing rather than a token, so `edgecms deploy` needs no extra secret.
+  // existing rather than a token, so `kalayaan deploy` needs no extra secret.
   app.post("/setup", async (c) => {
     const users = new UsersStore(c.env.DB);
     if ((await users.count()) > 0)

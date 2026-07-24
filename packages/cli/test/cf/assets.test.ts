@@ -10,7 +10,7 @@ let dir: string;
 const creds = { apiToken: "account-token-xyz", accountId: "acct" };
 
 beforeEach(async () => {
-  dir = await mkdtemp(join(tmpdir(), "edgecms-assets-"));
+  dir = await mkdtemp(join(tmpdir(), "kalayaan-assets-"));
   await writeFile(join(dir, "index.html"), "<!doctype html><title>x</title>");
   await writeFile(join(dir, "app.js"), "console.log(1)");
 });

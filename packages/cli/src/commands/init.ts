@@ -4,6 +4,7 @@ import { spawnSync } from "node:child_process";
 import { join } from "node:path";
 import * as p from "@clack/prompts";
 import { CONFIG_CANDIDATES } from "../config-loader.js";
+import { isApexDomain } from "../domain-utils.js";
 import { resolveCredentials } from "../cf/client.js";
 import { runLogin } from "./login.js";
 import { runDeploy } from "./deploy.js";
@@ -81,7 +82,7 @@ const TEMPLATE_COLLECTIONS: Record<Template, string> = {
 };
 
 /**
- * `edgecms init`: a guided setup wizard. Prompts for the content models, which
+ * `kalayaan init`: a guided setup wizard. Prompts for the content models, which
  * services to turn on, and a custom domain, then scaffolds the project and can
  * deploy it — so the whole journey is `login → init → live site`. Every prompt
  * has a flag equivalent (`--template`, `--db`, `--collections`, `--ai-features`,
@@ -165,8 +166,16 @@ export async function runInit(opts: InitOptions): Promise<{ configPath: string }
   const domain =
     opts.domain ??
     (interactive
-      ? String(await p.text({ message: "Custom domain (blank for the free workers.dev URL)", defaultValue: "", placeholder: "blog.example.com" })).trim() || undefined
+      ? String(await p.text({ message: "Custom domain (blank for the free workers.dev URL)", defaultValue: "", placeholder: "cms.example.com" })).trim() || undefined
       : undefined);
+
+  if (interactive && domain && isApexDomain(domain)) {
+    p.log.info(
+      `${domain} looks like a root domain. Kalayaan is headless (no homepage) — consider a ` +
+        `subdomain like cms.${domain} or content.${domain} instead, so ${domain} stays free for ` +
+        `your own site. See docs/custom-root-page.md for options if you want them on the same domain.`,
+    );
+  }
 
   // Public submissions (anonymous create → moderated draft; needs Turnstile at deploy).
   const submissions =
@@ -186,13 +195,13 @@ export async function runInit(opts: InitOptions): Promise<{ configPath: string }
   await writeFile(join(opts.projectDir, "package.json"), buildPackageJson(name));
   await writeFile(
     join(opts.projectDir, ".env.example"),
-    "# Run `edgecms login` to sign in — no env vars needed for local use.\n" +
+    "# Run `kalayaan login` to sign in — no env vars needed for local use.\n" +
       "# These are only for CI / non-interactive deploys:\n" +
       "EDGE_API_TOKEN=\nEDGE_ACCOUNT_ID=\n" +
       (db !== "d1" ? "DATABASE_URL=\n" : "") +
       (submissions ? "TURNSTILE_SECRET=\n" : ""),
   );
-  await writeFile(join(opts.projectDir, ".gitignore"), "node_modules/\n.edgecms/\n.env\n.wrangler/\n");
+  await writeFile(join(opts.projectDir, ".gitignore"), "node_modules/\n.kalayaan/\n.env\n.wrangler/\n");
 
   // Deploy at the end (never on --yes). Ties login → init → live into one flow.
   const shouldDeploy = opts.deploy ?? (interactive ? Boolean(await p.confirm({ message: "Deploy now?", initialValue: false })) : false);
@@ -203,7 +212,7 @@ export async function runInit(opts: InitOptions): Promise<{ configPath: string }
 
   if (interactive) {
     p.outro(
-      `Created ${configPath}\n\nNext steps:\n  cd ${opts.projectDir}\n  npm install\n  npx edgecms login   # one-time Cloudflare sign-in\n  npx edgecms deploy`,
+      `Created ${configPath}\n\nNext steps:\n  cd ${opts.projectDir}\n  npm install\n  npx kalayaan login   # one-time Cloudflare sign-in\n  npx kalayaan deploy`,
     );
   }
   return { configPath };
@@ -227,7 +236,7 @@ async function deployNow(projectDir: string, domain: string | undefined): Promis
     p.outro(`Your site: ${site}\n\nCreate your admin account: ${result.url}/admin`);
   } catch (err) {
     p.log.error(`Deploy didn't complete: ${err instanceof Error ? err.message : String(err)}`);
-    p.outro(`Config is ready. Finish with:\n  cd ${projectDir}\n  npm install\n  npx edgecms login\n  npx edgecms deploy`);
+    p.outro(`Config is ready. Finish with:\n  cd ${projectDir}\n  npm install\n  npx kalayaan login\n  npx kalayaan deploy`);
   }
 }
 
@@ -245,7 +254,7 @@ interface BuildArgs {
 
 function buildConfigSource(a: BuildArgs): string {
   const lines: string[] = [
-    `import { defineConfig, collection, field } from "edgecms";`,
+    `import { defineConfig, collection, field } from "kalayaan";`,
     ``,
     `export default defineConfig({`,
     `  name: ${JSON.stringify(a.name)},`,
@@ -311,11 +320,11 @@ function buildPackageJson(name: string): string {
   return (
     JSON.stringify(
       {
-        name: sanitizeCollectionName(name) ?? "edgecms-site",
+        name: sanitizeCollectionName(name) ?? "kalayaan-site",
         private: true,
         type: "module",
-        scripts: { dev: "edgecms dev", deploy: "edgecms deploy" },
-        dependencies: { edgecms: "latest" },
+        scripts: { dev: "kalayaan dev", deploy: "kalayaan deploy" },
+        dependencies: { kalayaan: "latest" },
       },
       null,
       2,

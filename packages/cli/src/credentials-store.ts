@@ -5,14 +5,14 @@ import { join } from "node:path";
 import type { CfCredentials } from "./cf/client.js";
 
 /**
- * Global (per-user, not per-project) credential store written by `edgecms login`
+ * Global (per-user, not per-project) credential store written by `kalayaan login`
  * and read by deploy/down/doctor when no env vars are set. Lives in the home dir
  * — credentials are a machine-level concern, not something to keep in a project
- * (or its gitignored `.edgecms/`). Mirrors the JSON read/write shape in state.ts.
+ * (or its gitignored `.kalayaan/`). Mirrors the JSON read/write shape in state.ts.
  */
 
 export function credentialsDir(home: string = homedir()): string {
-  return join(home, ".edgecms");
+  return join(home, ".kalayaan");
 }
 
 export function credentialsPath(home: string = homedir()): string {

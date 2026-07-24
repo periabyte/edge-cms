@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Manrope:wght@400;500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;0,800;1,400&family=Spectral:ital,wght@0,500;0,600;1,600&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -10,10 +10,11 @@
  * etc. and raw var() usage agree. Light is the default; `.dark` on <html>
  * (set by useTheme, matching Tailwind's darkMode:"class") swaps the palette.
  *
- * Values are the EdgeCMS brand system (see docs/design-system/): light =
- * warm paper over indigo text, dark = indigo-charcoal with a signal-orange
- * interactive accent and a mako-teal secondary. Converted from the DS's hex
- * source (docs/design-system/tokens/colors.css) to HSL triplets here.
+ * Values are the Kalayaan "Dawn" brand system: light = warm paper over warm
+ * ink text with a dawn-gold interactive accent and a sky-blue secondary;
+ * dark is a first-class equal (warm charcoal, brighter gold). Converted from
+ * the rebrand design system's hex source (tokens/colors.css) to HSL triplets
+ * here.
  */
 /*
  * Token VALUES are HSL channel triplets ("H S% L%", no hsl() wrapper, no
@@ -26,43 +27,43 @@
  * in app code.
  */
 :root {
-  --background: 60 18% 97%;
-  --foreground: 229 22% 10%;
+  --background: 40 100% 99%;
+  --foreground: 34 33% 12%;
   --card: 0 0% 100%;
-  --card-2: 60 15% 94%;
+  --card-2: 40 65% 95%;
   --popover: 0 0% 100%;
-  --popover-foreground: 229 22% 10%;
-  --muted: 60 15% 94%;
-  --muted-foreground: 226 9% 46%;
-  --subtle-foreground: 227 10% 62%;
-  --accent: 60 12% 89%;
-  --accent-hover: 60 11% 82%;
-  --accent-foreground: 229 22% 10%;
-  --border: 60 13% 86%;
-  --border-strong: 60 11% 79%;
-  --input: 60 13% 86%;
+  --popover-foreground: 34 33% 12%;
+  --muted: 40 65% 95%;
+  --muted-foreground: 37 15% 47%;
+  --subtle-foreground: 38 18% 60%;
+  --accent: 41 51% 90%;
+  --accent-hover: 37 36% 79%;
+  --accent-foreground: 34 33% 12%;
+  --border: 40 44% 87%;
+  --border-strong: 37 36% 79%;
+  --input: 40 44% 87%;
   --ring: var(--brand);
-  --radius: 0.625rem;
+  --radius: 0.6875rem;
 
-  --brand: 16 81% 54%;
-  --brand-hover: 14 100% 62%;
-  --brand-foreground: 0 0% 100%;
-  --brand-subtle: 16 100% 95%;
-  --brand-subtle-fg: 16 74% 38%;
-  --teal: 175 84% 34%;
-  --teal-hover: 175 82% 39%;
-  --teal-subtle: 175 60% 95%;
-  --teal-fg: 175 84% 27%;
-  --data: 199 89% 48%;
-  --draft: 40 92% 41%;
-  --draft-subtle: 40 100% 96%;
-  --draft-fg: 40 92% 32%;
-  --published: 156 68% 37%;
-  --published-subtle: 156 76% 97%;
-  --published-fg: 156 72% 29%;
-  --danger: 7 67% 49%;
-  --danger-subtle: 7 86% 97%;
-  --danger-fg: 7 74% 42%;
+  --brand: 34 75% 52%;
+  --brand-hover: 32 77% 44%;
+  --brand-foreground: 38 50% 9%;
+  --brand-subtle: 36 90% 95%;
+  --brand-subtle-fg: 31 80% 30%;
+  --teal: 212 56% 42%;
+  --teal-hover: 212 50% 50%;
+  --teal-subtle: 212 60% 95%;
+  --teal-fg: 212 57% 34%;
+  --data: 212 50% 50%;
+  --draft: 42 87% 35%;
+  --draft-subtle: 42 90% 95%;
+  --draft-fg: 42 90% 28%;
+  --published: 143 47% 34%;
+  --published-subtle: 143 50% 95%;
+  --published-fg: 143 50% 26%;
+  --danger: 6 65% 43%;
+  --danger-subtle: 6 70% 95%;
+  --danger-fg: 6 65% 35%;
   --mt: 258 90% 66%;
   --mt-subtle: 250 100% 98%;
   --mt-fg: 263 70% 50%;
@@ -75,47 +76,47 @@
   --destructive: var(--danger);
   --destructive-foreground: 0 0% 100%;
 
-  --shadow: 0 1px 2px rgba(10, 10, 22, 0.08), 0 1px 3px rgba(10, 10, 22, 0.06);
-  --shadow-lg: 0 10px 30px -8px rgba(10, 10, 22, 0.16), 0 4px 12px -6px rgba(10, 10, 22, 0.1);
+  --shadow: 0 2px 8px -2px rgba(60, 45, 20, 0.1);
+  --shadow-lg: 0 30px 60px -24px rgba(52, 38, 18, 0.26);
 }
 
 .dark {
-  --background: 234 28% 7%;
-  --foreground: 231 23% 94%;
-  --card: 232 31% 10%;
-  --card-2: 230 25% 14%;
-  --popover: 232 31% 10%;
-  --popover-foreground: 231 23% 94%;
-  --muted: 230 25% 14%;
-  --muted-foreground: 228 12% 54%;
-  --subtle-foreground: 228 15% 40%;
-  --accent: 229 24% 18%;
-  --accent-hover: 228 22% 23%;
-  --accent-foreground: 231 23% 94%;
-  --border: 229 22% 19%;
-  --border-strong: 229 21% 27%;
-  --input: 229 22% 19%;
+  --background: 38 26% 8%;
+  --foreground: 40 51% 92%;
+  --card: 37 24% 11%;
+  --card-2: 36 22% 13%;
+  --popover: 37 24% 11%;
+  --popover-foreground: 40 51% 92%;
+  --muted: 36 22% 13%;
+  --muted-foreground: 39 17% 53%;
+  --subtle-foreground: 39 18% 37%;
+  --accent: 38 23% 16%;
+  --accent-hover: 36 25% 22%;
+  --accent-foreground: 40 51% 92%;
+  --border: 36 25% 16%;
+  --border-strong: 36 25% 22%;
+  --input: 36 25% 16%;
   --ring: var(--brand);
 
-  --brand: 14 100% 62%;
-  --brand-hover: 14 100% 67%;
-  --brand-foreground: 18 79% 6%;
-  --brand-subtle: 16 68% 10%;
-  --brand-subtle-fg: 16 100% 74%;
-  --teal: 175 82% 39%;
-  --teal-hover: 175 65% 49%;
-  --teal-subtle: 175 84% 10%;
-  --teal-fg: 175 68% 63%;
-  --data: 198 93% 60%;
-  --draft: 42 87% 55%;
-  --draft-subtle: 42 71% 10%;
-  --draft-fg: 42 97% 65%;
-  --published: 157 57% 48%;
-  --published-subtle: 157 50% 9%;
-  --published-fg: 157 77% 73%;
-  --danger: 7 86% 59%;
-  --danger-subtle: 7 37% 12%;
-  --danger-fg: 7 94% 82%;
+  --brand: 36 80% 59%;
+  --brand-hover: 38 85% 68%;
+  --brand-foreground: 38 50% 9%;
+  --brand-subtle: 36 40% 14%;
+  --brand-subtle-fg: 38 85% 68%;
+  --teal: 210 55% 59%;
+  --teal-hover: 208 64% 73%;
+  --teal-subtle: 210 40% 16%;
+  --teal-fg: 208 64% 73%;
+  --data: 210 55% 59%;
+  --draft: 41 84% 44%;
+  --draft-subtle: 41 50% 12%;
+  --draft-fg: 41 90% 65%;
+  --published: 143 43% 43%;
+  --published-subtle: 143 40% 12%;
+  --published-fg: 143 55% 65%;
+  --danger: 6 66% 53%;
+  --danger-subtle: 6 45% 14%;
+  --danger-fg: 6 80% 75%;
   --mt: 255 92% 76%;
   --mt-subtle: 257 40% 14%;
   --mt-fg: 252 95% 85%;
@@ -128,8 +129,8 @@
   --destructive: var(--danger);
   --destructive-foreground: 0 0% 100%;
 
-  --shadow: 0 1px 2px rgba(6, 7, 14, 0.45), 0 1px 3px rgba(6, 7, 14, 0.35);
-  --shadow-lg: 0 16px 40px -12px rgba(6, 7, 14, 0.65), 0 4px 12px -6px rgba(6, 7, 14, 0.5);
+  --shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.35);
+  --shadow-lg: 0 30px 60px -24px rgba(0, 0, 0, 0.55);
 }
 
 html,
@@ -140,7 +141,7 @@ body,
 
 body {
   margin: 0;
-  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  font-family: "Figtree", ui-sans-serif, system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   background: hsl(var(--background));
   color: hsl(var(--foreground));
@@ -155,6 +156,12 @@ body {
 @layer utilities {
   .font-mono {
     font-family: "JetBrains Mono", ui-monospace, monospace;
+  }
+  /* Editorial display face — brand mark/wordmark and hero moments only; app
+     chrome (cards, dialogs, form labels) stays on the sans per the Dawn
+     design system's type guidance. */
+  .font-display {
+    font-family: "Spectral", Georgia, serif;
   }
 }
 

@@ -41,6 +41,6 @@
     "vitest": "^3.1.0"
   },
   "bin": {
-    "edgecms": "./dist/bin.js"
+    "kalayaan": "./dist/bin.js"
   }
 }

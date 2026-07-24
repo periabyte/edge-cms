@@ -3,24 +3,24 @@ title: Quickstart
 description: From an empty folder to a live site on your own Cloudflare account.
 ---
 
-EdgeCMS deploys entirely onto your own Cloudflare account — Workers, D1, R2, and KV, all on the
+Kalayaan deploys entirely onto your own Cloudflare account — Workers, D1, R2, and KV, all on the
 permanent free tier. There's no separate hosting to sign up for and no server to manage.
 
 ## 1. Sign in
 
 ```sh
-npx edgecms login
+npx kalayaan login
 ```
 
 A one-time guided sign-in: it opens a Cloudflare API token page with the right permissions
 pre-filled, and auto-discovers your account. Credentials are stored at
-`~/.edgecms/credentials.json` — `init`, `dev`, `deploy`, and `down` all pick them up automatically,
+`~/.kalayaan/credentials.json` — `init`, `dev`, `deploy`, and `down` all pick them up automatically,
 no environment variables needed locally.
 
 ## 2. Scaffold a project
 
 ```sh
-npx edgecms init my-site
+npx kalayaan init my-site
 ```
 
 `init` is a guided wizard. It asks for:
@@ -37,7 +37,7 @@ It writes `cms.config.ts` and a `package.json` for your project.
 ```sh
 cd my-site
 npm install
-npx edgecms dev
+npx kalayaan dev
 ```
 
 `dev` runs your whole CMS locally under `workerd` (Cloudflare's actual Workers runtime), backed by
@@ -47,7 +47,7 @@ reachable on your LAN.
 ## 4. Deploy
 
 ```sh
-npx edgecms deploy
+npx kalayaan deploy
 ```
 
 `deploy` is idempotent and safe to re-run — it provisions D1, R2, and KV, applies any pending
@@ -57,7 +57,7 @@ your live URL (`https://my-site.<you>.workers.dev`).
 To use your own domain instead:
 
 ```sh
-npx edgecms deploy --domain blog.example.com
+npx kalayaan deploy --domain blog.example.com
 ```
 
 See the [custom domains guide](/edge-cms/guides/custom-domains/) for the one prerequisite (the
@@ -69,7 +69,7 @@ non-interactively with `--admin-email`/`--admin-password` for CI.
 ## 5. Tear it down
 
 ```sh
-npx edgecms down
+npx kalayaan down
 ```
 
 Detaches any custom domain and deletes the deployed Worker and every resource it provisioned

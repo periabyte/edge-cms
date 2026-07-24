@@ -3,7 +3,7 @@ import { dirname, join } from "node:path";
 
 /**
  * Resolves the wrangler CLI entry script via Node module resolution from
- * this package, rather than relying on PATH — works whether `edgecms` was
+ * this package, rather than relying on PATH — works whether `kalayaan` was
  * installed globally, as a project dependency, or run through a monorepo
  * workspace.
  */

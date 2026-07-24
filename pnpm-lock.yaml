@@ -45,9 +45,9 @@ importers:
 
   examples/blog:
     dependencies:
-      edgecms:
+      kalayaan:
         specifier: workspace:*
-        version: link:../../packages/edgecms
+        version: link:../../packages/kalayaan
 
   packages/adapters/d1:
     dependencies:
@@ -385,7 +385,7 @@ importers:
         specifier: ^3.1.0
         version: 3.2.7(@types/debug@4.1.13)(@types/node@24.13.3)(jiti@1.21.7)(jsdom@25.0.1)(yaml@2.9.0)
 
-  packages/edgecms:
+  packages/kalayaan:
     dependencies:
       '@edgecms/adapter-mysql':
         specifier: workspace:*

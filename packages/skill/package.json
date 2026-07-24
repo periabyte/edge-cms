@@ -1,13 +1,13 @@
 {
-  "name": "edgecms-skill",
+  "name": "kalayaan-skill",
   "version": "0.0.0",
-  "description": "Agent skill for deploying and managing an EdgeCMS project safely",
+  "description": "Agent skill for deploying and managing a Kalayaan project safely",
   "type": "module",
   "files": [
     "SKILL.md"
   ],
   "keywords": [
-    "edgecms",
+    "kalayaan",
     "cloudflare",
     "cms",
     "agent-skill",

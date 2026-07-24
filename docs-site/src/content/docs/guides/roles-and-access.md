@@ -3,7 +3,7 @@ title: Roles & access
 description: Config-defined roles, scoped API tokens, and public/anonymous access.
 ---
 
-Every request in EdgeCMS — whether it's a logged-in editor, an API key, or an anonymous visitor —
+Every request in Kalayaan — whether it's a logged-in editor, an API key, or an anonymous visitor —
 resolves to an **Ability**: a list of permission grants of the shape
 `{ subjects: string[] | "*", actions: [...] }`. Actions are `read`, `create`, `update`, `delete`,
 `publish`, and `manage`; subjects are collection names, or fixed system subjects (`media`,
@@ -67,4 +67,4 @@ an editor to review. Two things protect it by default:
 - **Per-IP rate limiting** — a small fixed window via KV, independent of Turnstile.
 
 Submissions always land as drafts; anything trying to set its own `published_at` is rejected. See
-`edgecms init`'s wizard for turning this on when scaffolding a project.
+`kalayaan init`'s wizard for turning this on when scaffolding a project.

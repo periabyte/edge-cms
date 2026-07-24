@@ -3,7 +3,7 @@ import SiteHeader from "../components/SiteHeader.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 import "../styles/landing.css";
 
-const configCode = `import { defineConfig, collection, field } from "edgecms";
+const configCode = `import { defineConfig, collection, field } from "kalayaan";
 
 export default defineConfig({
   name: "my-site",
@@ -45,18 +45,18 @@ const costRows = [
 ];
 
 const terminalLines: Array<{ text: string; cls?: string }> = [
-  { text: "$ edgecms login", cls: "cmd" },
+  { text: "$ kalayaan login", cls: "cmd" },
   { text: "→ opening your Cloudflare token page…", cls: "dim" },
   { text: "✓ signed in — account auto-detected", cls: "ok" },
   { text: "", cls: "dim" },
-  { text: "$ edgecms init my-site", cls: "cmd" },
+  { text: "$ kalayaan init my-site", cls: "cmd" },
   { text: "? content models: posts, authors", cls: "dim" },
   { text: "? services: ai, custom domain", cls: "dim" },
   { text: "? domain: blog.example.com", cls: "dim" },
   { text: "✓ wrote cms.config.ts", cls: "ok" },
   { text: "deploy now? → yes", cls: "accent" },
   { text: "", cls: "dim" },
-  { text: "$ edgecms deploy", cls: "cmd" },
+  { text: "$ kalayaan deploy", cls: "cmd" },
   { text: "→ provisioning D1, R2, KV…", cls: "dim" },
   { text: "→ attaching blog.example.com…", cls: "dim" },
   { text: "✓ live at https://blog.example.com", cls: "ok" },
@@ -64,11 +64,11 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
 ];
 ---
 
-<html lang="en" data-theme="dark">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>EdgeCMS — Make it real. Free.</title>
+    <title>Kalayaan — Freedom to deploy.</title>
     <meta
       name="description"
       content="A config-driven, self-deploying headless CMS for Cloudflare. One cms.config.ts and a guided login → init → deploy, and you have a live site — free, on your own domain."
@@ -97,14 +97,11 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
           <circle class="pulse" cx="340" cy="230" r="4" style="animation-delay:1.2s"></circle>
         </svg>
       </div>
-      <div class="ec-wrap ec-two" style="position:relative;padding:76px 40px 72px;display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center">
+      <div class="ec-wrap ec-two" style="position:relative;padding:80px 40px 76px;display:grid;grid-template-columns:1.02fr .98fr;gap:52px;align-items:center">
         <div>
-          <div class="ec-eyebrow">// content with an edge</div>
-          <h1 class="ec-h1">Make it real. <span class="ec-accent">Free.</span></h1>
-          <p class="ec-mono" style="font-style:italic;font-size:16px;color:var(--text-3);margin:18px 0 0">
-            you don't need a big budget — just a big enough blade.
-          </p>
-          <p style="font-size:17px;line-height:1.6;color:var(--text-2);max-width:500px;margin:20px 0 28px">
+          <div class="ec-eyebrow">// login → init → deploy</div>
+          <h1 class="ec-h1">Freedom to deploy. <em class="ec-accent">Freedom to own.</em> Freedom from recurring CMS costs.</h1>
+          <p style="font-size:17px;line-height:1.6;color:var(--text-2);max-width:520px;margin:22px 0 28px">
             A guided setup — sign in once, answer a few questions, deploy — to a live site on your own
             Cloudflare account. D1, R2, and Workers on the permanent free tier. Your domain, your data,
             no monthly bill to publish.
@@ -112,7 +109,7 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
           <div style="max-width:460px;margin-bottom:16px" class="ec-command">
             <div class="ec-command-label">run this — a live site in a few minutes</div>
             <div class="ec-command-row">
-              <span class="ec-command-code"><span class="ec-prompt">$</span>npx edgecms init</span>
+              <span class="ec-command-code"><span class="ec-prompt">$</span>npx kalayaan init</span>
               <button type="button" class="ec-copy-btn" id="ec-copy-init">copy</button>
             </div>
           </div>
@@ -127,7 +124,7 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
               <span class="ec-terminal-dot"></span>
               <span class="ec-terminal-dot"></span>
               <span class="ec-terminal-dot"></span>
-              <span class="ec-terminal-title">edgecms</span>
+              <span class="ec-terminal-title">kalayaan</span>
             </div>
             <div class="ec-terminal-body">
               {terminalLines.map((l, i) => (
@@ -155,22 +152,22 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
           <div class="ec-eyebrow">// how it works</div>
           <h2 class="ec-h2">Three commands. One is enough.</h2>
           <p class="ec-section-lede">
-            Run them yourself, or let <code>edgecms init</code> chain login and deploy for you.
+            Run them yourself, or let <code>kalayaan init</code> chain login and deploy for you.
           </p>
         </div>
         <div class="ec-steps">
           <div class="ec-step">
-            <div class="ec-step-head"><span class="ec-step-num">01</span><span class="ec-step-cmd">$ edgecms login</span></div>
+            <div class="ec-step-head"><span class="ec-step-num">01</span><span class="ec-step-cmd">$ kalayaan login</span></div>
             <div class="ec-step-title">Sign in, once</div>
-            <p class="ec-step-body">Opens a Cloudflare token page with the right permissions pre-filled. EdgeCMS auto-detects your account — no keys to copy by hand.</p>
+            <p class="ec-step-body">Opens a Cloudflare token page with the right permissions pre-filled. Kalayaan auto-detects your account — no keys to copy by hand.</p>
           </div>
           <div class="ec-step">
-            <div class="ec-step-head"><span class="ec-step-num">02</span><span class="ec-step-cmd">$ edgecms init</span></div>
+            <div class="ec-step-head"><span class="ec-step-num">02</span><span class="ec-step-cmd">$ kalayaan init</span></div>
             <div class="ec-step-title">Answer the wizard</div>
             <p class="ec-step-body">Pick your content models, toggle services, enter a domain. It writes a real <code>cms.config.ts</code> — the file below — then asks: deploy now?</p>
           </div>
           <div class="ec-step">
-            <div class="ec-step-head"><span class="ec-step-num">03</span><span class="ec-step-cmd">$ edgecms deploy</span></div>
+            <div class="ec-step-head"><span class="ec-step-num">03</span><span class="ec-step-cmd">$ kalayaan deploy</span></div>
             <div class="ec-step-title">Ship to the edge</div>
             <p class="ec-step-body">Provisions D1, R2, and KV, uploads the admin SPA, and attaches your domain with automatic DNS and TLS. Resolves to a live URL.</p>
           </div>
@@ -208,7 +205,7 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
           <div class="ec-eyebrow">// honest cost</div>
           <h2 class="ec-h2">The bill is the whole point.</h2>
           <p class="ec-section-lede">
-            EdgeCMS runs entirely on your own Cloudflare free tier — every service it uses, at no
+            Kalayaan runs entirely on your own Cloudflare free tier — every service it uses, at no
             monthly cost to publish.
           </p>
         </div>
@@ -233,11 +230,11 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
     <section class="ec-section ec-cta">
       <div class="ec-cta-glow"></div>
       <div class="ec-wrap ec-cta-inner">
-        <h2 class="ec-h2" style="font-size:48px">Make it real. <span class="ec-accent">Free.</span></h2>
-        <p class="ec-cta-sub">just a big enough blade.</p>
+        <h2 class="ec-h2" style="font-size:46px">Your idea, on <em class="ec-accent">your own</em> domain.</h2>
+        <p class="ec-cta-sub">Sign in once, answer a few questions, deploy — free, on your own Cloudflare account.</p>
         <div style="max-width:440px;margin:0 auto" class="ec-command">
           <div class="ec-command-row">
-            <span class="ec-command-code"><span class="ec-prompt">$</span>npx edgecms init</span>
+            <span class="ec-command-code"><span class="ec-prompt">$</span>npx kalayaan init</span>
             <button type="button" class="ec-copy-btn" id="ec-copy-cta">copy</button>
           </div>
         </div>
@@ -251,7 +248,7 @@ const terminalLines: Array<{ text: string; cls?: string }> = [
         const btn = document.getElementById(id);
         btn?.addEventListener("click", async () => {
           try {
-            await navigator.clipboard.writeText("npx edgecms init");
+            await navigator.clipboard.writeText("npx kalayaan init");
             const original = btn.textContent;
             btn.textContent = "copied";
             setTimeout(() => (btn.textContent = original), 1400);

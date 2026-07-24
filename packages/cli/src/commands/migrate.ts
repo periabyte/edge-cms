@@ -21,7 +21,7 @@ export interface MigrateResult {
 }
 
 /**
- * `edgecms migrate`: diffs the current config against the last applied
+ * `kalayaan migrate`: diffs the current config against the last applied
  * schema snapshot and applies the SQL to the local D1 database.
  * `--dry-run` only prints the plan; destructive changes (dropped
  * fields/collections, narrowed selects, removed locales) require
@@ -46,7 +46,7 @@ export async function runMigrate(opts: MigrateOptions): Promise<MigrateResult> {
     );
   }
 
-  const migrationsDir = join(opts.projectDir, ".edgecms", "migrations");
+  const migrationsDir = join(opts.projectDir, ".kalayaan", "migrations");
   await mkdir(migrationsDir, { recursive: true });
 
   const execSql = async (fileName: string, sql: string): Promise<void> => {

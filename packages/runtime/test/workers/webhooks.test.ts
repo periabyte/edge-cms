@@ -66,8 +66,8 @@ describe("webhooks", () => {
     const publishCall = fetchSpy.mock.calls.find(([u]) => String(u) === "https://pub.example/hook")!;
     const init = publishCall[1] as RequestInit;
     const headers = new Headers(init.headers);
-    expect(headers.get("x-edgecms-event")).toBe("document.published");
-    expect(headers.get("x-edgecms-signature")).toMatch(/^sha256=/);
+    expect(headers.get("x-kalayaan-event")).toBe("document.published");
+    expect(headers.get("x-kalayaan-signature")).toMatch(/^sha256=/);
     // The delete-only hook must not receive the publish event.
     expect(fetchSpy.mock.calls.some(([u]) => String(u) === "https://del.example/hook")).toBe(false);
   });

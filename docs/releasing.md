@@ -1,12 +1,12 @@
 # Releasing
 
-Publishing `@edgecms/*` + `edgecms` to npm is triggered by publishing a **GitHub Release** —
+Publishing `@edgecms/*` + `kalayaan` to npm is triggered by publishing a **GitHub Release** —
 nothing publishes automatically on every merge to `main`. Versions are bumped manually first, so
 you review the changelog before anything ships.
 
 ## One-time setup (do before the first release)
 
-1. **npm**: create/confirm the `@edgecms` npm org (or scope) and the `edgecms` package name are
+1. **npm**: create/confirm the `@edgecms` npm org (or scope) and the `kalayaan` package name are
    yours, then generate an **automation** access token (npmjs.com → Access Tokens → Generate New
    Token → Automation — bypasses 2FA prompts so CI can use it non-interactively).
 2. **GitHub repo secret**: add that token as `NPM_TOKEN` (Settings → Secrets and variables →
@@ -47,6 +47,6 @@ Publishing the release fires `.github/workflows/release.yml`: build → typechec
 ## Verifying
 
 ```sh
-npx edgecms@latest --version
-npm view edgecms versions --json
+npx kalayaan@latest --version
+npm view kalayaan versions --json
 ```

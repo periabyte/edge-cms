@@ -29,8 +29,8 @@ interface Target {
 }
 
 /**
- * `edgecms down`: deletes every Cloudflare resource recorded in
- * `.edgecms/state.json` — the Worker, D1 database, KV namespaces, R2 bucket,
+ * `kalayaan down`: deletes every Cloudflare resource recorded in
+ * `.kalayaan/state.json` — the Worker, D1 database, KV namespaces, R2 bucket,
  * and (when present) Vectorize/Hyperdrive — then resets local state so a later
  * `deploy` provisions cleanly. Destructive and irreversible; the CLI confirms
  * before calling this without `dryRun`. The Worker is removed first so nothing
@@ -81,7 +81,7 @@ async function requireCredentials(): Promise<CfCredentials> {
   const creds = await resolveCredentials();
   if (!creds)
     throw new Error(
-      "Not signed in to Cloudflare. Run `edgecms login`, or set EDGE_API_TOKEN + EDGE_ACCOUNT_ID (CI).",
+      "Not signed in to Cloudflare. Run `kalayaan login`, or set EDGE_API_TOKEN + EDGE_ACCOUNT_ID (CI).",
     );
   return creds;
 }

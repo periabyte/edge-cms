@@ -13,7 +13,7 @@ import { runLogout } from "./commands/logout.js";
 import { bootstrapAdmin, waitForWorker } from "./admin-setup.js";
 
 const program = new Command();
-program.name("edgecms").description("The CMS that deploys itself.");
+program.name("kalayaan").description("The CMS that deploys itself.");
 
 program
   .command("init")

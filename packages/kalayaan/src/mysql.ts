@@ -1,4 +1,4 @@
-// Subpath export `edgecms/mysql`: see ./postgres.ts. Kept out of the main entry
+// Subpath export `kalayaan/mysql`: see ./postgres.ts. Kept out of the main entry
 // so D1 projects never bundle the MySQL driver (mysql2).
 import { MysqlAdapter, connectMysql } from "@edgecms/adapter-mysql";
 import type { DatabaseAdapterFactory } from "@edgecms/runtime";
