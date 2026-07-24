@@ -1,5 +1,12 @@
 # @kalayaan/config
 
+## 0.1.2
+
+### Patch Changes
+
+- 706e3b4: Add an MIT `LICENSE` at the repo root and `"license": "MIT"` to every package.json.
+  Every published package previously showed "License: none" on its npm page.
+
 ## 0.1.1
 
 ## 0.1.0

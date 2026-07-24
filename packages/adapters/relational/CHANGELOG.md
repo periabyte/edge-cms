@@ -1,5 +1,15 @@
 # @kalayaan/adapter-relational
 
+## 0.1.2
+
+### Patch Changes
+
+- 706e3b4: Add an MIT `LICENSE` at the repo root and `"license": "MIT"` to every package.json.
+  Every published package previously showed "License: none" on its npm page.
+- Updated dependencies [706e3b4]
+  - @kalayaan/config@0.1.2
+  - @kalayaan/core@0.1.2
+
 ## 0.1.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # @kalayaan/admin
 
+## 0.1.2
+
+### Patch Changes
+
+- 706e3b4: Add an MIT `LICENSE` at the repo root and `"license": "MIT"` to every package.json.
+  Every published package previously showed "License: none" on its npm page.
+- e35d57f: Fix a plugin-contributed custom field type with `control: "select"` still rendering the
+  native `<select>` (`registry.tsx`'s `CustomFieldEditor`) instead of the shadcn/Radix
+  `Select` already used everywhere else in the admin UI. The built-in `field.select()` type
+  was already correct — only the custom-field-type variant had the leftover.
+
 ## 0.1.1
 
 ### Patch Changes
